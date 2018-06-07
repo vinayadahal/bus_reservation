@@ -1,12 +1,16 @@
 .slider_wrap{
+    /*float: left;*/
     position:relative;
-    margin:5px auto;
+    margin:5px;
     top:0px;
     left:0px;
+    right: 0px;
+    /*width: 50%;*/
     width:980px;
     height:350px;
     overflow:hidden;
     visibility:hidden;
+    background-color: #333;
 }
 
 .slider_loading_icon{
@@ -32,7 +36,9 @@
     position:relative;
     top:0px;
     left:0px;
+    right: 0px;
     width:980px;
+    /*width: 50%;*/
     height:350px;
     overflow:hidden;
 }

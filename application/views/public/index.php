@@ -1,4 +1,3 @@
-<?php
-
-echo "public page";
-
+<div class="container" id="container">
+    Testing 
+</div>
