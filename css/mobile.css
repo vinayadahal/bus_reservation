@@ -1,0 +1,35 @@
+@media screen and (max-width:980px){
+    *{
+        font-size: 8px;
+    }
+
+/*    .content_wrap{
+        width: 100%;
+        background-color: #fff;
+    }
+
+    .slider_wrap,.news_wrap{
+        height: auto;
+        background-color: #00592e;
+        width: 100%;
+        margin: 0%;
+        margin-bottom: .5%;
+        display: block;
+    }
+
+    .news_wrap{
+        background-color: #b4d2e0;
+    }
+
+    .news_preview_wrap{
+        height: auto;
+    }
+
+    .news_preview{
+        height: auto;
+    }*/
+    
+    
+
+    /*silder & news end*/
+}

@@ -1,9 +1,12 @@
+</div>
+</div>
+<script type="text/javascript" src="<?php echo base_url(); ?>js/slider.js"></script>
+
+
 <div class="footerWrap" id="footerWrap">
     <div class="footerLinkWrap">
         <div class="footerLink">
-            <i class="fa fa-bus fa-5x"></i>
-            <br>
-            <span style="font-size: 40px">Bus Reservation</span>
+            <i class="fa fa-bus fa-5x"></i> <span style="font-size: 24px;">Bus Reservation</span>
             <br />
             <br />
             <?php
@@ -17,26 +20,24 @@
             <ul>
                 <li><h4>This Site</h4></li>
                 <li><a href="<?php echo base_url(); ?>">Home</a></li>
-                <li><a href="<?php echo base_url() ?>register">Register</a></li>
-                <li><a href="<?php echo base_url(); ?>request">User's Request</a></li>
+                <li><a href="<?php echo base_url() ?>register">News</a></li>
+                <li><a href="<?php echo base_url(); ?>request">Publications</a></li>
+                <li><a href="<?php echo base_url(); ?>request">Activities</a></li>
             </ul>
         </div>
         <div class="footerLink">
             <ul>
-                <li><h4>My Account</h4></li>
-                <?php if (empty($user_id) && !isset($user_id)) { ?>
-                    <li><a href="<?php echo base_url() ?>login">Login</a></li>
-                <?php } ?>
-                <li><a href="<?php echo base_url() ?>member/my-books">My Books</a></li>
-                <li><a href="<?php echo base_url() ?>member/my-posts" >My Posts</a></li>
-                <li><a href="<?php echo base_url() ?>member/matches">Matching Books</a></li>
+                <li><h4>About Us</h4></li>
+                <li><a href="<?php echo base_url() ?>register">Services</a></li>
+                <li><a href="<?php echo base_url() ?>member/my-books">Objectives</a></li>
+                <li><a href="<?php echo base_url() ?>member/my-posts" >Chairman's Message</a></li>
+                <li><a href="<?php echo base_url() ?>member/matches">Contact Us</a></li>
             </ul>
         </div>
         <div class="footerLink">
             <ul>
-                <li><h4>Customer Service</h4></li>
-                <li><a href="javascript:void(0)" onclick="loadForm('Suggestion');">Return Policy</a></li>
-                <li><a href="javascript:void(0)" onclick="loadForm('Suggestion');">Privacy & Security</a></li>
+                <li><h4>Other</h4></li>
+                <li><a href="javascript:void(0)" onclick="loadForm('Suggestion');">Gallery</a></li>
                 <li><a href="javascript:void(0)" onclick="loadForm('Suggestion');">Suggestion</a></li>
                 <li><a href="javascript:void(0)" onclick="loadForm('Feedback');">Feedback</a></li>
             </ul>
@@ -52,6 +53,5 @@
         </div>
     </div>
 </div>
-<script type="text/javascript" src="<?php echo base_url(); ?>js/user_script.js"></script>
 </body>
 </html>

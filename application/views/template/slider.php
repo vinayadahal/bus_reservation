@@ -1,43 +1,38 @@
-<div id="jssor_1" class="slider_wrap">
-    <div data-u="loading" class="jssorl-009-spin slider_loading_icon">
-        <img class="loading_image" src="images/slider/spin.svg" />
-    </div>
-    <div data-u="slides" class="slider_area">
+<div class="slider_wrap">
+    <!-- Slideshow container -->
+    <div class="slideshow-container">
+        <!-- Full-width images with number and caption text -->
         <?php
         foreach (glob('images/slider/*.*') as $file) {
             if (strpos($file, 'svg') != TRUE) {
                 ?>
-                <div>
-                    <img data-u="image" src="<?php echo base_url() . $file ?>" />
+                <div class="mySlides fade">
+                    <!--<div class="numbertext">1 / 3</div>-->
+                    <img src="<?php echo base_url() . $file ?>" style="width:100%">
+                    <!--<div class="text">Caption Text</div>-->
                 </div>
                 <?php
             }
         }
         ?>
-    </div>
+        <!-- Next and previous buttons -->
+        <!--        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                <a class="next" onclick="plusSlides(1)">&#10095;</a>-->
+        <a class="prev" onclick="lastSlide()">&#10094;</a>
+        <a class="next" onclick="nextSlide()">&#10095;</a>
 
-    <div data-u="navigator" class="bullet_nav_wrap"  data-autocenter="1" data-scale="0.5" data-scale-bottom="0.75">
-        <div data-u="prototype" class="i">
-            <svg viewbox="0 0 16000 16000">
-            <circle class="b" cx="8000" cy="8000" r="5800"></circle>
-            </svg>
+        <!-- The dots/circles -->
+        <div class="dot_wrap" style="text-align:center">
+            <?php
+            $i = 1;
+            foreach (glob('images/slider/*.*') as $file) {
+                if (strpos($file, 'svg') != TRUE) {
+                    ?>
+                    <span class="dot" onclick="currentSlide(<?php echo $i++ ?>)"></span>
+                    <?php
+                }
+            }
+            ?>
         </div>
     </div>
-
-    <div data-u="arrowleft" class="arrow_nav_common arrow-left" data-autocenter="2" data-scale="0.75" data-scale-left="0.75">
-        <svg viewbox="0 0 16000 16000">
-        <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
-        </svg>
-    </div>
-    <div data-u="arrowright" class="arrow_nav_common arrow-right" data-autocenter="2" data-scale="0.75" data-scale-right="0.75">
-        <svg viewbox="0 0 16000 16000">
-        <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
-        </svg>
-    </div>
 </div>
-<script type="text/javascript" src="<?php echo base_url(); ?>js/style-slider.js"></script>
-<script type="text/javascript">jssor_1_slider_init();</script>
-
-<!--<div style="width: 100px; background-color: #333; float: left;">
-    News
-</div>-->
