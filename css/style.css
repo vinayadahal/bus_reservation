@@ -86,26 +86,82 @@
 }
 /* Nav bar End */
 
-.page_wrap{
+/*.page_wrap{
     width: 99%;
     margin: .5%;
-}
+}*/
 
 .content_wrap{
     display: table;
-    width: 100%;
+    width: 99%;
+    margin: .5%;
 }
 
 /*silder start*/
 
 .slider_wrap{
     background-color: #5b9bc6;
-    width: 100%;
+    width: 99.4%;
     padding: 4px 4px 0px 4px;
     margin-bottom: .5%;
 }
 
 /*silder end*/
+
+/*routes start*/
+.routes{
+    background-color: #b4d2e0;
+    /*height: 200px;*/
+    width: 100%;
+    /*color: #ccc;*/
+    /*padding: 10px;*/
+    /*display: table-cell;*/
+}
+
+.routes h2{
+    font-size: 24px;
+    padding: 10px;
+
+}
+
+.routes table{
+    width: 100%;
+}
+
+.routes table th{
+    text-align: left;
+    padding: 10px;
+}
+
+.routes table td{
+    padding: 10px;
+}
+
+.route_form table{
+    /*border: none;*/
+    width: 100%;
+    /*border-spacing: 20px;*/
+    border-collapse: collapse;
+}
+
+.route_form table th{
+    text-align: left;
+    padding: 10px;
+}
+
+.route_form table td{
+    padding: 10px;
+}
+
+.route_float{
+    float:left;
+    width: 49%;
+    display: table-cell;
+    margin: 0 .5% ;
+}
+
+/*routes end*/
+
 
 /*site_intro start*/
 

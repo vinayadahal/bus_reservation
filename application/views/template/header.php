@@ -14,7 +14,7 @@
         <div class="menu_wrap">
             <div class="menu">
                 <div class="logo">
-                    <a href="<?php echo base_url();?>">
+                    <a href="<?php echo base_url(); ?>">
                         <i class="fa fa-bus"></i> <span class="logo_text">Bus Reservation</span>
                     </a>
                 </div>
@@ -24,18 +24,17 @@
                     <li><a href="#">Routes</a></li>
                     <li><a href="#">Popular</a></li>
                     <li><a href="#">News</a></li>
-<!--                    <li class="dropdown-menu-li" id="side_drp_wrap" style="float: right;">
-                        <a href="javascript:void();" id="side_drp_down">
-                            About <i class="fa fa-angle-down" style="font-weight: bold"></i>
-                        </a>
-                        <ul id="side_drp_list">
-                            <li><a href="http://google.com">Objectives</a></li>
-                            <li><a href="http://google.com">Chairmain's Message</a></li>
-                            <li><a href="http://google.com">About Us</a></li>
-                        </ul>
-                    </li>-->
+                    <!--                    <li class="dropdown-menu-li" id="side_drp_wrap" style="float: right;">
+                                            <a href="javascript:void();" id="side_drp_down">
+                                                About <i class="fa fa-angle-down" style="font-weight: bold"></i>
+                                            </a>
+                                            <ul id="side_drp_list">
+                                                <li><a href="http://google.com">Objectives</a></li>
+                                                <li><a href="http://google.com">Chairmain's Message</a></li>
+                                                <li><a href="http://google.com">About Us</a></li>
+                                            </ul>
+                                        </li>-->
                 </ul>
             </div>
         </div>
-        <div class="page_wrap">
-            <div class="content_wrap">
+        <div class="content_wrap">
