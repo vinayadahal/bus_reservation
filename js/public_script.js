@@ -8,6 +8,13 @@ $(document).ready(function () {
     });
 });
 
+
+jQuery(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+
 function showDropDown(list_id, list_wrap) {
     $("#" + list_id).css({"display": "block"});
     $("#" + list_wrap).css({"background-color": "#b4d2e0", "color": "#333"});

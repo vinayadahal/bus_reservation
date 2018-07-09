@@ -21,8 +21,8 @@
                 <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Travel Agencies</a></li>
-                    <li><a href="#">Routes</a></li>
-                    <li><a href="#">Popular</a></li>
+                    <li><a href="#">Available Routes</a></li>
+                    <li><a href="#">Popular Routes</a></li>
                     <li><a href="#">News</a></li>
                     <!--                    <li class="dropdown-menu-li" id="side_drp_wrap" style="float: right;">
                                             <a href="javascript:void();" id="side_drp_down">

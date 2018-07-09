@@ -20,17 +20,17 @@
             <ul>
                 <li><h4>This Site</h4></li>
                 <li><a href="<?php echo base_url(); ?>">Home</a></li>
-                <li><a href="<?php echo base_url() ?>register">News</a></li>
-                <li><a href="<?php echo base_url(); ?>request">Publications</a></li>
-                <li><a href="<?php echo base_url(); ?>request">Activities</a></li>
+                <li><a href="<?php echo base_url() ?>register">Travel Agencies</a></li>
+                <li><a href="<?php echo base_url(); ?>request">Available Routes</a></li>
+                <li><a href="<?php echo base_url(); ?>request">Popular Routes</a></li>
             </ul>
         </div>
         <div class="footerLink">
             <ul>
                 <li><h4>About Us</h4></li>
+                <li><a href="<?php echo base_url(); ?>request">News</a></li>
                 <li><a href="<?php echo base_url() ?>register">Services</a></li>
                 <li><a href="<?php echo base_url() ?>member/my-books">Objectives</a></li>
-                <li><a href="<?php echo base_url() ?>member/my-posts" >Chairman's Message</a></li>
                 <li><a href="<?php echo base_url() ?>member/matches">Contact Us</a></li>
             </ul>
         </div>

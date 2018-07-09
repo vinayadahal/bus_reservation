@@ -111,21 +111,19 @@
 /*routes start*/
 .routes{
     background-color: #b4d2e0;
-    /*height: 200px;*/
     width: 100%;
-    /*color: #ccc;*/
-    /*padding: 10px;*/
-    /*display: table-cell;*/
+    margin-bottom: .5%;
+    display: table;
 }
 
 .routes h2{
     font-size: 24px;
     padding: 10px;
-
 }
 
 .routes table{
     width: 100%;
+
 }
 
 .routes table th{
@@ -138,10 +136,10 @@
 }
 
 .route_form table{
-    /*border: none;*/
     width: 100%;
-    /*border-spacing: 20px;*/
     border-collapse: collapse;
+    /*display: table-cell;*/
+    float: left;
 }
 
 .route_form table th{
@@ -153,11 +151,50 @@
     padding: 10px;
 }
 
-.route_float{
+.form-elements{
+    width: 100%;
+    padding: 3px 8px;
+    box-sizing: border-box;
+}
+
+.avail_popular_wrap{
+    display: table;
+    width: 100%;
+    background-color: #b4d2e0;
+}
+
+.avail_popular{
     float:left;
-    width: 49%;
     display: table-cell;
-    margin: 0 .5% ;
+    width: 49.25%;
+    margin-left: .5%;
+}
+
+.avail_popular:last-child{
+    float: right;
+    margin-right: .5%;
+}
+
+.avail_popular h2{
+    font-size: 24px;
+    padding: 10px;
+}
+
+.avail_popular table th{
+    text-align: left;
+    padding: 10px;
+}
+
+.avail_popular table td{
+    padding: 10px;
+}
+
+.avail_popular tr:hover{
+    cursor: pointer;
+}
+
+.avail_popular tr th:hover{
+    cursor: auto;
 }
 
 /*routes end*/
