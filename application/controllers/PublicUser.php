@@ -13,7 +13,8 @@ class PublicUser extends CI_Controller {
     }
 
     public function index() {
-        $this->loadView("index", "home");
+        $data['places'] = $this->select->getAllFromTable("destination");
+        $this->loadView("index", "home", $data);
     }
 
     public function loadView($php_file, $page_title, $data = null) {

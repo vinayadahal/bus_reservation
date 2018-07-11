@@ -2,7 +2,7 @@
 
 class Select extends CI_Model {
 
-    public function getAllFromTable($table, $limit, $start) {
+    public function getAllFromTable($table, $limit = null, $start = null) {
         $this->db->select('*');
         $this->db->from($table);
         if (isset($limit)) {

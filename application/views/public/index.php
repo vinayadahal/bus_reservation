@@ -1,7 +1,7 @@
 <div class="routes" style="width: 99%;padding: .5%;">
     <h2>Pick A Route</h2>
     <hr/>
-    <form class="route_form">
+    <form class="route_form" onsubmit="return validate()">
         <table>
             <tr>
                 <th>Start Point:</th>
@@ -10,13 +10,17 @@
             </tr>
             <tr>
                 <td>
-                    <select name="start_point" class="form-elements">
-                        <option>Kathmandu</option>
+                    <select name="start_point" class="form-elements" id="start_point" onchange="change_destination();">
+                        <?php foreach ($places as $start) { ?>
+                            <option value="<?php echo $start->id; ?>" ><?php echo $start->destination; ?></option>
+                        <?php } ?>
                     </select>
                 </td>
                 <td>
-                    <select name="destination" class="form-elements">
-                        <option>Kathmandu</option>
+                    <select name="destination" class="form-elements" id="destination">
+                        <?php foreach (array_reverse($places) as $end) { ?>
+                            <option value="<?php echo $end->id; ?>"><?php echo $end->destination; ?></option>
+                        <?php } ?>
                     </select>
                 </td>
                 <td><input type="date" name="date" class="form-elements" /></td>
