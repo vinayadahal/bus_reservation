@@ -13,11 +13,13 @@ class PublicUser extends CI_Controller {
     }
 
     public function index() {
+        $this->session->sess_destroy();
         $data['places'] = $this->select->getAllFromTable("destination");
         $this->loadView("index", "home", $data);
     }
 
     public function showBuses() {
+        $this->session->unset_userdata('buses');
         $start_point = $this->input->post("start_point");
         $end_point = $this->input->post("destination");
         $date = $this->input->post("date");
@@ -30,6 +32,9 @@ class PublicUser extends CI_Controller {
         } else {
             $data['buses'] = array("no records to display");
         }
+        $this->session->set_userdata('buses', $data['buses']);
+
+//        var_dump($data);
         $this->loadView("buses", "search result", $data);
     }
 
@@ -56,14 +61,13 @@ class PublicUser extends CI_Controller {
         return $buses;
     }
 
-    public function seats() {
-        echo 'Bla';
-        $id = $this->uri->segment(2);
-        $date = $this->uri->segment(3);
-        $time = $this->uri->segment(4);
-        echo $id, $date, $time;
-
-        $this->select->getSingleWhereMultiValue("");
+    public function seats($id) {
+        $bus['bus_details'] = $this->session->userdata('buses');
+        if (empty($bus['bus_details'][$id])) {
+            echo "Someone is getting curious :P";
+        } else {
+            var_dump($this->select->getSingleRecordWhere("reservation", "bus_id", $bus['bus_details'][$id]['id']));
+        }
     }
 
     public function loadView($php_file, $page_title, $data = null) {

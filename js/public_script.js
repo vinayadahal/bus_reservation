@@ -3,7 +3,7 @@ var detached;
 $(document).ready(function () {
     var container_height = $("#container").height();
     console.log(container_height);
-    setFooter(container_height);
+//    setFooter(container_height);
     $("#side_drp_down").click(function () {
         showDropDown("side_drp_list", "side_drp_wrap");
     });

@@ -7,4 +7,4 @@ $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
 $route['search_bus'] = 'PublicUser/showBuses';
-$route['seats/(:num)/(:any)/(:any)'] = 'PublicUser/seats/$1';
+$route['seats/(:num)'] = 'PublicUser/seats/$1';

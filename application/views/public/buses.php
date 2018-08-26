@@ -13,9 +13,13 @@
             <th>Departure Time</th>
             <th>Departure Date</th>
         </tr>
-        <?php $i = 1; ?>
+        <?php
+        $i = 1;
+        $j = 0;
+//        var_dump($sess_buses_ids);
+        ?>
         <?php foreach ($buses as $bus) { ?>
-            <tr class="clickable-row" id="tr<?php echo $bus['id'];?>" url="<?php echo base_url(); ?>seats/<?php echo $bus['id'] . '/' . $bus['departure_date'] . '/' . $bus['departure_time']; ?>">
+            <tr class="clickable-row" url="<?php echo base_url(); ?>seats/<?php echo $j++; ?>">
                 <td><?php echo $i++; ?></td>
                 <td><?php echo $bus['travel_agency']; ?></td>
                 <td><?php echo $bus['type']; ?></td>
