@@ -86,11 +86,6 @@
 }
 /* Nav bar End */
 
-/*.page_wrap{
-    width: 99%;
-    margin: .5%;
-}*/
-
 .content_wrap{
     display: table;
     width: 99%;
@@ -138,7 +133,6 @@
 .route_form table{
     width: 100%;
     border-collapse: collapse;
-    /*display: table-cell;*/
     float: left;
 }
 
@@ -197,7 +191,63 @@
     cursor: auto;
 }
 
+.btn_submit {
+    background-color: #00592e;
+    border: 1px solid #00492e;
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+}
+
+.btn_submit:hover{
+    background-color: #00492e;
+    border: 1px solid #00592e;
+    cursor: pointer;
+}
+
+.clickable-row{
+    cursor: pointer;
+}
+
+.clickable-row:hover{
+    background-color: #b4d2e0;
+}
+
 /*routes end*/
+
+/*show buses start*/
+
+.bus_search_wrap{
+    width: 100%;
+}
+
+.bus_search_wrap h1{
+    padding: 10px;
+    font-size: 24px;
+}
+
+.bus_search_table{
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ccc;
+}
+
+.bus_search_table th{
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: #00592e;
+    color: #fff;
+}
+
+.bus_search_table td{
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+
+/*show buses end*/
 
 
 /*site_intro start*/

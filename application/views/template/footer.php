@@ -1,8 +1,5 @@
 </div>
-</div>
-<script type="text/javascript" src="<?php echo base_url(); ?>js/slider.js"></script>
-
-
+<script src="<?php echo base_url(); ?>js/slider.js"></script>
 <div class="footerWrap" id="footerWrap">
     <div class="footerLinkWrap">
         <div class="footerLink">
@@ -52,5 +49,6 @@
             </ul>
         </div>
     </div>
+</div>
 </body>
 </html>

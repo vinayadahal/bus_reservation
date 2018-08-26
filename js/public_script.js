@@ -1,6 +1,9 @@
 var detached;
 
 $(document).ready(function () {
+    var container_height = $("#container").height();
+    console.log(container_height);
+    setFooter(container_height);
     $("#side_drp_down").click(function () {
         showDropDown("side_drp_list", "side_drp_wrap");
     });
@@ -10,10 +13,18 @@ $(document).ready(function () {
     });
 });
 
+function setFooter(container_height) {
+    if (container_height < 500) {
+        $(".footerWrap").css({position: "fixed", bottom: "0"});
+    } else {
+        $(".footerWrap").css({position: "relative"});
+    }
+}
 
 jQuery(document).ready(function ($) {
     $(".clickable-row").click(function () {
-        window.location = $(this).data("href");
+        var redirect_url = $(this).attr("url");
+        window.location = redirect_url;
     });
 });
 
@@ -34,4 +45,49 @@ function change_destination() {
     }
     var selection = $("#start_point").find(":selected").val();
     detached = $("#destination option[value='" + selection + "']").detach();
+}
+
+
+function countChars() {
+    var val = $('#title').val().length;
+    if (val > 40) {
+        alert('Only 40 characters are allowed in title.');
+        $('#title').css({
+            'color': '#f00'
+        });
+        return false;
+    } else if ($('#title').val() === '') {
+        return false;
+    } else {
+        $('#title').css({
+            'color': '#555'
+        });
+        return true;
+    }
+
+}
+
+function validate(idArray) {
+    var count = idArray.length;
+    for (var i = 0; i <= count; i++) {
+        if (idArray[i] === 'title') {
+            countChars();
+        }
+        if (checkNull(idArray[i])) {
+            continue;
+        } else {
+            alert('Please fill every fields.');
+            return false;
+        }
+    }
+    return true;
+}
+
+function checkNull(idName) {
+    var id = $("#" + idName).val();
+    if (id === '') {
+        return false;
+    } else {
+        return true;
+    }
 }

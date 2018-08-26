@@ -7,8 +7,8 @@
         <link href="<?php echo base_url(); ?>css/style.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>css/slider.css" rel="stylesheet" type="text/css" />
         <link href="<?php echo base_url(); ?>css/mobile.css" type="text/css" rel="stylesheet"/>
-        <script type="text/javascript" src="<?php echo base_url(); ?>js/styler.js"></script>
-        <script type="text/javascript" src="<?php echo base_url(); ?>js/public_script.js"></script>
+        <script src="<?php echo base_url(); ?>js/styler.js"></script>
+        <script src="<?php echo base_url(); ?>js/public_script.js"></script>
     </head>
     <body>
         <div class="menu_wrap">
@@ -19,7 +19,7 @@
                     </a>
                 </div>
                 <ul>
-                    <li><a href="#">Home</a></li>
+                    <li><a href="<?php echo base_url(); ?>">Home</a></li>
                     <li><a href="#">Travel Agencies</a></li>
                     <li><a href="#">Available Routes</a></li>
                     <li><a href="#">Popular Routes</a></li>
@@ -37,4 +37,4 @@
                 </ul>
             </div>
         </div>
-        <div class="content_wrap">
+        <div class="content_wrap" id="container">

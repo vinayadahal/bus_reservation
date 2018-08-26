@@ -3,8 +3,9 @@ var slideIndex = 1;
 var previous = 0;
 var slides = document.getElementsByClassName("mySlides");
 var dots = document.getElementsByClassName("dot");
-
-showSlides(slideIndex);
+if (dots.length > 0) {
+    showSlides(slideIndex);
+}
 
 function nextSlide() {
     clearTimeout(timeout);

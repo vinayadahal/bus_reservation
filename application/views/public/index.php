@@ -1,7 +1,7 @@
 <div class="routes" style="width: 99%;padding: .5%;">
     <h2>Pick A Route</h2>
     <hr/>
-    <form class="route_form" onsubmit="return validate()">
+    <form class="route_form" onsubmit="return validate(['start_point', 'destination', 'date'])" method="post" action="<?php echo base_url();?>search_bus">
         <table>
             <tr>
                 <th>Start Point:</th>
@@ -23,10 +23,10 @@
                         <?php } ?>
                     </select>
                 </td>
-                <td><input type="date" name="date" class="form-elements" /></td>
+                <td><input type="date" name="date" id='date' class="form-elements" /></td>
             </tr>
             <tr>
-                <td colspan="3"><input type="submit" value="Search" /></td>
+                <td colspan="3"><button type="submit" class="btn_submit">Submit</button></td>
             </tr>
         </table>
     </form>

@@ -78,6 +78,19 @@ class Select extends CI_Model {
         return $query->row();
     }
 
+    public function getAllRecordJoinThreeTbl($col, $t1, $t2, $t3, $t1_c1, $t1_c2, $t2_c1, $t2_c2, $t3_c, $t2_c1_val, $t1_c2_val) { //$col should be array like $col=array('name','category')
+        $field = "`" . implode("`,`", $col) . "`";
+        $field = "" . implode(",", $col) . "";
+        $this->db->select($field);
+        $this->db->from($t1); //book table
+        $this->db->join($t2, "$t2.$t2_c1 = $t1.$t1_c1"); //category table
+        $this->db->join($t3, "$t2.$t2_c2 = $t3.$t3_c");
+        $this->db->where("$t1.$t1_c2", $t1_c2_val);
+        $this->db->where("$t2.$t2_c1", $t2_c1_val);
+        $query = $this->db->get();
+        return $query->result();
+    }
+
     public function getCountFromTable($table, $id, $value) {
         $this->db->select('*');
         $this->db->from($table);
@@ -165,11 +178,14 @@ class Select extends CI_Model {
         }
     }
 
-    public function getSingleRecordWhereMultiValue($table, $cond_col, $cond_val, $cond_col2, $cond_val2) {
+    public function getSingleWhereMultiValue($table, $cond_col_array, $cond_val_array) {
         $this->db->select('*');
         $this->db->from($table);
-        $this->db->where($cond_col, $cond_val);
-        $this->db->where($cond_col2, $cond_val2);
+        $i = 0;
+        foreach ($cond_col_array as $cond_col) {
+            $this->db->where($cond_col, $cond_val_array[$i]);
+            $i++;
+        }
         $this->db->limit(1);
         $query = $this->db->get();
         if ($query->num_rows() == 1) {
