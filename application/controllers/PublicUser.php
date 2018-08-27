@@ -66,9 +66,10 @@ class PublicUser extends CI_Controller {
         if (empty($bus['bus_details'][$id])) {
             echo "Someone is getting curious :P";
         } else {
-            var_dump($this->select->getSingleRecordWhere("reservation", "bus_id", $bus['bus_details'][$id]['id']));
+            $data['bus_details'] = $this->select->getSingleRecordWhere("reservation", "bus_id", $bus['bus_details'][$id]['id']);
         }
-        $data['bus_details']="";
+//        var_dump($bus);
+        $data['bus_type'] = $bus['bus_details'][$id]['type'];
         $this->loadView("seats", "choose seats", $data);
     }
 
