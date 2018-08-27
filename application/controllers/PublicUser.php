@@ -68,6 +68,8 @@ class PublicUser extends CI_Controller {
         } else {
             var_dump($this->select->getSingleRecordWhere("reservation", "bus_id", $bus['bus_details'][$id]['id']));
         }
+        $data['bus_details']="";
+        $this->loadView("seats", "choose seats", $data);
     }
 
     public function loadView($php_file, $page_title, $data = null) {

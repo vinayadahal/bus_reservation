@@ -249,6 +249,50 @@
 
 /*show buses end*/
 
+/*seat start*/
+
+.seat_table{
+    width: 20%;
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+}
+
+
+.seat_table td {
+    /*width: 33.33%;*/
+    position: relative;
+    /*background-color: #ccc;*/
+    vertical-align: middle;
+    text-align: center;
+    border: 1px solid #ccc;
+    
+}
+.seat_table td:after {
+    /*content: 'est';*/
+    display: block;
+    margin-top: 100%;
+}
+
+.click_seat{
+    cursor: pointer;
+}
+
+.click_seat:hover{
+    background-color: #b4d2e0;
+}
+
+/*.seat_table td .content {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: gold;
+}*/
+
+
+/*seat end*/
+
 
 /*site_intro start*/
 

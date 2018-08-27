@@ -3,7 +3,7 @@ var detached;
 $(document).ready(function () {
     var container_height = $("#container").height();
     console.log(container_height);
-//    setFooter(container_height);
+    setFooter(container_height);
     $("#side_drp_down").click(function () {
         showDropDown("side_drp_list", "side_drp_wrap");
     });
@@ -26,7 +26,39 @@ jQuery(document).ready(function ($) {
         var redirect_url = $(this).attr("url");
         window.location = redirect_url;
     });
+
+    $(".click_seat").click(function () {
+//        var redirect_url = $(this).attr("url");
+//        console.log ($(this).html());
+        highlight_seat($(this));
+    });
 });
+
+function highlight_seat(id) {
+    id.css({"background-color": "#b4d2e0"});
+    $.cookie(id, id, { expires : 10 });
+//    $.ajax({
+//        url: url,
+//        type: "get",
+//        cache: false,
+//        complete: function () {
+//            console.log("completed the request");
+////            $('#loading').hide();
+//        },
+//        success: function (response) {
+//            console.log(response);
+////            $("#formPanel").fadeIn(600);
+////            $("#heading").html(heading);
+////            $("#data").html(response);
+////            if (heading === 'Publish Image') {
+////                $('#formSize').attr('class', 'pagesPopupFrom');
+////            }
+//        },
+//        failure: function (response) {
+//            console.log(response);
+//        }
+//    });
+}
 
 function showDropDown(list_id, list_wrap) {
     $("#" + list_id).css({"display": "block"});
@@ -46,7 +78,6 @@ function change_destination() {
     var selection = $("#start_point").find(":selected").val();
     detached = $("#destination option[value='" + selection + "']").detach();
 }
-
 
 function countChars() {
     var val = $('#title').val().length;
