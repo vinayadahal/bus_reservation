@@ -12,11 +12,11 @@
             <th>Available Capacity</th>
             <th>Departure Time</th>
             <th>Departure Date</th>
+            <th>Ticket Price</th>
         </tr>
         <?php
         $i = 1;
         $j = 0;
-//        var_dump($sess_buses_ids);
         ?>
         <?php foreach ($buses as $bus) { ?>
             <tr class="clickable-row" url="<?php echo base_url(); ?>seats/<?php echo $j++; ?>">
@@ -28,6 +28,7 @@
                 <td><?php echo $bus['avail_seat']; ?></td>
                 <td><?php echo $bus['departure_time']; ?></td>
                 <td><?php echo $bus['departure_date']; ?></td>
+                <td>Rs. <?php echo $bus['price']; ?> /-</td>
             </tr>
         <?php } ?>
     </table>

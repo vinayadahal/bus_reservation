@@ -10,7 +10,7 @@
         <script src="<?php echo base_url(); ?>js/styler.js"></script>
         <script src="<?php echo base_url(); ?>js/public_script.js"></script>
     </head>
-    <body>
+    <body id="container">
         <div class="menu_wrap">
             <div class="menu">
                 <div class="logo">
@@ -37,4 +37,4 @@
                 </ul>
             </div>
         </div>
-        <div class="content_wrap" id="container">
+        <div class="content_wrap" >
