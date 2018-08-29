@@ -1,48 +1,27 @@
 <div class="bus_search_wrap">
-
     Departure Date: <?php echo $bus_details->departure_date; ?>
     <br>
     Departure Time: <?php echo $bus_details->departure_time; ?>
-
-    <?php
-    $reserved_array = explode(",", $bus_details->reserved_seat);
-    ?>
-
-    <table border="1" class="seat_table" >
+    <?php // $reserved_array = explode(",", $bus_details->reserved_seat); ?>
+    <div style="display: none;" id="reserved_seat"><?php echo $bus_details->reserved_seat; ?></div>
+    <?php if (!empty($selected_seat)) { ?>
+        <div style="display: none;" id="selected_seat"><?php echo $selected_seat; ?></div>
+    <?php } ?>
+    <table border="1" class="seat_table" id="seat_table" url="<?php echo base_url(); ?>" >
         <tr>
             <td colspan="4">Seat Layout for bus:</td>
         </tr>
         <?php if ($bus_type == "Micro") { ?>
             <tr>
-                <?php if (in_array("f1", $reserved_array)) { ?>
-                    <td class="click_seat" style="background-color: #ff0000">f1</td>
-                <?php } else { ?>
-                    <td class="click_seat">f1</td>
-                <?php } ?>
-                <?php if (in_array("f2", $reserved_array)) { ?>
-                    <td class="click_seat" style="background-color: #ff0000">f2</td>
-                <?php } else { ?>
-                    <td class="click_seat">f2</td>
-                <?php } ?>
+                <td class="click_seat">f1</td>
+                <td class="click_seat">f2</td>
                 <td colspan="2">Driver</td>
             </tr>
             <tr>
                 <td rowspan="3"></td>
-                <?php if (in_array("a1", $reserved_array)) { ?>
-                    <td class="click_seat" style="background-color: #ff0000">a1</td>
-                <?php } else { ?>
-                    <td class="click_seat">a1</td>
-                <?php } ?>
-                <?php if (in_array("a2", $reserved_array)) { ?>
-                    <td class="click_seat" style="background-color: #ff0000">a2</td>
-                <?php } else { ?>
-                    <td class="click_seat">a2</td>
-                <?php } ?>
-                <?php if (in_array("a3", $reserved_array)) { ?>
-                    <td class="click_seat" style="background-color: #ff0000">a3</td>
-                <?php } else { ?>
-                    <td class="click_seat">a3</td>
-                <?php } ?>
+                <td class="click_seat">a1</td>
+                <td class="click_seat">a2</td>
+                <td class="click_seat">a3</td>
             </tr>
             <tr>
                 <td class="click_seat">b1</td>
@@ -63,4 +42,6 @@
         <?php } ?>
     </table>
 
-</div>
+    <button class="btn_submit" onclick="seat_session();">Next</button>
+
+</div> 

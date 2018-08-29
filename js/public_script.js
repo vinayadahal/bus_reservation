@@ -1,9 +1,13 @@
 var detached;
 
+var selected_seats = new Array();
+
 $(document).ready(function () {
     var container_height = $("#container").height();
     console.log(container_height);
-    setFooter(container_height);
+//    setFooter(container_height);
+    set_reserved_seats();
+    set_selected_seats();
     $("#side_drp_down").click(function () {
         showDropDown("side_drp_list", "side_drp_wrap");
     });
@@ -12,6 +16,35 @@ $(document).ready(function () {
         hideDropDown("side_drp_list", "side_drp_wrap");
     });
 });
+
+function set_reserved_seats() {
+    if ($("#reserved_seat").length !== 0) {
+        var seats = $("#reserved_seat").html().split(',');
+        $.each(seats, function (index, value) {
+            $('.click_seat').each(function () { // all element with class click_seat within DOM
+                if ($(this).html() === value) {
+                    $(this).css({"background-color": "#ff0000", "color": "#fff"});
+                    $(this).removeClass("click_seat");
+                    selected_seats.push(value);
+                }
+            });
+        });
+    }
+}
+
+function set_selected_seats() {
+    if ($("#selected_seat").length !== 0) {
+        var seats = $("#selected_seat").html().split(',');
+        $.each(seats, function (index, value) {
+            $('.click_seat').each(function () { // all element with class click_seat within DOM
+                if ($(this).html() === value) {
+                    $(this).css({"background-color": "#00ff00", "color": "#fff"});
+                    selected_seats.push(value);
+                }
+            });
+        });
+    }
+}
 
 function setFooter(container_height) {
     if (container_height < 500) {
@@ -26,38 +59,37 @@ jQuery(document).ready(function ($) {
         var redirect_url = $(this).attr("url");
         window.location = redirect_url;
     });
-
     $(".click_seat").click(function () {
-//        var redirect_url = $(this).attr("url");
-//        console.log ($(this).html());
         highlight_seat($(this));
     });
 });
 
 function highlight_seat(id) {
     id.css({"background-color": "#b4d2e0"});
-    $.cookie(id, id, { expires : 10 });
-//    $.ajax({
-//        url: url,
-//        type: "get",
-//        cache: false,
-//        complete: function () {
-//            console.log("completed the request");
-////            $('#loading').hide();
-//        },
-//        success: function (response) {
-//            console.log(response);
-////            $("#formPanel").fadeIn(600);
-////            $("#heading").html(heading);
-////            $("#data").html(response);
-////            if (heading === 'Publish Image') {
-////                $('#formSize').attr('class', 'pagesPopupFrom');
-////            }
-//        },
-//        failure: function (response) {
-//            console.log(response);
-//        }
-//    });
+    console.log((jQuery.inArray(id.html(), selected_seats)));
+    if ((jQuery.inArray(id.html(), selected_seats)) === -1) {
+        selected_seats.push(id.html());
+    } else {
+        console.log("already exists value. Removing...");
+        selected_seats=jQuery.grep(selected_seats, function (value) { // removing any element and updating the array selected seats
+            return value !== id.html();
+        });
+        id.removeAttr('style');
+    }
+    console.log(selected_seats);
+}
+
+function seat_session() {
+    var base_url = $("#seat_table").attr("url");
+    $.ajax({
+        type: "GET",
+        data: {selected_seats},
+        url: base_url + "set_seat",
+        success: function (msg) {
+            console.log(msg);
+            window.location = base_url + "confirm_seat";
+        }
+    });
 }
 
 function showDropDown(list_id, list_wrap) {

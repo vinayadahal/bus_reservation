@@ -68,9 +68,23 @@ class PublicUser extends CI_Controller {
         } else {
             $data['bus_details'] = $this->select->getSingleRecordWhere("reservation", "bus_id", $bus['bus_details'][$id]['id']);
         }
-//        var_dump($bus);
+        if (!empty($this->session->userdata('seats'))) {
+            $data['selected_seat'] = $this->session->userdata('seats');
+        }
         $data['bus_type'] = $bus['bus_details'][$id]['type'];
         $this->loadView("seats", "choose seats", $data);
+    }
+
+    public function setSeatSession() {
+        echo "triggered: ";
+        $seat_array = $this->input->get("selected_seats");
+        $seat_string = implode(",", $seat_array);
+        $this->session->set_userdata('seats', $seat_string);
+    }
+
+    public function confirmSeat() {
+        echo "new page <br>";
+        var_dump($this->session->userdata('seats'));
     }
 
     public function loadView($php_file, $page_title, $data = null) {

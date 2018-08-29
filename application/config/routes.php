@@ -8,3 +8,5 @@ $route['translate_uri_dashes'] = FALSE;
 
 $route['search_bus'] = 'PublicUser/showBuses';
 $route['seats/(:num)'] = 'PublicUser/seats/$1';
+$route['set_seat'] = 'PublicUser/setSeatSession';
+$route['confirm_seat'] = 'PublicUser/confirmSeat';

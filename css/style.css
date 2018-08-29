@@ -268,12 +268,13 @@
     
 }
 .seat_table td:after {
-    /*content: 'est';*/
+    /*content: '';*/
     display: block;
     margin-top: 100%;
 }
 
 .click_seat{
+    /*background-image: url("../images/icons/seats.png");*/
     cursor: pointer;
 }
 
