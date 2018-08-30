@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 26, 2018 at 08:16 PM
+-- Generation Time: Aug 30, 2018 at 09:11 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -25,6 +25,7 @@ CREATE TABLE IF NOT EXISTS `bus` (
   `type` text NOT NULL,
   `total_seat` int(11) NOT NULL,
   `bus_number` int(11) NOT NULL,
+  `price` int(11) NOT NULL,
   `seat_layout` int(11) NOT NULL,
   `travel_agency_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
@@ -35,9 +36,9 @@ CREATE TABLE IF NOT EXISTS `bus` (
 -- Dumping data for table `bus`
 --
 
-INSERT INTO `bus` (`id`, `type`, `total_seat`, `bus_number`, `seat_layout`, `travel_agency_id`) VALUES
-(2, 'Micro', 15, 23123123, 1, 1),
-(3, 'Mini', 20, 12323, 2, 1);
+INSERT INTO `bus` (`id`, `type`, `total_seat`, `bus_number`, `price`, `seat_layout`, `travel_agency_id`) VALUES
+(2, 'Micro', 15, 9808, 800, 1, 1),
+(3, 'Mini', 20, 1245, 600, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -80,9 +81,9 @@ CREATE TABLE IF NOT EXISTS `reservation` (
 --
 
 INSERT INTO `reservation` (`id`, `departure_time`, `departure_date`, `reserved_seat`, `bus_id`) VALUES
-(1, '9 am', '2018-08-27', 'a1,a2,a3', 2),
+(1, '9 am', '2018-08-27', 'a1,a2,a3,c1,f2,d4', 2),
 (2, '10pm', '2018-08-28', 'a2,a3', 3),
-(3, '12 pm', '2018-08-27', 'a2,a3', 2);
+(3, '12 pm', '2018-08-27', 'a2,a3,a1,d4', 2);
 
 -- --------------------------------------------------------
 
@@ -112,6 +113,36 @@ INSERT INTO `route` (`id`, `start_point`, `end_point`, `bus_id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tickets`
+--
+
+CREATE TABLE IF NOT EXISTS `tickets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `address` varchar(255) NOT NULL,
+  `contact` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `seats` varchar(255) NOT NULL,
+  `total_price` int(11) NOT NULL,
+  `unique_id` varchar(255) NOT NULL,
+  `reservation_id` int(11) NOT NULL,
+  `bus_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `tickets`
+--
+
+INSERT INTO `tickets` (`id`, `first_name`, `last_name`, `address`, `contact`, `email`, `seats`, `total_price`, `unique_id`, `reservation_id`, `bus_id`) VALUES
+(1, 'Vinaya', 'Dahal', 'Kathmandu', '982346569', 'vin@xyz.com', 'c1,f2,d4', 2400, 's7C7jR6eDl', 1, 2),
+(2, 'Vivek', 'Dahal', 'Jorpati', '9813456786', 'viv@qwe.com', 'a1', 800, 'OLvuMVTTHU', 3, 2),
+(3, 'Aweqwe', 'Zxczxczfjghjghj', 'Yuoioupu', '1233556456', 'asd@qwer.ghfhjf', 'd4', 800, 'UBsAyRdZ1i', 3, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `travel_agency`
 --
 
@@ -129,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `travel_agency` (
 --
 
 INSERT INTO `travel_agency` (`id`, `name`, `address`, `contact`, `email`) VALUES
-(1, 'Agni Yatayat', 'Kalanki', 12313323, 'agni@abc.com');
+(1, 'ABC Yatayat', 'Kalanki', 12313323, 'info@abc.com');
 
 --
 -- Constraints for dumped tables

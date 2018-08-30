@@ -136,6 +136,15 @@ hr{
     padding: 10px;
 }
 
+.tbl_travel_agency th{
+    background-color: #00592e;
+    color: #fff;
+}
+
+.tbl_travel_agency td{
+    background-color: #fff;
+}
+
 .route_form table{
     width: 100%;
     border-collapse: collapse;
@@ -153,8 +162,12 @@ hr{
 
 .form-elements{
     width: 100%;
-    padding: 3px 8px;
+    padding: 8px 10px;
+    border: 1px solid #5b9bc6;
     box-sizing: border-box;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
 }
 
 .avail_popular_wrap{
@@ -283,12 +296,6 @@ hr{
     text-align: left;
 }
 
-
-.seat_table{
-    /*border: 1px solid #5b9bc6;*/
-    /*border-collapse: collapse;*/
-}
-
 .seat_table td {
     width: 60px;
     height: 60px;
@@ -320,10 +327,23 @@ hr{
 
 /*seat end*/
 
+/*confirm_seat start*/
+
+.form_table {
+    border-spacing: 5px;
+}
+
+.form_table th{
+    text-align: left;
+    /*width: 15%;*/
+}
+
+/*confirm_seat end*/
+
 
 /*site_intro start*/
 
-.site_intro_wrap{
+/*.site_intro_wrap{
     width: 100%;
     background-color: #b4d2e0;
     margin-bottom: .5%;
@@ -343,7 +363,7 @@ hr{
 .site_intro{
     background-color: #fff;
     padding: 10px;
-}
+}*/
 /*site_intro end*/
 
 /*Footer Style*/

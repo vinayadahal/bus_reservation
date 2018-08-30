@@ -1,8 +1,8 @@
 <div class="routes" style="width: 99%;padding: .5%;">
     <h2>Pick A Route</h2>
     <hr/>
-    <form class="route_form" onsubmit="return validate(['start_point', 'destination', 'date'])" method="post" action="<?php echo base_url();?>search_bus">
-        <table>
+    <form class="route_form" onsubmit="return validate(['start_point', 'destination', 'date'])" method="post" action="<?php echo base_url(); ?>search_bus">
+        <table class="tbl_form">
             <tr>
                 <th>Start Point:</th>
                 <th>Destination:</th>
@@ -35,7 +35,7 @@
 <div class="routes" style="width: 99%;padding: .5%;">
     <h2>Travel Agencies</h2>
     <hr/>
-    <table>
+    <table class="tbl_travel_agency">
         <tr>
             <th>S.No.</th>
             <th>Name</th>
@@ -43,52 +43,23 @@
             <th>Phone</th>
             <th>Email</th>
         </tr>
-        <tr>
-            <td>1</td>
-            <td>Agni Yatayat</td>
-            <td>Kalanki</td>
-            <td>1546879</td>
-            <td>agni@abc.com</td>
-        </tr>     
-        <tr>
-            <td>1</td>
-            <td>Agni Yatayat</td>
-            <td>Kalanki</td>
-            <td>1546879</td>
-            <td>agni@abc.com</td>
-        </tr> 
-        <tr>
-            <td>1</td>
-            <td>Agni Yatayat</td>
-            <td>Kalanki</td>
-            <td>1546879</td>
-            <td>agni@abc.com</td>
-        </tr> 
-        <tr>
-            <td>1</td>
-            <td>Agni Yatayat</td>
-            <td>Kalanki</td>
-            <td>1546879</td>
-            <td>agni@abc.com</td>
-        </tr> 
-        <tr>
-            <td>1</td>
-            <td>Agni Yatayat</td>
-            <td>Kalanki</td>
-            <td>1546879</td>
-            <td>agni@abc.com</td>
-        </tr> 
-        <tr>
-            <td>1</td>
-            <td>Agni Yatayat</td>
-            <td>Kalanki</td>
-            <td>1546879</td>
-            <td>agni@abc.com</td>
-        </tr> 
+
+        <?php
+        $i = 1;
+        foreach ($agencies as $agency) {
+            ?>
+            <tr>
+                <td><?php echo $i++; ?></td>
+                <td><?php echo $agency->name; ?></td>
+                <td><?php echo $agency->address; ?></td>
+                <td><?php echo $agency->contact; ?></td>
+                <td><?php echo $agency->email; ?></td>
+            </tr>
+        <?php } ?>
     </table>
 </div>
 
-<div class="avail_popular_wrap">
+<!--<div class="avail_popular_wrap">
     <div class="avail_popular">
         <h2>Available Routes</h2>
         <hr/>
@@ -150,4 +121,4 @@
             </tr>
         </table>
     </div>
-</div>
+</div>-->

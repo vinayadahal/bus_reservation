@@ -42,11 +42,20 @@
                 <th>Total Price</th>
             </tr>
             <tr>
-                <?php foreach ($seat_details as $seat_name) { ?>
-                    <td><?php echo $seat_name; ?></td>
+                <?php
+                if (!empty($seat_details)) {
+                    foreach ($seat_details as $seat_name) {
+                        ?>
+                        <td><?php echo $seat_name; ?></td>
+                    <?php } ?>
+                    <td><?php echo count($seat_details); ?></td>
+                    <td>Rs. <?php echo $total_price; ?> /-</td>
+                <?php } else { ?>
+                    <td>N/A</td>
+                    <td>0</td>
+                    <td>Rs. 0 /-</td>
                 <?php } ?>
-                <td><?php echo count($seat_details); ?></td>
-                <td>Rs. <?php echo $total_price; ?> /-</td>
+
             </tr>
         </table>
     </div>
@@ -54,31 +63,44 @@
         <h1>Provide Your Details</h1>
         <hr>
         <br>
-        <form method="post" action="<?php // echo base_url()      ?>">
-            <table>
+        <form onsubmit="return validate(['fname', 'lname', 'address', 'email', 'contact'])" method="post" action="<?php echo base_url(); ?>reserve_seat" >
+            <table class="form_table">
                 <tr>
-                    <td>First Name</td>
-                    <td><input type="text" name="fname" class="form-elements" /></td>
+                    <th>First Name</th>
                 </tr>
                 <tr>
-                    <td>Last Name</td>
-                    <td><input type="text" name="lname" class="form-elements" /></td>
+                    <td><input type="text" name="fname" id="fname" class="form-elements" /></td>
                 </tr>
                 <tr>
-                    <td>Address</td>
-                    <td><input type="text" name="address" class="form-elements" /></td>
+                    <th>Last Name</th>
                 </tr>
                 <tr>
-                    <td>Email</td>
-                    <td><input type="text" name="email" class="form-elements" /></td>
+                    <td><input type="text" name="lname" id="lname" class="form-elements" /></td>
                 </tr>
                 <tr>
-                    <td>Contact</td>
-                    <td><input type="text" name="contact" class="form-elements" /></td>
+                    <th>Address</th>
                 </tr>
                 <tr>
-                    <td colspan="2">
-                        <button class="btn_submit">Submit</button>
+                    <td><input type="text" name="address" id="address" class="form-elements" /></td>
+                </tr>
+                <tr>
+                    <th>Email</th>
+                </tr>
+                <tr>
+                    <td><input type="text" name="email" id="email" class="form-elements" /></td>
+                </tr>
+                <tr>
+                    <th>Contact</th>
+                </tr>
+                <tr>
+                    <td><input type="text" name="contact" id="contact" class="form-elements" /></td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                </tr>
+                <tr>
+                    <td>
+                        <button class="btn_submit" type="submit">Submit</button>
                         <a href="javascript:history.go(-1)"><button class="btn_submit" type="button">Cancel</button></a>
                     </td>
                 </tr>

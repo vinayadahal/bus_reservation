@@ -8,6 +8,8 @@ class PublicUser extends CI_Controller {
         parent:: __construct();
         $this->load->database();
         $this->load->model('select');
+        $this->load->model('insert');
+        $this->load->model('update');
         $this->load->helper('url'); // Helps to get base url defined in config.php
         $this->load->library('session'); // starts session
     }
@@ -15,6 +17,7 @@ class PublicUser extends CI_Controller {
     public function index() {
         $this->session->sess_destroy();
         $data['places'] = $this->select->getAllFromTable("destination");
+        $data['agencies']= $this->select->getAllFromTable("travel_agency");
         $this->loadView("index", "home", $data);
     }
 
@@ -45,7 +48,7 @@ class PublicUser extends CI_Controller {
             $t1_c2 = "departure_date";
             $t2_c1 = $t3_c = "id"; // merged due to same value
             $t2_c2 = "travel_agency_id";
-            $all_bus = $this->select->getAllRecordJoinThreeTbl($col, $t1, $t2, $t3, $t1_c1, $t1_c2, $t2_c1, $t2_c2, $t3_c, $bus_id->bus_id, $date,"reservation.id");
+            $all_bus = $this->select->getAllRecordJoinThreeTbl($col, $t1, $t2, $t3, $t1_c1, $t1_c2, $t2_c1, $t2_c2, $t3_c, $bus_id->bus_id, $date, "reservation.id");
             foreach ($all_bus as $bus) {
                 $avail_seat = $bus->total_seat - count(explode(",", $bus->reserved_seat));
                 $buses[$j] = array('id' => $bus->id, 'type' => $bus->type, 'total_seat' => $bus->total_seat, 'bus_number' => $bus->bus_number, 'seat_layout' => $bus->bus_number, 'travel_agency' => $bus->travel_agency, 'address' => $bus->address, 'contact' => $bus->contact, 'departure_date' => $bus->departure_date, 'departure_time' => $bus->departure_time, "avail_seat" => $avail_seat, "price" => $bus->price, "reserved_seat" => $bus->reserved_seat, "reserve_id" => $bus->reserve_id);
@@ -91,6 +94,41 @@ class PublicUser extends CI_Controller {
         $data['seat_details'] = $selected_seat_array;
         $data['details'] = $bus_details;
         $this->loadView("confirm_seat", "confirm seat", $data);
+    }
+
+    public function bookSeat() {
+        $first_name = $this->input->post("fname");
+        $last_name = $this->input->post("lname");
+        $address = $this->input->post("address");
+        $email = $this->input->post("email");
+        $contact = $this->input->post("contact");
+        $bus_details = $this->session->userdata('bus_details');
+        $res_details = $this->select->getSingleRecordWhere("reservation", "id", $bus_details['reserve_id']);
+        $reserved_seat = explode(",", $res_details->reserved_seat);
+        $allSeatArray = explode(",", $this->session->userdata('seats')); // update to db reservation table
+        $selected_seat_array = array_diff($allSeatArray, $reserved_seat); // to get calculation and payment
+        $total_price = count($selected_seat_array) * $bus_details['price'];
+        $this->insertData($first_name, $last_name, $address, $contact, $email, implode(",", $selected_seat_array), $total_price, $this->generateRandomString(), $bus_details['reserve_id'], $bus_details['id']);
+    }
+
+    public function insertData($first_name, $last_name, $address, $contact, $email, $seats, $total_price, $unique_id, $reservation_id, $bus_id) {
+        $data_ticket_table = array("first_name" => ucfirst($first_name), "last_name" => ucfirst($last_name), "address" => ucwords($address), "contact" => $contact, "email" => $email, "seats" => $seats, "total_price" => $total_price, "unique_id" => $unique_id, "reservation_id" => $reservation_id, "bus_id" => $bus_id);
+        $new_ticket_id = $this->insert->insert_return_id($data_ticket_table, "tickets");
+        if (!empty($new_ticket_id)) {
+            $this->update->updateSingleCondition(array("reserved_seat" => $this->session->userdata('seats')), "reservation", "id", $reservation_id);
+        } else {
+            echo "failed";
+        }
+    }
+
+    public function generateRandomString($length = 10) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $charactersLength = strlen($characters);
+        $randomString = '';
+        for ($i = 0; $i < $length; $i++) {
+            $randomString .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $randomString;
     }
 
     public function loadView($php_file, $page_title, $data = null) {
