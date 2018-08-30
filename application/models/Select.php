@@ -78,7 +78,7 @@ class Select extends CI_Model {
         return $query->row();
     }
 
-    public function getAllRecordJoinThreeTbl($col, $t1, $t2, $t3, $t1_c1, $t1_c2, $t2_c1, $t2_c2, $t3_c, $t2_c1_val, $t1_c2_val) { //$col should be array like $col=array('name','category')
+    public function getAllRecordJoinThreeTbl($col, $t1, $t2, $t3, $t1_c1, $t1_c2, $t2_c1, $t2_c2, $t3_c, $t2_c1_val, $t1_c2_val, $orderByDesc = null, $orderByAsc = null) { //$col should be array like $col=array('name','category')
         $field = "`" . implode("`,`", $col) . "`";
         $field = "" . implode(",", $col) . "";
         $this->db->select($field);
@@ -87,6 +87,12 @@ class Select extends CI_Model {
         $this->db->join($t3, "$t2.$t2_c2 = $t3.$t3_c");
         $this->db->where("$t1.$t1_c2", $t1_c2_val);
         $this->db->where("$t2.$t2_c1", $t2_c1_val);
+        if (!empty($orderByDesc)) {
+            $this->db->order_by($orderByDesc, "desc");
+        }
+        if (!empty($orderByAsc)) {
+            $this->db->order_by($orderByAsc, "asc");
+        }
         $query = $this->db->get();
         return $query->result();
     }

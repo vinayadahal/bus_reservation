@@ -92,7 +92,7 @@
             </tr>
             <tr>
                 <td>Rs. <span id="price"><?php echo $details['price']; ?></span> /-</td>
-                <td id="selected_seat">N/A</td>
+                <td id="selected_seat_count">N/A</td>
                 <td id="seat_name">N/A</td>
                 <td id="total_price">Rs. 0 /-</td>
             </tr>

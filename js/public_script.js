@@ -2,10 +2,11 @@ var detached;
 
 var all_seats = new Array();
 var selected_seats = new Array();
+var old_select_seats = new Array();
 
 $(document).ready(function () {
     var container_height = $("#container").height();
-    console.log(container_height);
+//    console.log(container_height);
     setFooter(container_height);
     set_reserved_seats();
     set_selected_seats();
@@ -49,7 +50,6 @@ function set_selected_seats() {
 }
 
 function setFooter(container_height) {
-//    console.log(container_height);
     if (container_height < 600) {
         $(".footerWrap").css({position: "fixed", bottom: "0"});
     } else {
@@ -68,30 +68,35 @@ jQuery(document).ready(function ($) {
 });
 
 function preserve_history() {
-    var select_seats = new Array();
     $('.click_seat').each(function () { // all element with class click_seat within DOM
         if (typeof $(this).attr("style") !== "undefined") {
-            select_seats.push($(this).html());
-//            console.log(select_seats);
+            old_select_seats.push($(this).html());
         }
     });
-    set_pricing(select_seats);
-    $("#selected_seat").html(select_seats.length);
+    set_pricing(old_select_seats);
 }
 
 function highlight_seat(id) {
     id.css({"background-color": "#b4d2e0"});
     console.log((jQuery.inArray(id.html(), selected_seats)));
-    if ((jQuery.inArray(id.html(), selected_seats)) === -1) {
+    if ((jQuery.inArray(id.html(), all_seats)) === -1) {
         all_seats.push(id.html());
         selected_seats.push(id.html());
-        $("#selected_seat").html(selected_seats.length);
-        set_pricing(selected_seats);
+        old_select_seats.push(id.html());
+//        $("#selected_seat_count").html(selected_seats.length);
+        set_pricing(old_select_seats);
     } else {
         console.log("already exists value. Removing...");
-        all_seats = jQuery.grep(selected_seats, function (value) { // removing any element and updating the array selected seats
+        all_seats = jQuery.grep(all_seats, function (value) { // removing any element and updating the array all seats
             return value !== id.html();
         });
+        var res_seats = $("#reserved_seat").html().split(',');
+        console.log(res_seats.length + ":" + all_seats.length);
+        if (res_seats.length === all_seats.length) {
+            $("#seat_name").html("N/A");
+            $("#selected_seat_count").html("N/A");
+            $("#total_price").html("Rs. " + 0 + " /-");
+        }
         id.removeAttr('style');
     }
     console.log(all_seats);
@@ -100,6 +105,7 @@ function highlight_seat(id) {
 
 function set_pricing(select_seat) {
     $("#seat_name").html(select_seat);
+    $("#selected_seat_count").html(select_seat.length);
     var total_price = select_seat.length * $("#price").html();
     $("#total_price").html("Rs. " + total_price + " /-");
 }
