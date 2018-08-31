@@ -1,5 +1,20 @@
 <div class="bus_search_wrap" style="display: table;">
     <div class="seat_layout">
+        <h1>Color Index</h1>
+        <hr>
+        <br>
+        <table id="bus_details">
+            <tr>
+                <th>Booked</th>
+                <th>Selected</th>
+                <th>In Progress</th>
+            </tr>
+            <tr>
+                <td style="background-color: #ac0022;">&nbsp;</td>
+                <td style="background-color: #00592e;">&nbsp;</td>
+                <td style="background-color: #b4d2e0;">&nbsp;</td>
+            </tr>
+        </table>
         <h1>Seat Layout</h1>
         <hr>
         <br>
@@ -40,19 +55,17 @@
         </table>
     </div>
     <div class="seat_layout">
-        <h1>Color Index</h1>
+        <h1>Route Information</h1>
         <hr>
         <br>
         <table id="bus_details">
             <tr>
-                <th>Booked</th>
-                <th>Selected</th>
-                <th>In Progress</th>
+                <th>From</th>
+                <th>To</th>
             </tr>
             <tr>
-                <td style="background-color: #ac0022;">&nbsp;</td>
-                <td style="background-color: #00592e;">&nbsp;</td>
-                <td style="background-color: #b4d2e0;">&nbsp;</td>
+                <td><?php echo $from; ?></td>
+                <td><?php echo $to; ?></td>
             </tr>
         </table>
         <h1>Bus Details</h1>

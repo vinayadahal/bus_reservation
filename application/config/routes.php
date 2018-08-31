@@ -11,3 +11,4 @@ $route['seats/(:num)'] = 'PublicUser/seats/$1';
 $route['set_seat'] = 'PublicUser/setSeatSession';
 $route['confirm_seat'] = 'PublicUser/confirmSeat';
 $route['reserve_seat'] = 'PublicUser/bookSeat';
+$route['show_ticket'] = 'PublicUser/showTicket';

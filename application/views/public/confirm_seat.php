@@ -31,7 +31,19 @@
                 <td><?php echo $details['departure_time']; ?></td>
             </tr>
         </table>
-
+        <h1>Route Information</h1>
+        <hr>
+        <br>
+        <table id="bus_details">
+            <tr>
+                <th>From</th>
+                <th>To</th>
+            </tr>
+            <tr>
+                <td><?php echo $from; ?></td>
+                <td><?php echo $to; ?></td>
+            </tr>
+        </table>
         <h1>Seat Details</h1>
         <hr>
         <br>

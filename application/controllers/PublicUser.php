@@ -17,7 +17,7 @@ class PublicUser extends CI_Controller {
     public function index() {
         $this->session->sess_destroy();
         $data['places'] = $this->select->getAllFromTable("destination");
-        $data['agencies']= $this->select->getAllFromTable("travel_agency");
+        $data['agencies'] = $this->select->getAllFromTable("travel_agency");
         $this->loadView("index", "home", $data);
     }
 
@@ -32,8 +32,16 @@ class PublicUser extends CI_Controller {
         } else {
             $data['buses'] = array("no records to display");
         }
+        $data["from"] = $this->route_details($start_point);
+        $data["to"] = $this->route_details($end_point);
         $this->session->set_userdata('buses', $data['buses']);
+        $this->session->set_userdata('from', $data['from']->destination);
+        $this->session->set_userdata('to', $data['to']->destination);
         $this->loadView("buses", "search result", $data);
+    }
+
+    public function route_details($id) {
+        return $this->select->getSingleRecordWhere("destination", "id", $id);
     }
 
     public function bus_array_maker($buses_id, $date) {
@@ -71,6 +79,8 @@ class PublicUser extends CI_Controller {
         }
         $data['bus_type'] = $bus['bus_details'][$id]['type'];
         $data['details'] = $bus['bus_details'][$id];
+        $data["from"] = $this->session->userdata('from');
+        $data["to"] = $this->session->userdata('to');
         $this->session->set_userdata('bus_details', $data['details']);
         $this->loadView("seats", "choose seats", $data);
     }
@@ -93,6 +103,8 @@ class PublicUser extends CI_Controller {
         $data['total_price'] = count($selected_seat_array) * $bus_details['price'];
         $data['seat_details'] = $selected_seat_array;
         $data['details'] = $bus_details;
+        $data["from"] = $this->session->userdata('from');
+        $data["to"] = $this->session->userdata('to');
         $this->loadView("confirm_seat", "confirm seat", $data);
     }
 
@@ -108,16 +120,38 @@ class PublicUser extends CI_Controller {
         $allSeatArray = explode(",", $this->session->userdata('seats')); // update to db reservation table
         $selected_seat_array = array_diff($allSeatArray, $reserved_seat); // to get calculation and payment
         $total_price = count($selected_seat_array) * $bus_details['price'];
-        $this->insertData($first_name, $last_name, $address, $contact, $email, implode(",", $selected_seat_array), $total_price, $this->generateRandomString(), $bus_details['reserve_id'], $bus_details['id']);
+        $random_code = $this->generateRandomString();
+        $from = $this->session->userdata('from');
+        $to = $this->session->userdata('to');
+        $status = $this->insertData($first_name, $last_name, $address, $contact, $email, implode(",", $selected_seat_array), $total_price, $random_code, $bus_details['reserve_id'], $bus_details['id'], $from, $to);
+        if ($status) {
+            $this->showTicket($random_code);
+        } else {
+            echo "error page";
+        }
     }
 
-    public function insertData($first_name, $last_name, $address, $contact, $email, $seats, $total_price, $unique_id, $reservation_id, $bus_id) {
+    public function showTicket($ticket_code = "UBsAyRdZ1i") {
+        $ticket_detail = $this->select->getSingleRecordWhere("tickets", "unique_id", $ticket_code);
+        $reservation_detail = $this->select->getSingleRecordWhere("reservation", "id", $ticket_detail->reservation_id);
+        $bus_detail = $this->select->getSingleRecordWhere("bus", "id", $ticket_detail->bus_id);
+        $agency_detail = $this->select->getSingleRecordWhere("travel_agency", "id", $bus_detail->travel_agency_id);
+        $data['ticket_details'] = $ticket_detail;
+        $data['reservation_details'] = $reservation_detail;
+        $data['bus_details'] = $bus_detail;
+        $data['agency_details'] = $agency_detail;
+        $data['ticket_id'] = $ticket_code;
+        $this->loadView("ticket", "ticket detail", $data);
+    }
+
+    public function insertData($first_name, $last_name, $address, $contact, $email, $seats, $total_price, $unique_id, $reservation_id, $bus_id, $from, $to) {
         $data_ticket_table = array("first_name" => ucfirst($first_name), "last_name" => ucfirst($last_name), "address" => ucwords($address), "contact" => $contact, "email" => $email, "seats" => $seats, "total_price" => $total_price, "unique_id" => $unique_id, "reservation_id" => $reservation_id, "bus_id" => $bus_id);
         $new_ticket_id = $this->insert->insert_return_id($data_ticket_table, "tickets");
         if (!empty($new_ticket_id)) {
             $this->update->updateSingleCondition(array("reserved_seat" => $this->session->userdata('seats')), "reservation", "id", $reservation_id);
+            return true;
         } else {
-            echo "failed";
+            return false;
         }
     }
 

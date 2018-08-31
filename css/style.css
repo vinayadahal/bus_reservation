@@ -289,11 +289,13 @@ hr{
 
 #bus_details th, #bus_details td{
     padding: 5px 10px;
-    border: 1px solid #5b9bc6;  
+    border: 1px solid #5b9bc6;
 }
 
 #bus_details th{
     text-align: left;
+    background-color: #00592e;
+    color: #fff;
 }
 
 .seat_table td {

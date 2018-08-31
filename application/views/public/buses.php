@@ -1,5 +1,5 @@
 <div class="bus_search_wrap">
-    <h1>Available Buses For Given Route:</h1>
+    <h1>Available Buses For: <?php echo $from->destination; ?> To <?php echo $to->destination; ?></h1>
     <hr>
     <br>
     <table class="bus_search_table">
