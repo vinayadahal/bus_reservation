@@ -11,8 +11,8 @@
             </tr>
             <tr>
                 <td style="background-color: #ac0022;">&nbsp;</td>
-                <td style="background-color: #00592e;">&nbsp;</td>
-                <td style="background-color: #b4d2e0;">&nbsp;</td>
+                <td style="background-color: #93a85c;">&nbsp;</td>
+                <td style="background-color: #dde9b9;">&nbsp;</td>
             </tr>
         </table>
         <h1>Seat Layout</h1>

@@ -41,7 +41,7 @@ function set_selected_seats() {
         $.each(seats, function (index, value) {
             $('.click_seat').each(function () { // all element with class click_seat within DOM
                 if ($(this).html() === value) {
-                    $(this).css({"background-color": "#00592e", "color": "#fff"});
+                    $(this).css({"background-color": "#93a85c", "color": "#fff"});
                     all_seats.push(value);
                 }
             });
@@ -77,30 +77,49 @@ function preserve_history() {
 }
 
 function highlight_seat(id) {
-    id.css({"background-color": "#b4d2e0"});
-    console.log((jQuery.inArray(id.html(), selected_seats)));
+    id.css({"background-color": "#dde9b9"});
+//    console.log((jQuery.inArray(id.html(), selected_seats)));
     if ((jQuery.inArray(id.html(), all_seats)) === -1) {
-        all_seats.push(id.html());
-        selected_seats.push(id.html());
-        old_select_seats.push(id.html());
-//        $("#selected_seat_count").html(selected_seats.length);
+        seat_add(id);
         set_pricing(old_select_seats);
     } else {
-        console.log("already exists value. Removing...");
-        all_seats = jQuery.grep(all_seats, function (value) { // removing any element and updating the array all seats
-            return value !== id.html();
-        });
+        seat_remove("all_seats", id);
         var res_seats = $("#reserved_seat").html().split(',');
-        console.log(res_seats.length + ":" + all_seats.length);
         if (res_seats.length === all_seats.length) {
-            $("#seat_name").html("N/A");
-            $("#selected_seat_count").html("N/A");
-            $("#total_price").html("Rs. " + 0 + " /-");
+            default_vaule();
+        } else {
+            seat_remove("old_select_seats", id);
+            $("#seat_name").html(old_select_seats);
         }
         id.removeAttr('style');
     }
-    console.log(all_seats);
-    console.log(selected_seats);
+//    console.log(all_seats);
+//    console.log(selected_seats);
+}
+
+function seat_add(id) {
+    all_seats.push(id.html());
+    selected_seats.push(id.html());
+    old_select_seats.push(id.html());
+}
+
+function seat_remove(array_name, id) {
+    console.log("removin seat:" + array_name);
+    if (array_name === "old_select_seats") {
+        old_select_seats = jQuery.grep(old_select_seats, function (value) { // removing any element and updating the array all seats
+            return value !== id.html();
+        });
+    } else {
+        all_seats = jQuery.grep(all_seats, function (value) { // removing any element and updating the array all seats
+            return value !== id.html();
+        });
+    }
+}
+
+function default_vaule() {
+    $("#seat_name").html("N/A");
+    $("#selected_seat_count").html("N/A");
+    $("#total_price").html("Rs. " + 0 + " /-");
 }
 
 function set_pricing(select_seat) {

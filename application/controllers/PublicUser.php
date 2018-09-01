@@ -12,6 +12,8 @@ class PublicUser extends CI_Controller {
         $this->load->model('update');
         $this->load->helper('url'); // Helps to get base url defined in config.php
         $this->load->library('session'); // starts session
+//        $this->load->library('generator');
+//        $this->generator->generate_pdf();
     }
 
     public function index() {
@@ -131,7 +133,7 @@ class PublicUser extends CI_Controller {
         }
     }
 
-    public function showTicket($ticket_code = "UBsAyRdZ1i") {
+    public function showTicket($ticket_code) {
         $ticket_detail = $this->select->getSingleRecordWhere("tickets", "unique_id", $ticket_code);
         $reservation_detail = $this->select->getSingleRecordWhere("reservation", "id", $ticket_detail->reservation_id);
         $bus_detail = $this->select->getSingleRecordWhere("bus", "id", $ticket_detail->bus_id);
@@ -167,12 +169,12 @@ class PublicUser extends CI_Controller {
 
     public function loadView($php_file, $page_title, $data = null) {
         $data['title'] = ucfirst($page_title);
-        $this->load->view('template/header', $data);
+        $this->load->view('public/template/header', $data);
         if ($page_title == "home") {
-            $this->load->view('template/slider', $data);
+            $this->load->view('public/template/slider', $data);
         }
         $this->load->view('public/' . $php_file, $data);
-        $this->load->view('template/footer', $data);
+        $this->load->view('public/template/footer', $data);
     }
 
 }
