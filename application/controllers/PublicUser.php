@@ -12,6 +12,7 @@ class PublicUser extends CI_Controller {
         $this->load->model('update');
         $this->load->helper('url'); // Helps to get base url defined in config.php
         $this->load->library('session'); // starts session
+        $this->load->library('commons');
 //        $this->load->library('generator');
 //        $this->generator->generate_pdf();
     }
@@ -19,7 +20,8 @@ class PublicUser extends CI_Controller {
     public function index() {
         $this->session->sess_destroy();
         $data['places'] = $this->select->getAllFromTable("destination");
-        $data['agencies'] = $this->select->getAllFromTable("travel_agency");
+        $data['agencies'] = $this->commons->travel_agency_list($this->select);
+//        $data['agencies'] = $this->select->getAllFromTable("travel_agency");
         $this->loadView("index", "home", $data);
     }
 

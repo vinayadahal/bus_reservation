@@ -11,8 +11,8 @@ class Slider extends CI_Controller {
         $this->load->helper('url'); // Helps to get base url defined in config.php
         $this->load->library('session'); // starts session
         $this->load->library('upload');
-//        $this->load->library('authorized');
-//        $this->authorized->check_auth($this->select, $this->session->userdata('user_id'));
+        $this->load->library('authorized');
+        $this->authorized->check_auth($this->select, $this->session->userdata('user_id'));
     }
 
     public function file_uploader() {
@@ -150,7 +150,7 @@ class Slider extends CI_Controller {
 
     public function loadView($data, $page_name, $title) {
         $data['title'] = ucfirst($title);
-//        $data['user'] = $this->select->getSingleRecordWhere('user', 'id', $this->session->userdata('user_id'));
+        $data['user'] = $this->select->getSingleRecordWhere('user', 'id', $this->session->userdata('user_id'));
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/' . $page_name, $data);
         $this->load->view('admin/template/footer', $data);

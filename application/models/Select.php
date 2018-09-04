@@ -42,11 +42,12 @@ class Select extends CI_Model {
         return $query->result();
     }
 
-    public function getAllRecordInnerJoinNoCondition($col, $t_name1, $t_name2, $t_1_col, $t_2_col) { //$col should be array like $col=array('name','category')
+    public function getAllRecordInnerJoinNoCondition($col, $t_name1, $t_name2, $t_1_col, $t_2_col, $limit = null, $start = null) { //$col should be array like $col=array('name','category')
         $field = "`" . implode("`,`", $col) . "`";
         $this->db->select($field);
         $this->db->from($t_name1); //book table
         $this->db->join($t_name2, "$t_name1.$t_1_col = $t_name2.$t_2_col"); //category table
+        $this->dataLimiter($limit, $start);
         $query = $this->db->get();
         return $query->result();
     }
@@ -175,6 +176,20 @@ class Select extends CI_Model {
         $this->db->select('*');
         $this->db->from($table);
         $this->db->where($cond_col, $cond_val);
+        $this->db->limit(1);
+        $query = $this->db->get();
+        if ($query->num_rows() == 1) {
+            return $query->row();
+        } else {
+            return false;
+        }
+    }
+
+    public function getSingleRecordWhereMultiValue($table, $cond_col, $cond_val, $cond_col2, $cond_val2) {
+        $this->db->select('*');
+        $this->db->from($table);
+        $this->db->where($cond_col, $cond_val);
+        $this->db->where($cond_col2, $cond_val2);
         $this->db->limit(1);
         $query = $this->db->get();
         if ($query->num_rows() == 1) {

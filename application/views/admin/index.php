@@ -3,10 +3,10 @@
         <a href="<?php echo base_url(); ?>admin/slider">
             <div class="dashboard_icons"><i class="fa fa-image" style="font-size: 128px;"></i>Manage Slider</div>
         </a>
-        <a href="<?php echo base_url(); ?>admin/category">
+        <a href="<?php echo base_url(); ?>admin/places">
             <div class="dashboard_icons"><i class="fa fa-map" style="font-size: 128px;"></i>Places</div>
         </a>
-        <a href="<?php echo base_url(); ?>admin/users">
+        <a href="<?php echo base_url(); ?>admin/travel_agencies">
             <div class="dashboard_icons"><i class="fa fa-users" style="font-size: 128px;"></i>Travel Agencies</div>
         </a>
         <a href="<?php echo base_url(); ?>admin/settings">

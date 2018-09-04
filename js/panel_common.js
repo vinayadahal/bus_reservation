@@ -21,6 +21,7 @@ function showPopup() {
 }
 
 function setFooter(container_height) {
+//    console.log(container_height);
     if (container_height < 500) {
         $(".footerWrap").css({position: "fixed", bottom: "0"});
     } else {
