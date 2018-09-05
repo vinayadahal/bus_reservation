@@ -4,13 +4,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AgencyAdmin extends CI_Controller {
 
-    private $agency_id;
-    private $agency_name;
+    private $name;
     private $address;
-    private $contact;
+    private $phone;
     private $email;
     private $username;
-    private $travel_agency_id;
+    private $password;
+    private $con_password;
+    private $user_id;
+    private $role;
 
     public function __construct() {
         parent:: __construct();
@@ -27,19 +29,25 @@ class AgencyAdmin extends CI_Controller {
     }
 
     public function form_value_init() {
-        $this->agency_name = $this->input->post('name');
+        $this->name = $this->input->post('name');
         $this->address = $this->input->post('address');
-        $this->contact = $this->input->post('phone');
+        $this->phone = $this->input->post('phone');
         $this->email = $this->input->post('email');
         $this->username = $this->input->post('username');
-        $this->travel_agency_id = $this->input->post('travel_agency_id');
-        if (!empty($this->input->post('agency_id')) && null !== $this->input->post('agency_id')) {
-            $this->agency_id = $this->input->post('agency_id');
+        $this->password = $this->input->post('password');
+        $this->con_password = $this->input->post('con_password');
+        $this->travel_agency_id = $this->input->post('agency_id');
+        if (!empty($this->input->post('user_id')) && null !== $this->input->post('user_id')) {
+            $this->user_id = $this->input->post('user_id');
         }
     }
 
-    public function array_maker_post_table() {
-        return array("name" => $this->name, "address" => $this->address, "phone" => $this->phone, "email" => $this->email, "username" => $this->username,"travel_agency_id" => $this->travel_agency_id);
+    public function array_maker_user_table() {
+        if (empty($this->password) && empty($this->con_password)) {
+            return array("name" => $this->name, "address" => $this->address, "phone" => $this->phone, "email" => $this->email, "username" => $this->username, "travel_agency_id" => $this->travel_agency_id);
+        } else {
+            return array("name" => $this->name, "address" => $this->address, "phone" => $this->phone, "email" => $this->email, "username" => $this->username, "travel_agency_id" => $this->travel_agency_id, "password" => sha1($this->password), "role" => $this->role);
+        }
     }
 
     public function index($page = null) {
@@ -66,43 +74,54 @@ class AgencyAdmin extends CI_Controller {
     }
 
     public function createAgencyAdmin() {
+        $role_agency_admin = (array) $this->select->getSingleRecordWhere("role", "role", "role_agency_admin");
+        $this->role = $role_agency_admin['id'];
         $this->form_value_init(); // initalize form value
-        $data_post_table = $this->array_maker_post_table(); // create array
-        if ($this->insert->insert_single_row($data_post_table, "travel_agency")) {
-            $this->session->set_flashdata('message', 'Added travel agency ' . ucfirst($this->agency_name) . '!!!');
-            redirect(base_url() . 'admin/travel_agencies', 'refresh');
+        $data_user_table = $this->array_maker_user_table(); // create array with book
+        if ($this->password != $this->con_password) {
+            $this->session->set_flashdata('message', "Passwords are not equal!!!");
         } else {
-            $this->session->set_flashdata('message', 'Unable to add travel agency ' . ucfirst($this->agency_name) . '!!!');
-            redirect(base_url() . 'admin/travel_agencies', 'refresh');
+            if ($this->insert->insert_single_row($data_user_table, "user")) {
+                $this->session->set_flashdata('message', ucwords($this->name) . " added successfully!!!");
+            } else {
+                $this->session->set_flashdata('message', 'Unable to add ' . ucwords($this->name) . '!!!');
+            }
+        }
+        redirect(base_url() . 'admin/agency_admin', 'refresh');
+    }
+
+    public function editAgencyAdmin($id) {
+        $data['agency_admin'] = (array) $this->select->getSingleRecordWhere('user', 'id', $id);
+        $data['agency_admin_id'] = $id;
+        $data['agency_ids'] = (array) $this->select->getAllFromTable("travel_agency");
+        $this->output->enable_profiler(TRUE);
+        $this->loadView($data, "agency_admin/edit", "Edit Agency Admin");
+    }
+
+    public function updateAgencyAdmin() {
+        $this->form_value_init(); // initalize form value
+        $data_user_table = $this->array_maker_user_table(); // create array with book
+        if ($this->password != $this->con_password) {
+            $this->session->set_flashdata('message', "Passwords are not equal!!!");
+        } else {
+            if ($this->update->updateSingleCondition($data_user_table, "user", "id", $this->user_id)) {
+                $this->session->set_flashdata('message', 'Updated agency admin ' . ucfirst($this->name) . '!!!');
+                redirect(base_url() . 'admin/agency_admin', 'refresh');
+            } else {
+                $this->session->set_flashdata('message', 'Unable to update agency admin ' . ucfirst($this->book_name) . '!!!');
+                redirect(base_url() . 'admin/agency_admin', 'refresh');
+            }
         }
     }
 
-    public function editAgency($id) {
-        $data['agency'] = (array) $this->select->getSingleRecord('travel_agency', $id);
-        $data['agency_id'] = $id;
-        $this->loadView($data, "travel_agencies/edit", "Edit Agency");
-    }
-
-    public function updateAgency() {
-        $this->form_value_init(); // initalize form value
-        $data_post_table = $this->array_maker_post_table(); // create array with book
-        if ($this->update->updateSingleCondition($data_post_table, "travel_agency", "id", $this->agency_id)) {
-            $this->session->set_flashdata('message', 'Updated travel agency ' . ucfirst($this->agency_name) . '!!!');
-            redirect(base_url() . 'admin/travel_agencies', 'refresh');
+    public function deleteAgencyAdmin($id) {
+        $post = (array) $this->select->getSingleRecord('user', $id);
+        if ($this->delete->deleteSingleCondition("user", "id", $id)) {
+            $this->session->set_flashdata('message', 'Agency admin ' . ucfirst($post['name']) . ' deleted successfully!!!');
+            redirect(base_url() . 'admin/agency_admin', 'refresh');
         } else {
-            $this->session->set_flashdata('message', 'Unable to update travel agency ' . ucfirst($this->book_name) . '!!!');
-            redirect(base_url() . 'admin/travel_agencies', 'refresh');
-        }
-    }
-
-    public function deleteAgency($id) {
-        $post = (array) $this->select->getSingleRecord('travel_agency', $id);
-        if ($this->delete->deleteSingleCondition("travel_agency", "id", $id)) {
-            $this->session->set_flashdata('message', 'Travel agency ' . ucfirst($post['name']) . ' deleted successfully!!!');
-            redirect(base_url() . 'admin/travel_agencies', 'refresh');
-        } else {
-            $this->session->set_flashdata('message', 'Unable to delete travel agency ' . ucfirst($post['name']) . '!!!');
-            redirect(base_url() . 'admin/travel_agencies', 'refresh');
+            $this->session->set_flashdata('message', 'Unable to delete agency admin ' . ucfirst($post['name']) . '!!!');
+            redirect(base_url() . 'admin/agency_admin', 'refresh');
         }
     }
 

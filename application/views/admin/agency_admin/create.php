@@ -1,7 +1,7 @@
 <div class="list_details_wrap">
-    <h3>Add Agency</h3>
+    <h3>Add Agency Admin</h3>
     <div class="form_wrap">
-        <form method="post" action="<?php echo base_url() ?>admin/travel_agencies/create" onsubmit="return validate(['name', 'address', 'phone', 'email', 'username', 'agency_id'])">
+        <form method="post" action="<?php echo base_url() ?>admin/agency_admin/create" onsubmit="return validate(['name', 'address', 'phone', 'email', 'username', 'agency_id','password','con_password'])">
             <table border="0">
                 <tr>
                     <td>Name:</td>
@@ -28,6 +28,10 @@
                     <td><input type="password" class="form-control" name="password" id='password'/></td>
                 </tr>
                 <tr>
+                    <td>Confirm Password:</td>
+                    <td><input type="password" class="form-control" name="con_password" id='con_password'/></td>
+                </tr>
+                <tr>
                     <td>Travel Agency:</td>
                     <td>
                         <select class="form-control" name="agency_id" id='agency_id'>
@@ -40,7 +44,7 @@
                 <tr>
                     <td colspan="2">
                         <button type="submit" class="btn btn-success">Add</button>
-                        <a href="<?php echo base_url(); ?>admin/travel_agencies"><button type="button" class="btn btn-danger">Cancel</button></a>
+                        <a href="<?php echo base_url(); ?>admin/agency_admin"><button type="button" class="btn btn-danger">Cancel</button></a>
                     </td>
                 </tr>
             </table>
