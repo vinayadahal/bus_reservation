@@ -6,6 +6,7 @@ class Login extends CI_Controller {
 
     private $username;
     private $password;
+    private $travel_agency_id;
 
     public function __construct() {
         parent:: __construct();
@@ -35,8 +36,11 @@ class Login extends CI_Controller {
             redirect(base_url() . 'login', 'refresh');
         } else {
 //            if ($this->checkActivated($result->active)) {
-                $this->session->set_userdata('user_id', $result->id);
-                $this->checkRole($result->role); // checks which panel to redirect to
+            $this->session->set_userdata('user_id', $result->id);
+            if (!empty($result->travel_agency_id)) {
+                $this->travel_agency_id = $result->travel_agency_id;
+            }
+            $this->checkRole($result->role); // checks which panel to redirect to
 //            }
         }
     }
@@ -58,6 +62,10 @@ class Login extends CI_Controller {
                 redirect(base_url() . 'admin', 'refresh');
             } else {
                 $this->redirectTo();
+//                $this->output->enable_profiler(TRUE);
+                $agency = $this->select->getSingleRecordWhere('travel_agency', 'id', $this->travel_agency_id);
+                $this->session->set_userdata('agency_id', $agency->id);
+                $this->session->set_userdata('user_role', $role_value->role);
                 redirect(base_url() . 'member', 'refresh');
             }
         }

@@ -50,3 +50,31 @@ $route['admin/agency_admin/create'] = 'AgencyAdmin/createAgencyAdmin';
 $route['admin/agency_admin/edit/(:num)'] = 'AgencyAdmin/editAgencyAdmin/$1';
 $route['admin/agency_admin/update'] = 'AgencyAdmin/updateAgencyAdmin';
 $route['admin/agency_admin/delete/(:num)'] = 'AgencyAdmin/deleteAgencyAdmin/$1';
+
+$route['admin/settings'] = 'SettingsAdmin/index';
+$route['admin/settings/updateUser'] = 'SettingsAdmin/updateUser';
+
+$route['member'] = 'Member/index';
+$route['member/home'] = 'Member/index';
+$route['member/my-books'] = 'MyBooks/index';
+$route['member/my-books/(:num)'] = 'MyBooks/index/$1';
+$route['member/my-books/add'] = 'MyBooks/addBook';
+$route['member/my-books/create'] = 'MyBooks/createBook';
+$route['member/my-books/edit/(:num)'] = 'MyBooks/editBook/$1';
+$route['member/my-books/update'] = 'MyBooks/updateBook';
+$route['member/my-books/delete/(:num)'] = 'MyBooks/deleteBook/$1';
+$route['member/my-books/publish/(:num)'] = 'MyBooks/publishBook/$1';
+$route['member/my-books/hide/(:num)'] = 'MyBooks/hideBook/$1';
+
+$route['member/buses'] = 'Buses/index';
+$route['member/buses/(:num)'] = 'Buses/index/$1';
+$route['member/buses/add'] = 'Buses/addBus';
+$route['member/buses/create'] = 'Buses/createBus';
+$route['member/buses/edit/(:num)'] = 'Buses/editBus/$1';
+$route['member/buses/update'] = 'Buses/updateBus';
+$route['member/buses/delete/(:num)'] = 'Buses/deleteBus/$1';
+
+$route['member/matches'] = 'Matches/index';
+
+$route['member/settings'] = 'Settings/index';
+$route['member/settings/updateUser'] = 'Settings/updateUser';

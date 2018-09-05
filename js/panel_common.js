@@ -1,3 +1,5 @@
+var detached;
+
 $(document).ready(function () {
     var container_height = $("#container").height();
     setFooter(container_height);
@@ -12,6 +14,14 @@ $(document).ready(function () {
         }
     });
 });
+
+function change_destination() {
+    if (detached) {
+        detached.appendTo("#destination");
+    }
+    var selection = $("#start_point").find(":selected").val();
+    detached = $("#destination option[value='" + selection + "']").detach();
+}
 
 function showPopup() {
     $("#popup").fadeIn('slow');

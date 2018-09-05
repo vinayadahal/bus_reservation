@@ -94,7 +94,6 @@ class AgencyAdmin extends CI_Controller {
         $data['agency_admin'] = (array) $this->select->getSingleRecordWhere('user', 'id', $id);
         $data['agency_admin_id'] = $id;
         $data['agency_ids'] = (array) $this->select->getAllFromTable("travel_agency");
-        $this->output->enable_profiler(TRUE);
         $this->loadView($data, "agency_admin/edit", "Edit Agency Admin");
     }
 

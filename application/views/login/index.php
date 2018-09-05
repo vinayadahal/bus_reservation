@@ -1,7 +1,7 @@
 <div class="container" id="container">
     <div class="panel panel_login">
         <div class="headings">
-            Login - Book Deals
+            Login - Bus Reservation
         </div>
         <div class="input_wrap">
             <form action="<?php echo base_url(); ?>checkLogin" method="POST">

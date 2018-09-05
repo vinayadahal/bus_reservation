@@ -12,7 +12,7 @@ class Select extends CI_Model {
         return $query->result();
     }
 
-    public function getAllFromTableWhere($table, $cond_col, $cond_val, $limit, $start) {
+    public function getAllFromTableWhere($table, $cond_col, $cond_val, $limit = null, $start = null) {
         $this->db->select('*');
         $this->db->from($table);
         if (is_array($cond_col) && is_array($cond_val)) {
@@ -106,9 +106,12 @@ class Select extends CI_Model {
         return count($query->result());
     }
 
-    public function getTotalCount($table) {
+    public function getTotalCount($table, $condition, $value) {
         $this->db->select("*");
         $this->db->from($table);
+        if (!empty($condition) && !empty($value)) {
+            $this->db->where("$condition", $value);
+        }
         $query = $this->db->get();
         return count($query->result());
     }
