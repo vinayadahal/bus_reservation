@@ -2,7 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Buses extends CI_Controller {
+class Schedules extends CI_Controller {
 
     private $start_point;
     private $end_point;
@@ -47,7 +47,7 @@ class Buses extends CI_Controller {
 //        $this->output->enable_profiler(TRUE);
     public function index($page = null) {
         $data['message'] = $this->session->flashdata('message');
-        $TotalCount = $this->select->getTotalCount("bus", 'travel_agency_id', $this->session->userdata('agency_id'));
+        $TotalCount = $this->select->getTotalCount("reservation", 'travel_agency_id', $this->session->userdata('agency_id'));
         $DataPerPage = 8;
         $data['num_pages'] = ceil($TotalCount / $DataPerPage);
         $start = $this->commons->pageDataLimiter($page, $DataPerPage);

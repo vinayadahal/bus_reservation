@@ -18,8 +18,8 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
                         <li><a href="<?php echo base_url(); ?>member">Home</a></li>
-                        <li><a href="<?php echo base_url(); ?>member/my-books">My Books</a></li>
-                        <li><a href="<?php echo base_url(); ?>member/my-posts">Posts</a></li>
+                        <li><a href="<?php echo base_url(); ?>member/schedules">Schedules</a></li>
+                        <li><a href="<?php echo base_url(); ?>member/buses">Buses</a></li>
                         <li>
                             <a href="<?php echo base_url(); ?>member/matches">Matching Books <?php
                                 if (!empty($books)) {

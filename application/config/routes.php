@@ -56,7 +56,7 @@ $route['admin/settings/updateUser'] = 'SettingsAdmin/updateUser';
 
 $route['member'] = 'Member/index';
 $route['member/home'] = 'Member/index';
-$route['member/my-books'] = 'MyBooks/index';
+$route['member/schedules'] = 'Schedules/index';
 $route['member/my-books/(:num)'] = 'MyBooks/index/$1';
 $route['member/my-books/add'] = 'MyBooks/addBook';
 $route['member/my-books/create'] = 'MyBooks/createBook';
