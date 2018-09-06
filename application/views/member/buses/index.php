@@ -55,7 +55,7 @@
                         <td><?php echo $bus['type']; ?></td>
                         <td><?php echo $bus['total_seat']; ?></td>
                         <td><?php echo $bus['bus_number']; ?></td>
-                        <td><?php echo $bus['price']; ?></td>
+                        <td>Rs. <?php echo $bus['price']; ?> /-</td>
                         <td><a href="<?php echo base_url() ?>member/buses/edit/<?php echo $bus['id']; ?>">Edit</a></td>
                         <td><a onclick="return confirm('Are you sure to delete <?php echo "bus type: " . $bus['type'] . " bus number: " . $bus['bus_number']; ?>?')" href="<?php echo base_url() ?>member/buses/delete/<?php echo $bus['id']; ?>">Delete</a></td>
                     </tr>

@@ -1,7 +1,7 @@
 <div class="list_details_wrap">
     <h3>Add Bus</h3>
     <div class="form_wrap">
-        <form method="post" action="<?php echo base_url() ?>member/buses/create" onsubmit="return validate(['book_name', 'author'])">
+        <form method="post" action="<?php echo base_url() ?>member/buses/create" onsubmit="return validate(['start_point', 'end_point','type','total_seat','bus_number','price'])">
             <table border="0">
                 <tr>
                     <td>From:</td>
@@ -16,7 +16,7 @@
                 <tr>
                     <td>To:</td>
                     <td>
-                        <select name="destination" class="form-control" id="destination">
+                        <select name="end_point" class="form-control" id="end_point">
                             <?php foreach (array_reverse($places) as $end) { ?>
                                 <option value="<?php echo $end->id; ?>"><?php echo $end->destination; ?></option>
                             <?php } ?>

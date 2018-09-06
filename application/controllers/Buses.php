@@ -5,9 +5,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Buses extends CI_Controller {
 
     private $start_point;
-    private $end_ppint;
-    private $author;
-    private $post_id;
+    private $end_point;
+    private $type;
+    private $total_seat;
+    private $bus_number;
+    private $price;
+    private $agency_id;
 
     public function __construct() {
         parent:: __construct();
@@ -24,19 +27,20 @@ class Buses extends CI_Controller {
     }
 
     public function form_value_init() {
-        $this->user_id = $this->session->userdata('user_id');
-        $this->book_name = $this->input->post('book_name');
-        $this->author = $this->input->post('author');
-        if (!empty($this->input->post('post_id')) && null !== $this->input->post('post_id')) {
-            $this->post_id = $this->input->post('post_id');
-        }
+        $this->agency_id = $this->session->userdata('agency_id');
+        $this->start_point = $this->input->post('start_point');
+        $this->end_point = $this->input->post('end_point');
+        $this->type = $this->input->post('type');
+        $this->total_seat = $this->input->post('total_seat');
+        $this->bus_number = $this->input->post('bus_number');
+        $this->price = $this->input->post('price');
     }
 
-    public function array_maker_post_table() {
-        return array("book_name" => $this->book_name, "author" => $this->author, "user_id" => $this->user_id);
+    public function array_maker_table() {
+        return array("type" => $this->type, "total_seat" => $this->total_seat, "bus_number" => $this->bus_number, "price" => $this->price, "travel_agency_id" => $this->agency_id);
     }
 
-    //        $this->output->enable_profiler(TRUE);
+//        $this->output->enable_profiler(TRUE);
     public function index($page = null) {
         $data['message'] = $this->session->flashdata('message');
         $TotalCount = $this->select->getTotalCount("bus", 'travel_agency_id', $this->session->userdata('agency_id'));
@@ -58,6 +62,7 @@ class Buses extends CI_Controller {
             $j++;
         }
         $data['buses'] = $buses;
+//        var_dump($buses);
         if ($page > 1) {
             $data['data_count'] = (($page - 1) * $DataPerPage) + 1;
         }
@@ -69,26 +74,34 @@ class Buses extends CI_Controller {
         $this->loadView($data, "buses/create", "Add Bus");
     }
 
-    public function createPost() {
+    public function createBus() {
         $this->form_value_init(); // initalize form value
-        $data_post_table = $this->array_maker_post_table(); // create array with book
-        if ($this->insert->insert_single_row($data_post_table, "posts")) {
-            $this->session->set_flashdata('message', 'Added post for ' . ucfirst($this->book_name) . '!!!');
-            redirect(base_url() . 'member/my-posts', 'refresh');
+        $data_table = $this->array_maker_table(); // create array with book
+        $bus_id = $this->insert->insert_return_id($data_table, "bus");
+        if ($this->insert->insert_single_row(array("start_point" => $this->start_point, "end_point" => $this->end_point, "bus_id" => $bus_id), "route")) {
+            $this->session->set_flashdata('message', 'Added ' . ucfirst($this->type) . ' bus !!!');
+            redirect(base_url() . 'buses/index', 'refresh');
         } else {
-            $this->session->set_flashdata('message', 'Unable to add post for ' . ucfirst($this->book_name) . '!!!');
-            redirect(base_url() . 'member/my-posts', 'refresh');
+            $this->session->set_flashdata('message', 'Unable to add ' . ucfirst($this->type) . '!!!');
+            redirect(base_url() . 'buses/index', 'refresh');
         }
     }
 
-    public function editPost($id) {
-        $data['books'] = $this->commons->matchingBooks($this->select);
-        $data['post'] = (array) $this->select->getSingleRecord('posts', $id);
-        $data['post_id'] = $id;
-        $this->loadView($data, "posts/edit", "Edit Post");
+    public function editBus($id) {
+        $bus = (array) $this->select->getSingleRecord('bus', $id);
+        $route = (array) $this->select->getSingleRecordWhere('route', 'bus_id', $bus['id']);
+        var_dump($route);
+//        $start_point = (array) $this->select->getSingleRecord('destination', $route['start_point']);
+//        $end_point = (array) $this->select->getSingleRecord('destination', $route['end_point']);
+        $data['bus']=array('id' => $bus['id'], 'type' => $bus['type'], 'total_seat' => $bus['total_seat'],
+            'bus_number' => $bus['bus_number'], "price" => $bus['price'],
+            "start_point" => $route['start_point'], 'end_point' => $route['end_point']);
+        $data['bus_id'] = $id;
+        $data['places'] = $this->select->getAllFromTable("destination");
+        $this->loadView($data, "buses/edit", "Edit Bus");
     }
 
-    public function updatePost() {
+    public function updateBus() {
         $this->form_value_init(); // initalize form value
         $data_post_table = $this->array_maker_post_table(); // create array with book
         if ($this->update->updateSingleCondition($data_post_table, "posts", "id", $this->post_id)) {
