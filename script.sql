@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 05, 2018 at 08:49 PM
+-- Generation Time: Sep 10, 2018 at 08:39 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `bus` (
   `travel_agency_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `travel_agency_id` (`travel_agency_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
 -- Dumping data for table `bus`
@@ -38,7 +38,8 @@ CREATE TABLE IF NOT EXISTS `bus` (
 
 INSERT INTO `bus` (`id`, `type`, `total_seat`, `bus_number`, `price`, `seat_layout`, `travel_agency_id`) VALUES
 (2, 'Micro', 15, 9808, 800, 1, 1),
-(3, 'Mini', 20, 1245, 600, 2, 1);
+(3, 'Deluxe', 35, 4955, 750, 2, 1),
+(4, 'AC', 36, 987, 1200, 3, 2);
 
 -- --------------------------------------------------------
 
@@ -50,7 +51,7 @@ CREATE TABLE IF NOT EXISTS `destination` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `destination` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `destination`
@@ -84,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `reservation` (
 INSERT INTO `reservation` (`id`, `departure_time`, `departure_date`, `reserved_seat`, `bus_id`) VALUES
 (1, '9 am', '2018-08-27', 'a1,a2,a3,c1,f2,d4', 2),
 (2, '10pm', '2018-08-28', 'a2,a3', 3),
-(3, '12 pm', '2018-08-27', 'a2,a3,a1', 2);
+(3, '12 pm', '2018-08-27', 'a2,a3,a1', 4);
 
 -- --------------------------------------------------------
 
@@ -130,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `route` (
 
 INSERT INTO `route` (`id`, `start_point`, `end_point`, `bus_id`) VALUES
 (1, 1, 2, 2),
-(2, 1, 2, 3);
+(2, 1, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -178,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `travel_agency` (
   `contact` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `travel_agency`
