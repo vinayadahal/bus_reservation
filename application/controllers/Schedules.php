@@ -25,6 +25,14 @@ class Schedules extends CI_Controller {
         $this->load->library('commons');
         $this->load->library('authorized');
         $this->authorized->check_auth($this->select, $this->session->userdata('user_id'));
+        $this->session_check();
+    }
+
+    public function session_check() {
+        if (empty($this->session->userdata('user_id'))) {
+            $this->session->set_flashdata('message', 'Invaild credentials!!!');
+            redirect(base_url() . 'login', 'refresh');
+        }
     }
 
     public function form_value_init() {
@@ -44,28 +52,32 @@ class Schedules extends CI_Controller {
         return array("type" => $this->type, "total_seat" => $this->total_seat, "bus_number" => $this->bus_number, "price" => $this->price, "travel_agency_id" => $this->agency_id);
     }
 
-//        $this->output->enable_profiler(TRUE);
-    public function index($page = null) {
-        $data['message'] = $this->session->flashdata('message');
-        $col = array("bus.id", "bus.type", "bus.total_seat", "bus.bus_number", "bus.seat_layout", "reservation.departure_date as departure_date", "reservation.departure_time as departure_time", "reservation.reserved_seat as reserved_seat", "reservation.id as reserve_id", "bus.price as price");
+    public function common_query($data_per_page = null, $start = null) {
+        $col = array("bus.id", "bus.type", "bus.total_seat", "bus.bus_number", "bus.seat_layout", "reservation.id as reservation_id", "reservation.departure_date as departure_date", "reservation.departure_time as departure_time", "reservation.reserved_seat as reserved_seat", "reservation.id as reserve_id", "bus.price as price");
         $t_name1 = "bus";
         $t_name2 = "reservation";
         $t_1_col = "id";
         $t_2_col = "bus_id";
         $cond_col = "travel_agency_id";
         $cond_val = $this->session->userdata('agency_id');
-        $TotalCount = count($this->select->getAllRecordInnerJoin($col, $t_name1, $t_name2, $t_1_col, $t_2_col, $cond_col, $cond_val));
+        return $this->select->getAllRecordInnerJoin($col, $t_name1, $t_name2, $t_1_col, $t_2_col, $cond_col, $cond_val, $data_per_page, $start);
+    }
+
+//        $this->output->enable_profiler(TRUE);
+    public function index($page = null) {
+        $data['message'] = $this->session->flashdata('message');
+        $TotalCount = count($this->common_query());
         $DataPerPage = 8;
         $data['num_pages'] = ceil($TotalCount / $DataPerPage);
         $start = $this->commons->pageDataLimiter($page, $DataPerPage);
         $reservation = array();
         $j = 0;
-        $schedules = $this->select->getAllRecordInnerJoin($col, $t_name1, $t_name2, $t_1_col, $t_2_col, $cond_col, $cond_val, $DataPerPage, $start);
+        $schedules = $this->common_query($DataPerPage, $start);
         foreach ($schedules as $schedule) {
             $route = (array) $this->select->getSingleRecordWhere('route', 'bus_id', $schedule->id);
             $start_point = (array) $this->select->getSingleRecord('destination', $route['start_point']);
             $end_point = (array) $this->select->getSingleRecord('destination', $route['end_point']);
-            $reservation[$j] = array('id' => $schedule->id, 'type' => $schedule->type, 'bus_number' => $schedule->bus_number, "departure_date" => $schedule->departure_date, "departure_time" => $schedule->departure_time, "reserved_seat" => $schedule->reserved_seat, "from" => $start_point['destination'], 'to' => $end_point['destination']);
+            $reservation[$j] = array('id' => $schedule->id, 'type' => $schedule->type, 'bus_number' => $schedule->bus_number, "departure_date" => $schedule->departure_date, "departure_time" => $schedule->departure_time, "reserved_seat" => $schedule->reserved_seat, "reservation_id" => $schedule->reservation_id, "from" => $start_point['destination'], 'to' => $end_point['destination']);
             $j++;
         }
         $data['reservations'] = $reservation;
@@ -75,9 +87,20 @@ class Schedules extends CI_Controller {
         $this->loadView($data, 'schedules/index', 'Bus Schedules');
     }
 
-    public function addBus() {
-        $data['places'] = $this->select->getAllFromTable("destination");
-        $this->loadView($data, "buses/create", "Add Bus");
+    public function addSchedule() {
+        $schedules = $this->common_query();
+        $reservation = array();
+        $j = 0;
+        foreach ($schedules as $schedule) {
+            $route = (array) $this->select->getSingleRecordWhere('route', 'bus_id', $schedule->id);
+            $start_point = (array) $this->select->getSingleRecord('destination', $route['start_point']);
+            $end_point = (array) $this->select->getSingleRecord('destination', $route['end_point']);
+            $reservation[$j] = array('id' => $schedule->id, 'type' => $schedule->type, 'bus_number' => $schedule->bus_number, "departure_date" => $schedule->departure_date, "departure_time" => $schedule->departure_time, "reserved_seat" => $schedule->reserved_seat, "reservation_id" => $schedule->reservation_id, "from" => $start_point['destination'], 'to' => $end_point['destination'], "route_id" => $route['id']);
+            $j++;
+        }
+        $data['reservations'] = $reservation;
+        var_dump($reservation);
+        $this->loadView($data, "schedules/create", "Add Schedule");
     }
 
     public function createBus() {

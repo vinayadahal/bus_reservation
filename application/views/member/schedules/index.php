@@ -1,6 +1,6 @@
 <div class="list_details_wrap">
     <div>
-        <a href="<?php echo base_url() ?>member/buses/add">
+        <a href="<?php echo base_url() ?>member/schedules/add">
             <button type="button" class="btn btn-success" style="float: right;display: table-cell;">Add New</button>
         </a>
     </div>
@@ -58,8 +58,8 @@
                         <td><?php echo $schedule['departure_date']; ?></td>
                         <td><?php echo $schedule['departure_time']; ?></td>
                         <td><?php echo $schedule['reserved_seat']; ?></td>
-                        <td><a href="<?php echo base_url() ?>member/schedules/edit/<?php echo $schedule['id']; ?>">Edit</a></td>
-                        <td><a onclick="return confirm('Are you sure to delete <?php echo "bus type: " . $schedule['type'] . " bus number: " . $schedule['bus_number']; ?>?')" href="<?php echo base_url() ?>member/schedules/delete/<?php echo $schedule['id']; ?>">Delete</a></td>
+                        <td><a href="<?php echo base_url() ?>member/schedules/edit/<?php echo $schedule['reservation_id']; ?>">Edit</a></td>
+                        <td><a onclick="return confirm('Are you sure to delete <?php echo "bus type: " . $schedule['type'] . " bus number: " . $schedule['bus_number']; ?>?')" href="<?php echo base_url() ?>member/schedules/delete/<?php echo $schedule['reservation_id']; ?>">Delete</a></td>
                     </tr>
                 <?php } ?>
             </tbody>
@@ -70,15 +70,15 @@
 <div class="pagination_wrap">
     <ul class="pagination">
         <li>
-            <a href="<?php echo base_url(); ?>member/buses/<?php echo 1; ?>" aria-label="Previous">
+            <a href="<?php echo base_url(); ?>member/schedules/<?php echo 1; ?>" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>
         <?php for ($i = 1; $i <= $num_pages; $i++) { ?>
-            <li><a href="<?php echo base_url(); ?>member/buses/<?php echo $i; ?>"><?php echo $i; ?></a></li>
+            <li><a href="<?php echo base_url(); ?>member/schedules/<?php echo $i; ?>"><?php echo $i; ?></a></li>
         <?php } ?>
         <li>
-            <a href="<?php echo base_url(); ?>member/buses/<?php echo --$i; ?>" aria-label="Next">
+            <a href="<?php echo base_url(); ?>member/schedules/<?php echo --$i; ?>" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>

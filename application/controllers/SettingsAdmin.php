@@ -18,6 +18,14 @@ class SettingsAdmin extends CI_Controller {
         $this->load->library('authorized');
         $this->authorized->check_auth($this->select, $this->session->userdata('user_id'));
         $this->user_id = $this->session->userdata('user_id');
+        $this->session_check();
+    }
+
+    public function session_check() {
+        if (empty($this->session->userdata('user_id'))) {
+            $this->session->set_flashdata('message', 'Invaild credentials!!!');
+            redirect(base_url() . 'login', 'refresh');
+        }
     }
 
     public function form_value_init() {

@@ -15,7 +15,15 @@ class Member extends CI_Controller {
         $this->load->library('images');
         $this->load->library('authorized');
         $this->load->library('commons');
+        $this->session_check();
         $this->authorized->check_auth($this->select, $this->session->userdata('user_id'));
+    }
+
+    public function session_check() {
+        if (empty($this->session->userdata('user_id'))) {
+            $this->session->set_flashdata('message', 'Invaild credentials!!!');
+            redirect(base_url() . 'login', 'refresh');
+        }
     }
 
     public function index() {
