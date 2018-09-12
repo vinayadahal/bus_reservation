@@ -4,14 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Schedules extends CI_Controller {
 
-    private $start_point;
-    private $end_point;
-    private $type;
-    private $total_seat;
-    private $bus_number;
-    private $price;
-    private $agency_id;
+    private $time;
+    private $date;
     private $bus_id;
+    private $reservation_id;
 
     public function __construct() {
         parent:: __construct();
@@ -36,20 +32,16 @@ class Schedules extends CI_Controller {
     }
 
     public function form_value_init() {
-        $this->agency_id = $this->session->userdata('agency_id');
-        $this->start_point = $this->input->post('start_point');
-        $this->end_point = $this->input->post('end_point');
-        $this->type = $this->input->post('type');
-        $this->total_seat = $this->input->post('total_seat');
-        $this->bus_number = $this->input->post('bus_number');
-        $this->price = $this->input->post('price');
-        if (!empty($this->input->post('bus_id')) && null !== $this->input->post('bus_id')) {
-            $this->bus_id = $this->input->post('bus_id');
+        $this->time = $this->input->post('time');
+        $this->date = $this->input->post('date');
+        $this->bus_id = $this->input->post('bus_id');
+        if (!empty($this->input->post('reservation_id')) && null !== $this->input->post('reservation_id')) {
+            $this->reservation_id = $this->input->post('reservation_id');
         }
     }
 
     public function array_maker_table() {
-        return array("type" => $this->type, "total_seat" => $this->total_seat, "bus_number" => $this->bus_number, "price" => $this->price, "travel_agency_id" => $this->agency_id);
+        return array("departure_time" => $this->time, "departure_date" => $this->date, "bus_id" => $this->bus_id);
     }
 
     public function common_query($data_per_page = null, $start = null) {
@@ -77,6 +69,9 @@ class Schedules extends CI_Controller {
             $route = (array) $this->select->getSingleRecordWhere('route', 'bus_id', $schedule->id);
             $start_point = (array) $this->select->getSingleRecord('destination', $route['start_point']);
             $end_point = (array) $this->select->getSingleRecord('destination', $route['end_point']);
+            if (date("Y-m-d") > $schedule->departure_date) {
+                continue;
+            }
             $reservation[$j] = array('id' => $schedule->id, 'type' => $schedule->type, 'bus_number' => $schedule->bus_number, "departure_date" => $schedule->departure_date, "departure_time" => $schedule->departure_time, "reserved_seat" => $schedule->reserved_seat, "reservation_id" => $schedule->reservation_id, "from" => $start_point['destination'], 'to' => $end_point['destination']);
             $j++;
         }
@@ -95,58 +90,52 @@ class Schedules extends CI_Controller {
             $route = (array) $this->select->getSingleRecordWhere('route', 'bus_id', $schedule->id);
             $start_point = (array) $this->select->getSingleRecord('destination', $route['start_point']);
             $end_point = (array) $this->select->getSingleRecord('destination', $route['end_point']);
+//            if (date("Y-m-d") > $schedule->departure_date) {
+//                continue;
+//            }
             $reservation[$j] = array('id' => $schedule->id, 'type' => $schedule->type, 'bus_number' => $schedule->bus_number, "departure_date" => $schedule->departure_date, "departure_time" => $schedule->departure_time, "reserved_seat" => $schedule->reserved_seat, "reservation_id" => $schedule->reservation_id, "from" => $start_point['destination'], 'to' => $end_point['destination'], "route_id" => $route['id']);
             $j++;
         }
         $data['reservations'] = $reservation;
-        var_dump($reservation);
         $this->loadView($data, "schedules/create", "Add Schedule");
     }
 
-    public function createBus() {
+    public function createSchedule() {
         $this->form_value_init(); // initalize form value
         $data_table = $this->array_maker_table(); // create array with book
-        $bus_id = $this->insert->insert_return_id($data_table, "bus");
-        if ($this->insert->insert_single_row(array("start_point" => $this->start_point, "end_point" => $this->end_point, "bus_id" => $bus_id), "route")) {
-            $this->session->set_flashdata('message', 'Added ' . ucfirst($this->type) . ' bus !!!');
-            redirect(base_url() . 'buses/index', 'refresh');
+        if ($this->insert->insert_return_id($data_table, "reservation")) {
+            $this->session->set_flashdata('message', 'Added schedule for bus !!!');
+            redirect(base_url() . 'schedules/index', 'refresh');
         } else {
-            $this->session->set_flashdata('message', 'Unable to add ' . ucfirst($this->type) . '!!!');
-            redirect(base_url() . 'buses/index', 'refresh');
+            $this->session->set_flashdata('message', 'Unable to add schedule for bus!!!');
+            redirect(base_url() . 'schedules/index', 'refresh');
         }
     }
 
-    public function editBus($id) {
-        $bus = (array) $this->select->getSingleRecord('bus', $id);
-        $route = (array) $this->select->getSingleRecordWhere('route', 'bus_id', $bus['id']);
-        $data['bus'] = array('id' => $bus['id'], 'type' => $bus['type'], 'total_seat' => $bus['total_seat'], 'bus_number' => $bus['bus_number'], "price" => $bus['price'], "start_point" => $route['start_point'], 'end_point' => $route['end_point']);
-        $data['bus_id'] = $id;
-        $data['places'] = $this->select->getAllFromTable("destination");
-        $this->loadView($data, "buses/edit", "Edit Bus");
+    public function editSchedule($id) {
+        $data['reservation'] = $this->select->getSingleRecord("reservation", $id);
+        $this->loadView($data, "schedules/edit", "Edit Schedule");
     }
 
-    public function updateBus() {
+    public function updateSchedule() {
         $this->form_value_init(); // initalize form value
         $data_table = $this->array_maker_table(); // create array with book
-        if ($this->update->updateSingleCondition($data_table, "bus", "id", $this->bus_id)) {
-            $this->update->updateSingleCondition(array("start_point" => $this->start_point, "end_point" => $this->end_point), "route", "bus_id", $this->bus_id);
-            $this->session->set_flashdata('message', 'Updated ' . ucfirst($this->type) . ' bus!!!');
-            redirect(base_url() . 'buses/index', 'refresh');
+        if ($this->update->updateSingleCondition($data_table, "reservation", "id", $this->reservation_id)) {
+            $this->session->set_flashdata('message', 'Updated schedule for bus!!!');
+            redirect(base_url() . 'schedules/index', 'refresh');
         } else {
-            $this->session->set_flashdata('message', 'Unable to update ' . ucfirst($this->type) . ' bus!!!');
-            redirect(base_url() . 'buses/index', 'refresh');
+            $this->session->set_flashdata('message', 'Unable to update schedule for bus!!!');
+            redirect(base_url() . 'schedules/index', 'refresh');
         }
     }
 
-    public function deleteBus($id) {
-        $bus = (array) $this->select->getSingleRecord('bus', $id);
-        if ($this->delete->deleteSingleCondition("route", "bus_id", $id)) {
-            $this->delete->deleteSingleCondition("bus", "id", $id);
-            $this->session->set_flashdata('message', ucfirst($bus['type']) . ' bus deleted successfully!!!');
-            redirect(base_url() . 'buses/index', 'refresh');
+    public function deleteSchedule($id) {
+        if ($this->delete->deleteSingleCondition("reservation", "id", $id)) {
+            $this->session->set_flashdata('message', 'Schedule for bus deleted successfully!!!');
+            redirect(base_url() . 'schedules/index', 'refresh');
         } else {
-            $this->session->set_flashdata('message', 'Unable to delete ' . ucfirst($bus['type']) . ' bus!!!');
-            redirect(base_url() . 'buses/index', 'refresh');
+            $this->session->set_flashdata('message', 'Unable to delete schedule for bus!!!');
+            redirect(base_url() . 'schedules/index', 'refresh');
         }
     }
 

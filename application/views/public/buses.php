@@ -26,7 +26,7 @@
                 <td><?php echo $bus['bus_number']; ?></td>
                 <td><?php echo $bus['total_seat']; ?></td>
                 <td><?php echo $bus['avail_seat']; ?></td>
-                <td><?php echo $bus['departure_time']; ?></td>
+                <td><?php echo $bus['departure_time']; ?>:00:00</td>
                 <td><?php echo $bus['departure_date']; ?></td>
                 <td>Rs. <?php echo $bus['price']; ?> /-</td>
             </tr>

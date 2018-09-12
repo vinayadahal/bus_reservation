@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 10, 2018 at 08:39 PM
+-- Generation Time: Sep 12, 2018 at 08:18 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -76,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   `bus_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `bus_bus_id` (`bus_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `reservation`
@@ -85,7 +85,9 @@ CREATE TABLE IF NOT EXISTS `reservation` (
 INSERT INTO `reservation` (`id`, `departure_time`, `departure_date`, `reserved_seat`, `bus_id`) VALUES
 (1, '9 am', '2018-08-27', 'a1,a2,a3,c1,f2,d4', 2),
 (2, '10pm', '2018-08-28', 'a2,a3', 3),
-(3, '12 pm', '2018-08-27', 'a2,a3,a1', 4);
+(3, '12 pm', '2018-08-27', 'a2,a3,a1', 4),
+(5, '9', '2018-09-15', '', 3),
+(6, '10', '2018-09-13', '', 2);
 
 -- --------------------------------------------------------
 

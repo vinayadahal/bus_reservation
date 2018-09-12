@@ -59,10 +59,10 @@ $route['member/home'] = 'Member/index';
 $route['member/schedules'] = 'Schedules/index';
 $route['member/schedules/(:num)'] = 'Schedules/index/$1';
 $route['member/schedules/add'] = 'Schedules/addSchedule';
-$route['member/schedules/create'] = 'Schedules/createBook';
-$route['member/schedules/edit/(:num)'] = 'Schedules/editBook/$1';
-$route['member/schedules/update'] = 'Schedules/updateBook';
-$route['member/schedules/delete/(:num)'] = 'Schedules/deleteBook/$1';
+$route['member/schedules/create'] = 'Schedules/createSchedule';
+$route['member/schedules/edit/(:num)'] = 'Schedules/editSchedule/$1';
+$route['member/schedules/update'] = 'Schedules/updateSchedule';
+$route['member/schedules/delete/(:num)'] = 'Schedules/deleteSchedule/$1';
 
 $route['member/buses'] = 'Buses/index';
 $route['member/buses/(:num)'] = 'Buses/index/$1';

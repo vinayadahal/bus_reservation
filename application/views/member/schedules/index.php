@@ -4,7 +4,7 @@
             <button type="button" class="btn btn-success" style="float: right;display: table-cell;">Add New</button>
         </a>
     </div>
-    <h3>Bus Schedule</h3>
+    <h3>Bus Schedules</h3>
     <div class="list_details">
         <table class="table">
             <thead class="thead-dark">
@@ -56,10 +56,10 @@
                         <td><?php echo $schedule['type']; ?></td>
                         <td><?php echo $schedule['bus_number']; ?></td>
                         <td><?php echo $schedule['departure_date']; ?></td>
-                        <td><?php echo $schedule['departure_time']; ?></td>
+                        <td><?php echo $schedule['departure_time']; ?>:00:00</td>
                         <td><?php echo $schedule['reserved_seat']; ?></td>
                         <td><a href="<?php echo base_url() ?>member/schedules/edit/<?php echo $schedule['reservation_id']; ?>">Edit</a></td>
-                        <td><a onclick="return confirm('Are you sure to delete <?php echo "bus type: " . $schedule['type'] . " bus number: " . $schedule['bus_number']; ?>?')" href="<?php echo base_url() ?>member/schedules/delete/<?php echo $schedule['reservation_id']; ?>">Delete</a></td>
+                        <td><a onclick="return confirm('Are you sure to delete <?php echo " schedule for bus type: " . $schedule['type'] . " and bus number: " . $schedule['bus_number']; ?>?')" href="<?php echo base_url() ?>member/schedules/delete/<?php echo $schedule['reservation_id']; ?>">Delete</a></td>
                     </tr>
                 <?php } ?>
             </tbody>

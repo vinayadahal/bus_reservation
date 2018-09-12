@@ -16,11 +16,22 @@ $(document).ready(function () {
 });
 
 function change_destination() {
-    if (detached) {
-        detached.appendTo("#destination");
-    }
-    var selection = $("#start_point").find(":selected").val();
-    detached = $("#destination option[value='" + selection + "']").detach();
+//    if (detached) {
+//        detached.appendTo("#destination");
+//    }
+//    var selection = $("#start_point").find(":selected").val();
+//    detached = $("#destination option[value='" + selection + "']").detach();
+
+    var selection = $("#route").find(":selected").val();
+    $("span").filter(function () {
+        if ($(this).html() === selection) {
+            var unique_id = $(this).html();
+            console.log("match found for selection " + selection);
+            $("#type").val($("#type" + unique_id).html());
+            $("#bus_number").val($("#bus_number" + unique_id).html());
+            $("#bus_id").val($("#id" + unique_id).html());
+        }
+    });
 }
 
 function showPopup() {
