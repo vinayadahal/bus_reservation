@@ -10,8 +10,6 @@
                 <span id="id<?php echo $reservation['id']; ?>"><?php echo $reservation['id']; ?></span><!--this is bus id-->
                 <span id="type<?php echo $reservation['id']; ?>"><?php echo $reservation['type']; ?></span>
                 <span id="bus_number<?php echo $reservation['id']; ?>"><?php echo $reservation['bus_number']; ?></span>
-                <span id="date<?php echo $reservation['id']; ?>"><?php echo $reservation['departure_date']; ?></span>
-                <span id="time<?php echo $reservation['id']; ?>"><?php echo $reservation['departure_time']; ?></span>
                 <span id="from_to<?php echo $reservation['id']; ?>"><?php echo $reservation['from']; ?> to <?php echo $reservation['to']; ?></span>
             <?php } ?>
         </div>
@@ -23,8 +21,8 @@
                     <td>Destination:</td>
                     <td>
                         <select name="route" class="form-control" id="route" onchange="change_destination();">
-                            <?php foreach ($reservations as $reservation) { ?>
-                                <option value="<?php echo $reservation['id']; ?>" ><?php echo $reservation['from']; ?> to <?php echo $reservation['to']; ?></option>
+                            <?php foreach ($reservations as $reservation) { ?>   
+                                <option value="<?php echo $reservation['id']; ?>"><?php echo $reservation['from']; ?> to <?php echo $reservation['to']; ?></option>
                             <?php } ?>
                         </select>
                     </td>

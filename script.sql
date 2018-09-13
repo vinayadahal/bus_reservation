@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 12, 2018 at 08:18 PM
+-- Generation Time: Sep 13, 2018 at 08:03 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `bus` (
   `travel_agency_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `travel_agency_id` (`travel_agency_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data for table `bus`
@@ -39,7 +39,8 @@ CREATE TABLE IF NOT EXISTS `bus` (
 INSERT INTO `bus` (`id`, `type`, `total_seat`, `bus_number`, `price`, `seat_layout`, `travel_agency_id`) VALUES
 (2, 'Micro', 15, 9808, 800, 1, 1),
 (3, 'Deluxe', 35, 4955, 750, 2, 1),
-(4, 'AC', 36, 987, 1200, 3, 2);
+(4, 'AC', 36, 987, 1200, 3, 2),
+(5, 'Micro', 15, 9078, 1200, 0, 1);
 
 -- --------------------------------------------------------
 
@@ -76,7 +77,7 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   `bus_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `bus_bus_id` (`bus_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data for table `reservation`
@@ -86,8 +87,10 @@ INSERT INTO `reservation` (`id`, `departure_time`, `departure_date`, `reserved_s
 (1, '9 am', '2018-08-27', 'a1,a2,a3,c1,f2,d4', 2),
 (2, '10pm', '2018-08-28', 'a2,a3', 3),
 (3, '12 pm', '2018-08-27', 'a2,a3,a1', 4),
-(5, '9', '2018-09-15', '', 3),
-(6, '10', '2018-09-13', '', 2);
+(5, '8', '2018-09-15', '', 3),
+(6, '10', '2018-09-13', '', 2),
+(8, '11', '2018-09-19', '', 5),
+(9, '5', '2018-09-28', '', 5);
 
 -- --------------------------------------------------------
 
@@ -125,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `route` (
   KEY `bus_id` (`bus_id`),
   KEY `end_point` (`end_point`),
   KEY `start_point` (`start_point`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `route`
@@ -133,7 +136,8 @@ CREATE TABLE IF NOT EXISTS `route` (
 
 INSERT INTO `route` (`id`, `start_point`, `end_point`, `bus_id`) VALUES
 (1, 1, 2, 2),
-(2, 1, 3, 3);
+(2, 1, 3, 3),
+(3, 2, 3, 5);
 
 -- --------------------------------------------------------
 

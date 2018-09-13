@@ -83,17 +83,21 @@ class Schedules extends CI_Controller {
     }
 
     public function addSchedule() {
-        $schedules = $this->common_query();
+        $col = array("route.start_point", "route.end_point", "bus.id", "bus.bus_number", "bus.type");
+        $t_name1 = "bus";
+        $t_name2 = "route";
+        $t_1_col = "id";
+        $t_2_col = "bus_id";
+        $cond_col = "travel_agency_id";
+        $cond_value = $this->session->userdata('agency_id');
+        $schedules = $this->select->getAllRecordInnerJoin($col, $t_name1, $t_name2, $t_1_col, $t_2_col, $cond_col, $cond_value);
         $reservation = array();
         $j = 0;
-        foreach ($schedules as $schedule) {
+        foreach (array_filter($schedules) as $schedule) {
             $route = (array) $this->select->getSingleRecordWhere('route', 'bus_id', $schedule->id);
             $start_point = (array) $this->select->getSingleRecord('destination', $route['start_point']);
             $end_point = (array) $this->select->getSingleRecord('destination', $route['end_point']);
-//            if (date("Y-m-d") > $schedule->departure_date) {
-//                continue;
-//            }
-            $reservation[$j] = array('id' => $schedule->id, 'type' => $schedule->type, 'bus_number' => $schedule->bus_number, "departure_date" => $schedule->departure_date, "departure_time" => $schedule->departure_time, "reserved_seat" => $schedule->reserved_seat, "reservation_id" => $schedule->reservation_id, "from" => $start_point['destination'], 'to' => $end_point['destination'], "route_id" => $route['id']);
+            $reservation[$j] = array('id' => $schedule->id, 'type' => $schedule->type, 'bus_number' => $schedule->bus_number, "from" => $start_point['destination'], 'to' => $end_point['destination'], "route_id" => $route['id']);
             $j++;
         }
         $data['reservations'] = $reservation;
