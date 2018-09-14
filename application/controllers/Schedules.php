@@ -109,10 +109,10 @@ class Schedules extends CI_Controller {
         $data_table = $this->array_maker_table(); // create array with book
         if ($this->insert->insert_return_id($data_table, "reservation")) {
             $this->session->set_flashdata('message', 'Added schedule for bus !!!');
-            redirect(base_url() . 'schedules/index', 'refresh');
+            redirect(base_url() . 'member/schedules', 'refresh');
         } else {
             $this->session->set_flashdata('message', 'Unable to add schedule for bus!!!');
-            redirect(base_url() . 'schedules/index', 'refresh');
+            redirect(base_url() . 'member/schedules', 'refresh');
         }
     }
 
@@ -126,20 +126,20 @@ class Schedules extends CI_Controller {
         $data_table = $this->array_maker_table(); // create array with book
         if ($this->update->updateSingleCondition($data_table, "reservation", "id", $this->reservation_id)) {
             $this->session->set_flashdata('message', 'Updated schedule for bus!!!');
-            redirect(base_url() . 'schedules/index', 'refresh');
+            redirect(base_url() . 'member/schedules', 'refresh');
         } else {
             $this->session->set_flashdata('message', 'Unable to update schedule for bus!!!');
-            redirect(base_url() . 'schedules/index', 'refresh');
+            redirect(base_url() . 'member/schedules', 'refresh');
         }
     }
 
     public function deleteSchedule($id) {
         if ($this->delete->deleteSingleCondition("reservation", "id", $id)) {
             $this->session->set_flashdata('message', 'Schedule for bus deleted successfully!!!');
-            redirect(base_url() . 'schedules/index', 'refresh');
+            redirect(base_url() . 'member/schedules', 'refresh');
         } else {
             $this->session->set_flashdata('message', 'Unable to delete schedule for bus!!!');
-            redirect(base_url() . 'schedules/index', 'refresh');
+            redirect(base_url() . 'member/schedules', 'refresh');
         }
     }
 

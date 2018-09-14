@@ -87,10 +87,10 @@ class Buses extends CI_Controller {
         $bus_id = $this->insert->insert_return_id($data_table, "bus");
         if ($this->insert->insert_single_row(array("start_point" => $this->start_point, "end_point" => $this->end_point, "bus_id" => $bus_id), "route")) {
             $this->session->set_flashdata('message', 'Added ' . ucfirst($this->type) . ' bus !!!');
-            redirect(base_url() . 'buses/index', 'refresh');
+            redirect(base_url() . 'member/buses', 'refresh');
         } else {
             $this->session->set_flashdata('message', 'Unable to add ' . ucfirst($this->type) . '!!!');
-            redirect(base_url() . 'buses/index', 'refresh');
+            redirect(base_url() . 'member/buses', 'refresh');
         }
     }
 
@@ -109,10 +109,10 @@ class Buses extends CI_Controller {
         if ($this->update->updateSingleCondition($data_table, "bus", "id", $this->bus_id)) {
             $this->update->updateSingleCondition(array("start_point" => $this->start_point, "end_point" => $this->end_point), "route", "bus_id", $this->bus_id);
             $this->session->set_flashdata('message', 'Updated ' . ucfirst($this->type) . ' bus!!!');
-            redirect(base_url() . 'buses/index', 'refresh');
+            redirect(base_url() . 'member/buses', 'refresh');
         } else {
             $this->session->set_flashdata('message', 'Unable to update ' . ucfirst($this->type) . ' bus!!!');
-            redirect(base_url() . 'buses/index', 'refresh');
+            redirect(base_url() . 'member/buses', 'refresh');
         }
     }
 
@@ -121,10 +121,10 @@ class Buses extends CI_Controller {
         if ($this->delete->deleteSingleCondition("route", "bus_id", $id)) {
             $this->delete->deleteSingleCondition("bus", "id", $id);
             $this->session->set_flashdata('message', ucfirst($bus['type']) . ' bus deleted successfully!!!');
-            redirect(base_url() . 'buses/index', 'refresh');
+            redirect(base_url() . 'member/buses', 'refresh');
         } else {
             $this->session->set_flashdata('message', 'Unable to delete ' . ucfirst($bus['type']) . ' bus!!!');
-            redirect(base_url() . 'buses/index', 'refresh');
+            redirect(base_url() . 'member/buses', 'refresh');
         }
     }
 
