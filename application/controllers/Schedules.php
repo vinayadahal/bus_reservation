@@ -146,6 +146,7 @@ class Schedules extends CI_Controller {
     public function loadView($data, $page_name, $title) {
         $data['title'] = ucfirst($title);
         $data['user'] = $this->select->getSingleRecordWhere('user', 'id', $this->session->userdata('user_id'));
+        $data['role'] = $this->select->getSingleRecordWhere('role', 'id', $data['user']->role);
         $this->load->view('member/template/header', $data);
         $this->load->view('member/' . $page_name, $data);
         $this->load->view('member/template/footer', $data);

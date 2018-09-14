@@ -106,7 +106,7 @@ class Select extends CI_Model {
         return count($query->result());
     }
 
-    public function getTotalCount($table, $condition, $value) {
+    public function getTotalCount($table, $condition=null, $value=null) {
         $this->db->select("*");
         $this->db->from($table);
         if (!empty($condition) && !empty($value)) {

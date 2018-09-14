@@ -20,8 +20,13 @@ class Authorized {
             }
         }
         if ($role_array['role'] == 'role_user') {
-            if (strpos($current_url, 'admin') == TRUE) {
+            if (strpos($current_url, 'member/users') == TRUE) {
                 show_error("You are not authorized to perform this operation as normal user.", '404', $heading = '401 - Unauthorized Error');
+            }
+        }
+        if ($role_array['role'] == 'role_agency_admin') {
+            if (strpos($current_url, 'member') != TRUE) {
+                show_error("You are authorized to perform this operation as member only.", '404', $heading = '401 - Unauthorized Error');
             }
         }
     }

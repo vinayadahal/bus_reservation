@@ -72,7 +72,11 @@ $route['member/buses/edit/(:num)'] = 'Buses/editBus/$1';
 $route['member/buses/update'] = 'Buses/updateBus';
 $route['member/buses/delete/(:num)'] = 'Buses/deleteBus/$1';
 
-$route['member/matches'] = 'Matches/index';
+$route['member/tickets'] = 'Tickets/index';
+$route['member/tickets/(:num)'] = 'Tickets/index/$1';
 
 $route['member/settings'] = 'Settings/index';
 $route['member/settings/updateUser'] = 'Settings/updateUser';
+
+$route['member/users'] = 'Users/index';
+$route['member/users/(:num)'] = 'Users/index/$1';

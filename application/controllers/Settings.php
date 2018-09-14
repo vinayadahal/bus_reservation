@@ -45,7 +45,6 @@ class Settings extends CI_Controller {
     }
 
     public function index() {
-        $data['books'] = $this->commons->matchingBooks($this->select);
         $data['user'] = (array) $this->select->getSingleRecord('user', $this->user_id);
         $data['message'] = $this->session->flashdata('message');
         $this->loadView($data, 'settings/index', 'Settings');
@@ -71,6 +70,7 @@ class Settings extends CI_Controller {
     public function loadView($data, $page_name, $title) {
         $data['title'] = ucfirst($title);
         $data['user'] = $this->select->getSingleRecordWhere('user', 'id', $this->session->userdata('user_id'));
+        $data['role'] = $this->select->getSingleRecordWhere('role', 'id', $data['user']->role);
         $this->load->view('member/template/header', $data);
         $this->load->view('member/' . $page_name, $data);
         $this->load->view('member/template/footer', $data);

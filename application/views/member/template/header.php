@@ -12,7 +12,7 @@
     <body>
         <nav class="navbar navbar-default">
             <div class="container-fluid">
-               <div class="navbar-header">
+                <div class="navbar-header">
                     <a class="navbar-brand" href="<?php echo base_url(); ?>member"><i class="fa fa-bus"></i> <span class="logo_text">Bus Reservation</span></a>
                 </div>
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -20,23 +20,16 @@
                         <li><a href="<?php echo base_url(); ?>member">Home</a></li>
                         <li><a href="<?php echo base_url(); ?>member/schedules">Schedules</a></li>
                         <li><a href="<?php echo base_url(); ?>member/buses">Buses</a></li>
-                        <li>
-                            <a href="<?php echo base_url(); ?>member/matches">Matching Books <?php
-                                if (!empty($books)) {
-                                    $count = 0;
-                                    foreach ($books as $book) {
-                                        $count += count($book);
-                                    }
-                                    echo "<span>(" . $count . ")</span>";
-                                }
-                                ?>
-                            </a></li>
+                        <li><a href="<?php echo base_url(); ?>member/tickets">Tickets</a></li>
                         <li><a href="<?php echo base_url(); ?>member/settings">Settings</a></li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hi, <?php echo ucwords($user->name); ?> <span class="caret"></span></a>
                             <ul class="dropdown-menu">
+                                <?php if ($role->role == "role_agency_admin") { ?>
+                                    <li><a href="<?php echo base_url(); ?>member/users">Users</a></li>
+                                <?php } ?>
                                 <li><a href="<?php echo base_url(); ?>member/settings">Settings</a></li>
                                 <li role="separator" class="divider"></li>
                                 <li><a href="<?php echo base_url() ?>logout">Logout</a></li>
