@@ -149,7 +149,7 @@ class PublicUser extends CI_Controller {
     }
 
     public function insertData($first_name, $last_name, $address, $contact, $email, $seats, $total_price, $unique_id, $reservation_id, $bus_id, $from, $to) {
-        $data_ticket_table = array("first_name" => ucfirst($first_name), "last_name" => ucfirst($last_name), "address" => ucwords($address), "contact" => $contact, "email" => $email, "seats" => $seats, "total_price" => $total_price, "unique_id" => $unique_id, "reservation_id" => $reservation_id, "bus_id" => $bus_id);
+        $data_ticket_table = array("first_name" => ucfirst($first_name), "last_name" => ucfirst($last_name), "address" => ucwords($address), "contact" => $contact, "email" => $email, "seats" => $seats, "total_price" => $total_price, "unique_id" => $unique_id, "reservation_id" => $reservation_id, "bus_id" => $bus_id, "from" => $from, "to" => $to);
         $new_ticket_id = $this->insert->insert_return_id($data_ticket_table, "tickets");
         if (!empty($new_ticket_id)) {
             $this->update->updateSingleCondition(array("reserved_seat" => $this->session->userdata('seats')), "reservation", "id", $reservation_id);
