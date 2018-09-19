@@ -6,12 +6,14 @@ $route['default_controller'] = 'PublicUser';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['travel_agency'] = 'PublicUser/travelAgencies';
 $route['search_bus'] = 'PublicUser/showBuses';
 $route['seats/(:num)'] = 'PublicUser/seats/$1';
 $route['set_seat'] = 'PublicUser/setSeatSession';
 $route['confirm_seat'] = 'PublicUser/confirmSeat';
 $route['reserve_seat'] = 'PublicUser/bookSeat';
-$route['show_ticket/(:any)'] = 'PublicUser/showTicket/$1';
+$route['show_ticket'] = 'PublicUser/showTicket';
+$route['print_ticket/(:any)'] = 'PublicUser/printTicket/$1';
 
 $route['login'] = 'Login/index';
 $route['checkLogin'] = 'Login/checkLogin';

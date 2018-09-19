@@ -20,10 +20,8 @@
                 </div>
                 <ul>
                     <li><a href="<?php echo base_url(); ?>">Home</a></li>
-                    <li><a href="#">Travel Agencies</a></li>
-                    <li><a href="#">Available Routes</a></li>
-                    <li><a href="#">Popular Routes</a></li>
-                    <li><a href="#">News</a></li>
+                    <li><a href="<?php echo base_url(); ?>travel_agency">Travel Agencies</a></li>
+                    <li><a href="<?php echo base_url(); ?>member">Login</a></li>
                     <!--                    <li class="dropdown-menu-li" id="side_drp_wrap" style="float: right;">
                                             <a href="javascript:void();" id="side_drp_down">
                                                 About <i class="fa fa-angle-down" style="font-weight: bold"></i>
@@ -35,6 +33,11 @@
                                             </ul>
                                         </li>-->
                 </ul>
+                <div class="search_area">
+                    <form method="get" action="<?php echo base_url() ?>show_ticket/">
+                        <input type="text" placeholder="Search Ticket" class="form-elements search_box" name="keyword"/><button class="btn_submit search_btn" type="submit"><i class="fa fa-search" ></i></button>
+                    </form>
+                </div>
             </div>
         </div>
         <div class="content_wrap" id="content_wrap">

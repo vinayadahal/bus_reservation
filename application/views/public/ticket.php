@@ -1,15 +1,4 @@
-<script>
-//    window.print();
-//    $(".content_wrap").printElement();
-    function printData()
-    {
-        var divToPrint = document.getElementById("content_wrap");
-        newWin = window.open("");
-        newWin.document.write(divToPrint.outerHTML);
-        newWin.print();
-        newWin.close();
-    }
-</script>
+<a href="<?php echo base_url() ?>print_ticket/<?php echo $ticket_id ?>"><button class="btn_submit"><i class="fa fa-print"></i></button></a>
 
 <div style="margin: 0 auto;">
     <p>

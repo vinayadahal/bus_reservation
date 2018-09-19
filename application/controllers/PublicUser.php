@@ -13,15 +13,21 @@ class PublicUser extends CI_Controller {
         $this->load->helper('url'); // Helps to get base url defined in config.php
         $this->load->library('session'); // starts session
         $this->load->library('commons');
-//        $this->load->library('generator');
-//        $this->generator->generate_pdf();
+        $this->load->library('Pdf'); // for pdf generator integration
+        //https://github.com/bcit-ci/CodeIgniter/wiki/TCPDF-Integration refer this link for details
+//        $this->load->view('view_file');
     }
 
     public function index() {
         $this->session->sess_destroy();
         $data['places'] = $this->select->getAllFromTable("destination");
-        $data['agencies'] = $this->commons->travel_agency_list($this->select);
+//        $data['agencies'] = $this->commons->travel_agency_list($this->select);
         $this->loadView("index", "home", $data);
+    }
+
+    public function travelAgencies() {
+        $data['agencies'] = $this->commons->travel_agency_list($this->select);
+        $this->loadView("travel_agency", "Travel Agencies", $data);
     }
 
     public function showBuses() {
@@ -73,7 +79,7 @@ class PublicUser extends CI_Controller {
     public function seats($id) {
         $bus['bus_details'] = $this->session->userdata('buses');
         if (empty($bus['bus_details'][$id])) {
-            echo "Someone is getting curious :P";
+            show_error("Sorry, We are unable the find what you are looking for. Please contact your system administrator for futher details.<br><br><div style='padding-right:20px;text-align: right;'>- Bus Reservation</div>", '404', $heading = '404 - File Not Found');
         } else {
             $data['bus_details'] = $this->select->getSingleRecordWhere("reservation", "id", $bus['bus_details'][$id]['reserve_id']);
         }
@@ -134,8 +140,13 @@ class PublicUser extends CI_Controller {
         }
     }
 
-    public function showTicket($ticket_code) {
+    public function showTicket() {
+        $ticket_code = $this->input->get('keyword');
         $ticket_detail = $this->select->getSingleRecordWhere("tickets", "unique_id", $ticket_code);
+        if (empty($ticket_detail)) {
+            show_error("Sorry, We are unable the find the ticket with ticket ID:<b> $ticket_code </b>in our database. Please contact your respective bus agency for futher details.<br><br><div style='padding-right:20px;text-align: right;'>- Bus Reservation</div>", '404', $heading = 'No Ticket Found');
+            return true;
+        }
         $reservation_detail = $this->select->getSingleRecordWhere("reservation", "id", $ticket_detail->reservation_id);
         $bus_detail = $this->select->getSingleRecordWhere("bus", "id", $ticket_detail->bus_id);
         $agency_detail = $this->select->getSingleRecordWhere("travel_agency", "id", $bus_detail->travel_agency_id);
@@ -145,6 +156,19 @@ class PublicUser extends CI_Controller {
         $data['agency_details'] = $agency_detail;
         $data['ticket_id'] = $ticket_code;
         $this->loadView("ticket", "ticket detail", $data);
+    }
+
+    public function printTicket($ticket_code) {
+        $ticket_detail = $this->select->getSingleRecordWhere("tickets", "unique_id", $ticket_code);
+        $reservation_detail = $this->select->getSingleRecordWhere("reservation", "id", $ticket_detail->reservation_id);
+        $bus_detail = $this->select->getSingleRecordWhere("bus", "id", $ticket_detail->bus_id);
+        $agency_detail = $this->select->getSingleRecordWhere("travel_agency", "id", $bus_detail->travel_agency_id);
+        $data['ticket_details'] = $ticket_detail;
+        $data['reservation_details'] = $reservation_detail;
+        $data['bus_details'] = $bus_detail;
+        $data['agency_details'] = $agency_detail;
+        $data['ticket_id'] = $ticket_code;
+        $this->loadView("sample_ticket", "ticket detail", $data);
     }
 
     public function insertData($first_name, $last_name, $address, $contact, $email, $seats, $total_price, $unique_id, $reservation_id, $bus_id, $from, $to) {

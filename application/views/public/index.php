@@ -38,7 +38,7 @@
 
 <div class="routes" style="width: 99%;padding: .5%;display: none; " id="bus_info"></div>
 
-<div class="routes" style="width: 99%;padding: .5%;">
+<!--<div class="routes" style="width: 99%;padding: .5%;">
     <h2>Travel Agencies</h2>
     <hr/>
     <table class="tbl_travel_agency">
@@ -51,19 +51,19 @@
         </tr>
 
         <?php
-        $i = 1;
-        foreach ($agencies as $agency) {
+//        $i = 1;
+//        foreach ($agencies as $agency) {
             ?>
             <tr>
-                <td><?php echo $i++; ?></td>
-                <td><?php echo $agency->name; ?></td>
-                <td><?php echo $agency->address; ?></td>
-                <td><?php echo $agency->contact; ?></td>
-                <td><?php echo $agency->email; ?></td>
+                <td><?php // echo $i++; ?></td>
+                <td><?php // echo $agency->name; ?></td>
+                <td><?php // echo $agency->address; ?></td>
+                <td><?php // echo $agency->contact; ?></td>
+                <td><?php // echo $agency->email; ?></td>
             </tr>
-        <?php } ?>
+        <?php // } ?>
     </table>
-</div>
+</div>-->
 
 <!--<div class="avail_popular_wrap">
     <div class="avail_popular">
