@@ -72,7 +72,7 @@
         </table>
     </div>
     <div class="seat_layout">
-        <h1>Provide Your Details</h1>
+        <h1>Provide Passenger Details</h1>
         <hr>
         <br>
         <form onsubmit="return validate(['fname', 'lname', 'address', 'email', 'contact'])" method="post" action="<?php echo base_url(); ?>reserve_seat" >

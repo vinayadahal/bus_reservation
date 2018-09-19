@@ -264,6 +264,7 @@ hr{
 .bus_search_table td{
     padding: 10px;
     border: 1px solid #5b9bc6;
+    background-color: #fff;
 }
 
 /*show buses end*/
@@ -434,3 +435,15 @@ hr{
 }
 
 /*Footer Style*/
+
+/*overriding page printing*/
+
+@media print
+{
+    .menu_wrap {display:none;}
+}
+
+@media print
+{
+    .footerWrap {display:none;}
+}

@@ -1,7 +1,10 @@
 <div class="routes" style="width: 99%;padding: .5%;">
     <h2>Pick A Route</h2>
     <hr/>
-    <form class="route_form" onsubmit="return validate(['start_point', 'destination', 'date'])" method="post" action="<?php echo base_url(); ?>search_bus">
+    <!--<form class="route_form" onsubmit="return validate(['start_point', 'destination', 'date']);">-->
+    <!--<form class="route_form" method="get">-->
+    <div class="route_form">
+            <!--action="<?php // echo base_url();           ?>search_bus"-->
         <table class="tbl_form">
             <tr>
                 <th>Start Point:</th>
@@ -17,7 +20,7 @@
                     </select>
                 </td>
                 <td>
-                    <select name="destination" class="form-elements" id="destination">
+                    <select name="end_point" class="form-elements" id="end_point">
                         <?php foreach (array_reverse($places) as $end) { ?>
                             <option value="<?php echo $end->id; ?>"><?php echo $end->destination; ?></option>
                         <?php } ?>
@@ -26,11 +29,14 @@
                 <td><input type="date" name="date" id='date' class="form-elements" /></td>
             </tr>
             <tr>
-                <td colspan="3"><button type="submit" class="btn_submit">Submit</button></td>
+                <td colspan="3"><button id="test" url="<?php echo base_url(); ?>search_bus" class="btn_submit">Submit</button></td>
             </tr>
         </table>
-    </form>
+        <!--</form>-->
+    </div>
 </div>
+
+<div class="routes" style="width: 99%;padding: .5%;display: none; " id="bus_info"></div>
 
 <div class="routes" style="width: 99%;padding: .5%;">
     <h2>Travel Agencies</h2>

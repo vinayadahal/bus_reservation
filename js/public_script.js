@@ -18,7 +18,41 @@ $(document).ready(function () {
     $("#side_drp_down").blur(function () {
         hideDropDown("side_drp_list", "side_drp_wrap");
     });
+
+    $("#test").click(function () {
+        console.log("URL: " + $(this).attr("url"));
+        if (validate(['start_point', 'destination', 'date'])) {
+            showBuses($(this).attr("url"));
+        }
+    });
+
+    $(".click_seat").click(function () {
+        highlight_seat($(this));
+    });
 });
+
+function showBuses(url) {
+    $.ajax({
+        url: url,
+        type: "get",
+        data: {
+            start_point: $("#start_point").val(),
+            end_point: $("#end_point").val(),
+            date: $("#date").val()
+        },
+        success: function (response) {
+            $("#bus_info").html(response);
+            $("#bus_info").css({
+                display: 'block'
+            });
+        },
+        error: function (xhr) {
+            console.log("Error:");
+            console.log(xhr);
+        }
+    });
+}
+
 
 function set_reserved_seats() {
     if ($("#reserved_seat").length !== 0) {
@@ -57,15 +91,9 @@ function setFooter(container_height) {
     }
 }
 
-jQuery(document).ready(function ($) {
-    $(".clickable-row").click(function () {
-        var redirect_url = $(this).attr("url");
-        window.location = redirect_url;
-    });
-    $(".click_seat").click(function () {
-        highlight_seat($(this));
-    });
-});
+//jQuery(document).ready(function ($) {
+//    
+//});
 
 function preserve_history() {
     $('.click_seat').each(function () { // all element with class click_seat within DOM

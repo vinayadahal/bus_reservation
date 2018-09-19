@@ -21,15 +21,14 @@ class PublicUser extends CI_Controller {
         $this->session->sess_destroy();
         $data['places'] = $this->select->getAllFromTable("destination");
         $data['agencies'] = $this->commons->travel_agency_list($this->select);
-//        $data['agencies'] = $this->select->getAllFromTable("travel_agency");
         $this->loadView("index", "home", $data);
     }
 
     public function showBuses() {
         $this->session->unset_userdata('buses');
-        $start_point = $this->input->post("start_point");
-        $end_point = $this->input->post("destination");
-        $date = $this->input->post("date");
+        $start_point = $this->input->get("start_point");
+        $end_point = $this->input->get("end_point");
+        $date = $this->input->get("date");
         $buses_id = $this->select->getAllFromTableWhere("route", array("start_point", "end_point"), array($start_point, $end_point), "", "");
         if (!empty($buses_id)) {
             $data['buses'] = $this->bus_array_maker($buses_id, $date);
@@ -41,7 +40,7 @@ class PublicUser extends CI_Controller {
         $this->session->set_userdata('buses', $data['buses']);
         $this->session->set_userdata('from', $data['from']->destination);
         $this->session->set_userdata('to', $data['to']->destination);
-        $this->loadView("buses", "search result", $data);
+        $this->load->view('public/' . "buses", $data);
     }
 
     public function route_details($id) {

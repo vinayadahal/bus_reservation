@@ -1,3 +1,16 @@
+<script>
+//    window.print();
+//    $(".content_wrap").printElement();
+    function printData()
+    {
+        var divToPrint = document.getElementById("content_wrap");
+        newWin = window.open("");
+        newWin.document.write(divToPrint.outerHTML);
+        newWin.print();
+        newWin.close();
+    }
+</script>
+
 <div style="margin: 0 auto;">
     <p>
         <em><strong>Notice:</strong></em> Please keep the ticket ID safe for future reference. This will be cross validated before entry to the bus.
