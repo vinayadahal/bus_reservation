@@ -1,10 +1,7 @@
 <div class="routes" style="width: 99%;padding: .5%;">
     <h2>Pick A Route</h2>
     <hr/>
-    <!--<form class="route_form" onsubmit="return validate(['start_point', 'destination', 'date']);">-->
-    <!--<form class="route_form" method="get">-->
     <div class="route_form">
-            <!--action="<?php // echo base_url();           ?>search_bus"-->
         <table class="tbl_form">
             <tr>
                 <th>Start Point:</th>

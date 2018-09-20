@@ -168,7 +168,8 @@ class PublicUser extends CI_Controller {
         $data['bus_details'] = $bus_detail;
         $data['agency_details'] = $agency_detail;
         $data['ticket_id'] = $ticket_code;
-        $this->loadView("sample_ticket", "ticket detail", $data);
+//        $this->loadView("sample_ticket", "ticket detail", $data);
+        $this->load->view('public/' . "sample_ticket", $data);
     }
 
     public function insertData($first_name, $last_name, $address, $contact, $email, $seats, $total_price, $unique_id, $reservation_id, $bus_id, $from, $to) {

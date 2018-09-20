@@ -381,7 +381,7 @@ hr{
     display: table;
     /*background-color: #777;*/
     margin: 0 auto;
-    
+
 }
 
 .footerLink:first-child{
@@ -488,4 +488,22 @@ hr{
 .search_btn:hover{
     background-color: #b4d2e0;
     color: #333;
+}
+
+.export_btn_wrap{
+    display: table;
+    width: 100%;
+}
+
+.export_btn{
+    display: table-cell;
+    float: right;
+    text-align: right; 
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #00592e;
+}
+
+.export_btn:hover{
+    background-color: #b4d2e0;
 }

@@ -1,18 +1,17 @@
-<a href="<?php echo base_url() ?>print_ticket/<?php echo $ticket_id ?>"><button class="btn_submit"><i class="fa fa-print"></i></button></a>
-
-<div style="margin: 0 auto;">
-    <p>
-        <em><strong>Notice:</strong></em> Please keep the ticket ID safe for future reference. This will be cross validated before entry to the bus.
-    </p>
-    <br>
+<div class="export_btn_wrap">
+    <div class="export_btn">
+        <a href="<?php echo base_url() ?>print_ticket/<?php echo $ticket_id ?>">
+            <img src="<?php echo base_url() ?>images/icons/pdf.png" width="36" height="36" />
+        </a>
+    </div>
 </div>
 <div class="bus_search_wrap">
-    <table id="bus_details" style="width: 20%">
+<!--    <table id="bus_details" style="width: 20%">
         <tr>
             <th>Ticket ID:</th>
             <td><?php echo $ticket_id; ?></td>
         </tr>
-    </table>
+    </table>-->
     <div class="seat_layout">
         <h1>Passenger Details</h1>
         <hr>
@@ -72,8 +71,6 @@
                 <td><?php echo $agency_details->name; ?></td>
                 <td><?php echo $agency_details->contact; ?></td>
             </tr>
-        </table>
-        <table id="bus_details">
             <tr>
                 <th>Bus Number</th>
                 <th>Bus Type</th>
@@ -112,4 +109,11 @@
             </tr>
         </table>
     </div>
+</div>
+<br>
+<div style="margin: 0 auto;">
+    <p>
+        <em><strong>Notice:</strong></em> Please keep the ticket code safe for future reference. This will be cross validated before entry to the bus.
+    </p>
+    <br>
 </div>
