@@ -46,50 +46,50 @@ class Tickets extends CI_Controller {
         $DataPerPage = 8;
         $data['num_pages'] = ceil($TotalCount / $DataPerPage);
         $start = $this->commons->pageDataLimiter($page, $DataPerPage);
-        $data['tickets'] = (array) $this->select->getAllFromTable('tickets', $DataPerPage, $start);
+        $col = array('tickets.id', 'tickets.first_name', 'tickets.last_name', 'tickets.address',
+            'tickets.contact', 'tickets.email', 'tickets.seats', 'tickets.total_price',
+            'tickets.unique_id', 'tickets.reservation_id', 'tickets.bus_id',
+            'tickets.from', 'tickets.to', 'reservation.departure_time', 'reservation.departure_date',
+            'reservation.reserved_seat');
+        $t_name1 = 'tickets';
+        $t_name2 = 'reservation';
+        $t_1_col = 'reservation_id';
+        $t_2_col = 'id';
+        $data['tickets'] = (array) $this->select->getAllRecordInnerJoinNoCondition($col, $t_name1, $t_name2, $t_1_col, $t_2_col, $DataPerPage, $start);
         $this->loadView($data, 'tickets/index', 'Tickets');
     }
 
-    public function addPlace() {
-        $this->loadView("", "places/create", "Add Place");
+    public function searchTicket() {
+        $ticket_code = $this->input->get('keyword');
+        $col = array('tickets.id', 'tickets.first_name', 'tickets.last_name', 'tickets.address',
+            'tickets.contact', 'tickets.email', 'tickets.seats', 'tickets.total_price',
+            'tickets.unique_id', 'tickets.reservation_id', 'tickets.bus_id',
+            'tickets.from', 'tickets.to', 'reservation.departure_time', 'reservation.departure_date',
+            'reservation.reserved_seat');
+        $t_name1 = 'tickets';
+        $compare_cols = array('unique_id', 'first_name', 'contact', 'email');
+        $keyword = $ticket_code;
+        $t_name2 = 'reservation';
+        $t_1_col = 'reservation_id';
+        $t_2_col = 'id';
+        $data['tickets'] = (array) $this->select->searchRecordJoinWhere($col, $t_name1, $compare_cols, $keyword, $t_name2, $t_1_col, $t_2_col);
+        $this->loadView($data, 'tickets/index', 'Tickets');
     }
 
-    public function createPlace() {
-        $this->form_value_init(); // initalize form value
-        $data_post_table = $this->array_maker_post_table(); // create array with book
-        if ($this->insert->insert_single_row($data_post_table, "destination")) {
-            $this->session->set_flashdata('message', 'Added a new place as ' . ucfirst($this->name) . '!!!');
+    public function deleteTicket($id) {
+        $ticket = (array) $this->select->getSingleRecord('tickets', $id);
+        $reservation = (array) $this->select->getSingleRecord('reservation', $ticket['reservation_id']);
+        $ticket_seats = explode(',', $ticket['seats']);
+        $reservation_seats = explode(",", $reservation['reserved_seat']);
+        $final_seat_array = array_diff($reservation_seats, $ticket_seats);
+        $final_seat = implode(",", $final_seat_array);
+        if ($this->update->updateSingleCondition(array("reserved_seat" => $final_seat), "reservation", "id", $reservation['id'])) {
+            $this->delete->deleteSingleCondition("tickets", "id", $id);
+            $this->session->set_flashdata('message', 'Ticket of ' . ucwords($ticket['first_name'] . " " . $ticket['last_name']) . ' deleted successfully for ' . $reservation['departure_date'] . ' !!!');
         } else {
-            $this->session->set_flashdata('message', 'Unable to add place as ' . ucfirst($this->name) . '!!!');
+            $this->session->set_flashdata('message', 'Unable to deleteTicket of ' . ucwords($ticket['first_name'] . " " . $ticket['last_name']) . '!!!');
         }
-        redirect(base_url() . 'admin/places', 'refresh');
-    }
-
-    public function editPlace($id) {
-        $data['place'] = (array) $this->select->getSingleRecord('destination', $id);
-        $data['place_id'] = $id;
-        $this->loadView($data, "places/edit", "Edit Place");
-    }
-
-    public function updatePlace() {
-        $this->form_value_init(); // initalize form value
-        $data_post_table = $this->array_maker_post_table(); // create array with book
-        if ($this->update->updateSingleCondition($data_post_table, "destination", "id", $this->place_id)) {
-            $this->session->set_flashdata('message', 'Updated place ' . ucfirst($this->name) . '!!!');
-        } else {
-            $this->session->set_flashdata('message', 'Unable to update place ' . ucfirst($this->name) . '!!!');
-        }
-        redirect(base_url() . 'admin/places', 'refresh');
-    }
-
-    public function deletePlace($id) {
-        $post = (array) $this->select->getSingleRecord('destination', $id);
-        if ($this->delete->deleteSingleCondition("destination", "id", $id)) {
-            $this->session->set_flashdata('message', 'Place ' . ucfirst($post['destination']) . ' deleted successfully!!!');
-        } else {
-            $this->session->set_flashdata('message', 'Unable to delete place ' . ucfirst($post['destination']) . '!!!');
-        }
-        redirect(base_url() . 'admin/places', 'refresh');
+        redirect(base_url() . 'member/tickets', 'refresh');
     }
 
     public function loadView($data, $page_name, $title) {

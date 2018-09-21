@@ -13,15 +13,12 @@ class PublicUser extends CI_Controller {
         $this->load->helper('url'); // Helps to get base url defined in config.php
         $this->load->library('session'); // starts session
         $this->load->library('commons');
-        $this->load->library('Pdf'); // for pdf generator integration
-        //https://github.com/bcit-ci/CodeIgniter/wiki/TCPDF-Integration refer this link for details
-//        $this->load->view('view_file');
+        $this->load->library('Pdf');
     }
 
     public function index() {
         $this->session->sess_destroy();
         $data['places'] = $this->select->getAllFromTable("destination");
-//        $data['agencies'] = $this->commons->travel_agency_list($this->select);
         $this->loadView("index", "home", $data);
     }
 
@@ -35,7 +32,7 @@ class PublicUser extends CI_Controller {
         $start_point = $this->input->get("start_point");
         $end_point = $this->input->get("end_point");
         $date = $this->input->get("date");
-        $buses_id = $this->select->getAllFromTableWhere("route", array("start_point", "end_point"), array($start_point, $end_point), "", "");
+        $buses_id = $this->select->getAllFromTable("route", array("start_point", "end_point"), array($start_point, $end_point), "", "");
         if (!empty($buses_id)) {
             $data['buses'] = $this->bus_array_maker($buses_id, $date);
         } else {
@@ -140,21 +137,17 @@ class PublicUser extends CI_Controller {
         }
     }
 
-    public function showTicket() {
-        $ticket_code = $this->input->get('keyword');
-        $ticket_detail = $this->select->getSingleRecordWhere("tickets", "unique_id", $ticket_code);
-        if (empty($ticket_detail)) {
-            show_error("Sorry, We are unable the find the ticket with ticket ID:<b> $ticket_code </b>in our database. Please contact your respective bus agency for futher details.<br><br><div style='padding-right:20px;text-align: right;'>- Bus Reservation</div>", '404', $heading = 'No Ticket Found');
-            return true;
+    public function showTicket($random_code = null) {
+        if (isset($random_code)) {
+            $res_ticket = $this->commons->getTicket($this->select, $random_code);
+        } else {
+            $res_ticket = $this->commons->getTicket($this->select, $this->input->get('keyword'));
         }
-        $reservation_detail = $this->select->getSingleRecordWhere("reservation", "id", $ticket_detail->reservation_id);
-        $bus_detail = $this->select->getSingleRecordWhere("bus", "id", $ticket_detail->bus_id);
-        $agency_detail = $this->select->getSingleRecordWhere("travel_agency", "id", $bus_detail->travel_agency_id);
-        $data['ticket_details'] = $ticket_detail;
-        $data['reservation_details'] = $reservation_detail;
-        $data['bus_details'] = $bus_detail;
-        $data['agency_details'] = $agency_detail;
-        $data['ticket_id'] = $ticket_code;
+        $data['ticket_details'] = $res_ticket['ticket_details'];
+        $data['reservation_details'] = $res_ticket['reservation_details'];
+        $data['bus_details'] = $res_ticket['bus_details'];
+        $data['agency_details'] = $res_ticket['agency_details'];
+        $data['ticket_id'] = $res_ticket['ticket_id'];
         $this->loadView("ticket", "ticket detail", $data);
     }
 
@@ -168,7 +161,6 @@ class PublicUser extends CI_Controller {
         $data['bus_details'] = $bus_detail;
         $data['agency_details'] = $agency_detail;
         $data['ticket_id'] = $ticket_code;
-//        $this->loadView("sample_ticket", "ticket detail", $data);
         $this->load->view('public/' . "sample_ticket", $data);
     }
 

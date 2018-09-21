@@ -59,7 +59,7 @@ class Buses extends CI_Controller {
         $DataPerPage = 8;
         $data['num_pages'] = ceil($TotalCount / $DataPerPage);
         $start = $this->commons->pageDataLimiter($page, $DataPerPage);
-        $all_buses = (array) $this->select->getAllFromTableWhere('bus', 'travel_agency_id', $this->session->userdata('agency_id'), $DataPerPage, $start);
+        $all_buses = (array) $this->select->getAllFromTable('bus', 'travel_agency_id', $this->session->userdata('agency_id'), $DataPerPage, $start);
         $buses = array();
         $j = 0;
         foreach ($all_buses as $bus) {

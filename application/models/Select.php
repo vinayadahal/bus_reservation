@@ -2,19 +2,7 @@
 
 class Select extends CI_Model {
 
-    public function getAllFromTable($table, $limit = null, $start = null) {
-        $this->db->select('*');
-        $this->db->from($table);
-        if (isset($limit)) {
-            $this->db->limit($limit, $start);
-        }
-        $query = $this->db->get();
-        return $query->result();
-    }
-
-    public function getAllFromTableWhere($table, $cond_col, $cond_val, $limit = null, $start = null) {
-        $this->db->select('*');
-        $this->db->from($table);
+    public function whereCondition($cond_col, $cond_val) {
         if (is_array($cond_col) && is_array($cond_val)) {
             $i = 0;
             foreach ($cond_col as $col) {
@@ -22,6 +10,14 @@ class Select extends CI_Model {
             }
         } else {
             $this->db->where($cond_col, $cond_val);
+        }
+    }
+
+    public function getAllFromTable($table, $cond_col = '', $cond_val = '', $limit = null, $start = null) {
+        $this->db->select('*');
+        $this->db->from($table);
+        if (!empty($cond_col) && !empty($cond_val)) {
+            $this->whereCondition($cond_col, $cond_val);
         }
         if (isset($limit)) {
             $this->db->limit($limit, $start);
@@ -106,7 +102,7 @@ class Select extends CI_Model {
         return count($query->result());
     }
 
-    public function getTotalCount($table, $condition=null, $value=null) {
+    public function getTotalCount($table, $condition = null, $value = null) {
         $this->db->select("*");
         $this->db->from($table);
         if (!empty($condition) && !empty($value)) {
@@ -129,7 +125,7 @@ class Select extends CI_Model {
         }
     }
 
-    public function search($keyword, $cols, $tablename, $cond_col = null, $cond_val = null) {
+    public function search($keyword, $cols, $tablename, $cond_col = null, $cond_val = null, $limit = null, $start = null) {
         $this->db->select('*');
         $this->db->from($tablename);
         foreach ($cols as $col) {
@@ -137,6 +133,33 @@ class Select extends CI_Model {
             if (isset($cond_col) && isset($cond_val)) {
                 $this->db->where($cond_col, $cond_val);
             }
+        }
+        if (isset($limit)) {
+            $this->db->limit($limit, $start);
+        }
+        $query = $this->db->get();
+        return $query->result();
+    }
+
+    public function searchRecordJoinWhere($col, $t_name1, $compare_cols, $keyword, $t_name2 = '', $t_1_col = '', $t_2_col = '', $cond_col = '', $cond_val = '', $limit = null, $start = null) {
+        if (is_array($col)) {
+            $field = "`" . implode("`,`", $col) . "`";
+        } else {
+            $field = '*';
+        }
+        $this->db->select($field);
+        $this->db->from($t_name1); //book table
+        if (!empty($t_name1)) {
+            $this->db->join($t_name2, "$t_name1.$t_1_col = $t_name2.$t_2_col"); //category table
+        }
+        foreach ($compare_cols as $col) {
+            $this->db->or_like($col, $keyword);
+            if (!empty($cond_col) && !empty($cond_val)) {
+                $this->db->where($cond_col, $cond_val);
+            }
+        }
+        if (isset($limit)) {
+            $this->dataLimiter($limit, $start);
         }
         $query = $this->db->get();
         return $query->result();

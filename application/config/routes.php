@@ -76,6 +76,8 @@ $route['member/buses/delete/(:num)'] = 'Buses/deleteBus/$1';
 
 $route['member/tickets'] = 'Tickets/index';
 $route['member/tickets/(:num)'] = 'Tickets/index/$1';
+$route['member/tickets/search'] = 'Tickets/searchTicket';
+$route['member/tickets/delete/(:num)'] = 'Tickets/deleteTicket/$1';
 
 $route['member/settings'] = 'Settings/index';
 $route['member/settings/updateUser'] = 'Settings/updateUser';

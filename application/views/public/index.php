@@ -26,10 +26,9 @@
                 <td><input type="date" name="date" id='date' class="form-elements" /></td>
             </tr>
             <tr>
-                <td colspan="3"><button id="test" url="<?php echo base_url(); ?>search_bus" class="btn_submit">Submit</button></td>
+                <td colspan="3"><button id="search_bus" url="<?php echo base_url(); ?>search_bus" class="btn_submit">Submit</button></td>
             </tr>
         </table>
-        <!--</form>-->
     </div>
 </div>
 

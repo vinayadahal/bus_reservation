@@ -6,7 +6,6 @@ var old_select_seats = new Array();
 
 $(document).ready(function () {
     var container_height = $("#container").height();
-//    console.log(container_height);
     setFooter(container_height);
     set_reserved_seats();
     set_selected_seats();
@@ -19,10 +18,15 @@ $(document).ready(function () {
         hideDropDown("side_drp_list", "side_drp_wrap");
     });
 
-    $("#test").click(function () {
-        console.log("URL: " + $(this).attr("url"));
+    $("#search_bus").click(function () {
         if (validate(['start_point', 'destination', 'date'])) {
-            showBuses($(this).attr("url"));
+            var input_date = new Date($("#date").val());
+            var today = new Date();
+            if (input_date.getTime() >= today.getTime()) {
+                showBuses($(this).attr("url"));
+            } else {
+                alert("Date cannot be today or older!");
+            }
         }
     });
 
@@ -84,16 +88,12 @@ function set_selected_seats() {
 }
 
 function setFooter(container_height) {
-    if (container_height < 600) {
+    if (container_height < 550) {
         $(".footerWrap").css({position: "fixed", bottom: "0"});
     } else {
         $(".footerWrap").css({position: "relative"});
     }
 }
-
-//jQuery(document).ready(function ($) {
-//    
-//});
 
 function preserve_history() {
     $('.click_seat').each(function () { // all element with class click_seat within DOM

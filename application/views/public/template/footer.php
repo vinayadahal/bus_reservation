@@ -22,15 +22,6 @@
                 <li><a href="<?php echo base_url(); ?>request">Popular Routes</a></li>
             </ul>
         </div>
-<!--        <div class="footerLink">
-            <ul>
-                <li><h4>About Us</h4></li>
-                <li><a href="<?php echo base_url(); ?>request">News</a></li>
-                <li><a href="<?php echo base_url() ?>register">Services</a></li>
-                <li><a href="<?php echo base_url() ?>member/my-books">Objectives</a></li>
-                <li><a href="<?php echo base_url() ?>member/matches">Contact Us</a></li>
-            </ul>
-        </div>-->
         <div class="footerLink">
             <ul>
                 <li><h4>Other</h4></li>
