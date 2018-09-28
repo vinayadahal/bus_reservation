@@ -1,0 +1,378 @@
+Test case Example:
+
+https://blog.testlodge.com/how-to-write-test-cases-for-software-with-sample/
+
+
+Test Case 1:
+
+Title: Login Page – Authenticate successfully as member or administrative user
+
+Description: A registered user should be able to successfully login at to their respective panels.
+
+Precondition: The user must already be added to the system and must have username and password.
+
+Assumption: User has specific priviliage.
+
+Test Steps:
+
+   1. Navigate to the login url by typing http://localhost/bus_reservation/member or click on login button at the home page.
+   2. In the 'Username' field, enter the username and in 'passowrd' field, enter the password.
+   3. Click the 'Login' button.
+
+Expected Result: A page displaying (admin or member) panel should appear on the browser.
+
+Debugging: Check user's roles in the 'user' and 'role' table of the database. Check and enter the correct password.
+
+Test Case 2:
+
+Title: Member Home Page
+
+Description: A logged in member should be able to 4 icons (schedules, buses, tickets and settings) in the dashboard. 
+
+Precondition: The user must be logged in to the system.
+
+Assumption: User has specific priviliage.
+
+Test Steps:
+
+   1. Check 4 icons (schedules, buses, tickets and settings) in the dashboard.
+   2. Click the username on the upper right side of the webpage to confirm the user acess.
+
+Expected Result: A page displaying 4 icons (schedules, buses, tickets and settings) in the dashboard should appear on the browser. Also, a member with agency admin role should be able to see a link with name 'users' under the username on the upper right of the webpage.
+
+Debugging: Check user privilage in the database.
+
+Test Case 3:
+
+Title: Bus Schedules Page
+
+Description: A logged in member should be able to see a list of scheduled bus for sepecific dates on the screen. 
+
+Precondition: The user must be logged in to the system.
+
+Assumption: Bus schedule has been placed earlier by same or another user.
+
+Test Steps:
+
+   1. Click on the schedules on the dashboard icons or click on the schedule in the navigation bar.
+   2. Check the list of scheduled bus and confirm departure date.
+
+Expected Result: A list displaying all the buses with departure date greater than today should appear.
+
+Debugging: Add new record to the list. If issue persists, requires code level changes.
+
+Test Case 4:
+
+Title: Add Schedules Page
+
+Description: A logged in member should be able add new schedule for sepecific date. 
+
+Precondition: The user must be logged in to the system.
+
+Assumption: User has specific priviliage.
+
+Test Steps:
+
+   1. Click on the 'Add New' button just above the list of bus schedules.
+   2. Choose a list of destination from the drop down.
+   3. Choose the date and enter time in 24 hour format.
+   4. Click on "Add".
+   5. A message showing sucessful addition should appear on the screen.
+
+Expected Result: A new entry should be visible on the list of schedules.
+
+Debugging: Requires code level changes.
+
+Test Case 5:
+
+Title: Edit Schedules Page
+
+Description: A logged in member should be able edit schedule for sepecific date. 
+
+Precondition: The user must be logged in to the system.
+
+Assumption: User has specific priviliage.
+
+Test Steps:
+
+   1. Click on the 'Edit' link under 'Actions' column in the list of bus schedules.
+   2. Change the values of date and time.
+   3. Click on "Update".
+   4. A message showing sucessful update should appear on the screen.
+
+Expected Result: Date or Time should have updated values on the list of schedules.
+
+Debugging: Requires code level changes.
+
+Test Case 6:
+
+Title: Delete Schedules 
+
+Description: A logged in member should be delete exisiting schedule for sepecific date from the list of schedule. 
+
+Precondition: The user must be logged in to the system and list of bus schedules should be visible.
+
+Assumption: User has specific priviliage.
+
+Test Steps:
+
+   1. Click on the 'Delete' link under 'Actions' column in the list of bus schedules.
+   2. A popup should appear showing the details of choice for delete.
+   3. Confirm to delete the record.
+   4. A message showing sucessful deletion should appear on the screen.
+   5. Selected entry from the list should disapper.
+
+Expected Result: Selected entry for deletion should disapper from the list of schedules.
+
+Debugging: Requires code level changes.
+
+Test Case 7:
+
+Title: Bus Page
+
+Description: A logged in member should be able to see a list of bus. 
+
+Precondition: The user must be logged in to the system.
+
+Assumption: Bus list has been placed earlier by same or another user.
+
+Test Steps:
+
+   1. Click on the buses on the dashboard icons or click on the buses in the navigation bar.
+   2. A list of available buses should be visible.
+
+Expected Result: A list displaying all the buses with routes, bus number and ticket Price should appear.
+
+Debugging: Add new record to the list. If issue persists, requires code level changes.
+
+Test Case 8:
+
+Title: Add Bus Page
+
+Description: A logged in member should be able add new bus. 
+
+Precondition: The user must be logged in to the system.
+
+Assumption: User has specific priviliage.
+
+Test Steps:
+
+   1. Click on the 'Add New' button just above the list of buses.
+   2. Choose a value for "From", "To" and "Bus Type". 
+   3. Then set total seat, bus number and price of the seat.
+   4. Click on "Add".
+   5. A message showing sucessful addition should appear on the screen.
+
+Expected Result: A new entry should be visible on the list of buses.
+
+Debugging: Requires code level changes.
+
+Test Case 9:
+
+Title: Edit Bus Page
+
+Description: A logged in member should be able edit bus for sepecific date. 
+
+Precondition: The user must be logged in to the system.
+
+Assumption: User has specific priviliage.
+
+Test Steps:
+
+   1. Click on the 'Edit' link under 'Actions' column in the list of buses.
+   2. Change the values of "From", "To" and "Bus Type".
+   3. Then set total seat, bus number and price of the seat as per requirement.
+   3. Click on "Update".
+   4. A message showing sucessful update should appear on the screen.
+
+Expected Result: Updated values should be visible on the list of schedules.
+
+Debugging: Requires code level changes.
+
+Test Case 10:
+
+Title: Delete Bus 
+
+Description: A logged in member should be delete an exisiting bus from the list of buses. 
+
+Precondition: The user must be logged in to the system and list of buses should be visible.
+
+Assumption: User has specific priviliage.
+
+Test Steps:
+
+   1. Click on the 'Delete' link under 'Actions' column in the list of bus schedules.
+   2. A popup should appear showing the details of choice for delete.
+   3. Confirm to delete the record.
+   4. A message showing sucessful deletion should appear on the screen.
+   5. Selected entry from the list should disapper.
+
+Expected Result: Selected entry for deletion should disapper from the list of buses.
+
+Debugging: Requires code level changes.
+
+Test Case 11:
+
+Title: Ticket Page
+
+Description: A logged in member should be able to see a list of tickets. 
+
+Precondition: The user must be logged in to the system.
+
+Assumption: Ticket list has been placed earlier by passengers.
+
+Test Steps:
+
+   1. Click on the Tickets on the dashboard icons or click on the Tickets in the navigation bar.
+   2. A list of booked tickets should be visible.
+
+Expected Result: A list displaying all the tickets with Customer Name, Address, Contact Details, Ticket Price etc should appear.
+
+Debugging: Add new record to the list by booking a ticket. If issue persists, requires code level changes.
+
+Test Case 12:
+
+Title: Delete Ticket 
+
+Description: A logged in member should be delete an exisiting ticket from the list of tickets. 
+
+Precondition: The user must be logged in to the system and list of tickets should be visible.
+
+Assumption: User has specific priviliage.
+
+Test Steps:
+
+   1. Click on the 'Delete' link under 'Actions' column in the list of tickets.
+   2. A popup should appear showing the details of choice for delete.
+   3. Confirm to delete the record.
+   4. A message showing sucessful deletion should appear on the screen.
+   5. Selected entry from the list should disapper.
+
+Expected Result: Selected entry for deletion should disapper from the list of tickets.
+
+Debugging: Requires code level changes.
+
+Test Case 13:
+
+Title: Settings Page
+
+Description: A logged in member should be able to update their credentails. 
+
+Precondition: The user must be logged in to the system.
+
+Assumption: User has specific priviliage.
+
+Test Steps:
+
+   1. Click on the Settings on the dashboard icons or click on the Settings in the navigation bar.
+   2. Change values of username, old password, new password and confirm password.
+   3. Click on "Update" to update the credentials.
+   4. A message showing sucessful update should appear on the screen.
+
+Expected Result: The user should use new credential for login.
+
+Debugging: Requires code level changes.
+
+Test Case 14:
+
+Title: Users Page
+
+Description: A logged in member with agency admin role should be able to see a list of users. 
+
+Precondition: The user must be logged in to the system and must have agency admin role.
+
+Assumption: User list has been placed earlier by same user.
+
+Test Steps:
+
+   1. Click on the username on the upper right corner.
+   2. Click on 'Users' link.
+   2. A list of current agency member should be visible.
+
+Expected Result: A list of current agency member should appear.
+
+Debugging: Add new record to the list. If issue persists, requires code level changes.
+
+Test Case 15:
+
+Title: Add Bus Page
+
+Description: A logged in member should be able add new bus. 
+
+Precondition: The user must be logged in to the system.
+
+Assumption: User has specific priviliage.
+
+Test Steps:
+
+   1. Click on the 'Add New' button just above the list of buses.
+   2. Choose a value for "From", "To" and "Bus Type". 
+   3. Then set total seat, bus number and price of the seat.
+   4. Click on "Add".
+   5. A message showing sucessful addition should appear on the screen.
+
+Expected Result: A new entry should be visible on the list of buses.
+
+Debugging: Requires code level changes.
+
+Test Case 16:
+
+Title: Edit Bus Page
+
+Description: A logged in member should be able edit bus for sepecific date. 
+
+Precondition: The user must be logged in to the system.
+
+Assumption: User has specific priviliage.
+
+Test Steps:
+
+   1. Click on the 'Edit' link under 'Actions' column in the list of buses.
+   2. Change the values of "From", "To" and "Bus Type".
+   3. Then set total seat, bus number and price of the seat as per requirement.
+   3. Click on "Update".
+   4. A message showing sucessful update should appear on the screen.
+
+Expected Result: Updated values should be visible on the list of schedules.
+
+Debugging: Requires code level changes.
+
+Test Case 17:
+
+Title: Delete Bus 
+
+Description: A logged in member should be delete an exisiting bus from the list of buses. 
+
+Precondition: The user must be logged in to the system and list of buses should be visible.
+
+Assumption: User has specific priviliage.
+
+Test Steps:
+
+   1. Click on the 'Delete' link under 'Actions' column in the list of bus schedules.
+   2. A popup should appear showing the details of choice for delete.
+   3. Confirm to delete the record.
+   4. A message showing sucessful deletion should appear on the screen.
+   5. Selected entry from the list should disapper.
+
+Expected Result: Selected entry for deletion should disapper from the list of buses.
+
+Debugging: Requires code level changes.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
