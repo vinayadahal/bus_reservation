@@ -171,7 +171,7 @@ Test Case 9:
 
 Title: Edit Bus Page
 
-Description: A logged in member should be able edit bus for sepecific date. 
+Description: A logged in member should be able edit bus in the list of buses. 
 
 Precondition: The user must be logged in to the system.
 
@@ -295,84 +295,248 @@ Debugging: Add new record to the list. If issue persists, requires code level ch
 
 Test Case 15:
 
-Title: Add Bus Page
+Title: Add User Page
 
-Description: A logged in member should be able add new bus. 
+Description: A logged in member should be able add new user. 
 
-Precondition: The user must be logged in to the system.
+Precondition: The user must be logged in to the system and must have agency admin role.
 
 Assumption: User has specific priviliage.
 
 Test Steps:
 
    1. Click on the 'Add New' button just above the list of buses.
-   2. Choose a value for "From", "To" and "Bus Type". 
-   3. Then set total seat, bus number and price of the seat.
-   4. Click on "Add".
-   5. A message showing sucessful addition should appear on the screen.
+   2. Set total name, email, phone, address, username and password in the text boxes.
+   3. Click on "Add".
+   4. A message showing sucessful addition should appear on the screen.
 
-Expected Result: A new entry should be visible on the list of buses.
+Expected Result: A new entry should be visible on the list of users.
 
 Debugging: Requires code level changes.
 
 Test Case 16:
 
-Title: Edit Bus Page
+Title: Edit User Page
 
-Description: A logged in member should be able edit bus for sepecific date. 
+Description: A logged in member should be able edit user. 
 
-Precondition: The user must be logged in to the system.
+Precondition: The user must be logged in to the system and must have agency admin role.
 
 Assumption: User has specific priviliage.
 
 Test Steps:
 
-   1. Click on the 'Edit' link under 'Actions' column in the list of buses.
-   2. Change the values of "From", "To" and "Bus Type".
-   3. Then set total seat, bus number and price of the seat as per requirement.
+   1. Click on the 'Edit' link under 'Actions' column in the list of users.
+   2. Change the values of name, email, phone, address, username and password in the text boxes.
    3. Click on "Update".
    4. A message showing sucessful update should appear on the screen.
 
-Expected Result: Updated values should be visible on the list of schedules.
+Expected Result: Updated values should be visible on the list of users.
 
 Debugging: Requires code level changes.
 
 Test Case 17:
 
-Title: Delete Bus 
+Title: Delete User 
 
-Description: A logged in member should be delete an exisiting bus from the list of buses. 
+Description: A logged in member should be delete an exisiting user from the list of users. 
 
-Precondition: The user must be logged in to the system and list of buses should be visible.
+Precondition: The user must be logged in to the system and must have agency admin role.
 
-Assumption: User has specific priviliage.
+Assumption: User has required priviliage.
 
 Test Steps:
 
-   1. Click on the 'Delete' link under 'Actions' column in the list of bus schedules.
+   1. Click on the 'Delete' link under 'Actions' column in the list of users.
    2. A popup should appear showing the details of choice for delete.
    3. Confirm to delete the record.
    4. A message showing sucessful deletion should appear on the screen.
    5. Selected entry from the list should disapper.
 
-Expected Result: Selected entry for deletion should disapper from the list of buses.
+Expected Result: Selected entry for deletion should disapper from the list of users.
 
 Debugging: Requires code level changes.
 
+Test Case 18:
 
+Title: Admin Home Page
 
+Description: A logged in member should be able to 4 icons (Manage Slider, Places, Travel Agencies and Settings) in the dashboard. 
 
+Precondition: The user must be logged in to the system and must have admin access.
 
+Assumption: User has specific priviliage.
 
+Test Steps:
 
+   1. Check 4 icons (Manage Slider, Places, Travel Agencies and Settings) in the dashboard.
 
+Expected Result: A page displaying 4 icons (Manage Slider, Places, Travel Agencies and Settings) in the dashboard should appear on the browser.
 
+Debugging: Check user privilage in the database.
 
+Test Case 19:
 
+Title: Slider Gallery Page
 
+Description: A logged in admin should be able to view slider images. 
 
+Precondition: The user must be logged in to the system and must have admin access.
 
+Assumption: User has specific priviliage.
 
+Test Steps:
 
+   1. click on Manage Slider Icon in the dashboard or Manage Slider link in the navigation bar.
 
+Expected Result: List of uploaded images should be visible in the page.
+
+Debugging: Check user privilage in the database and also list of image file in the folder.
+
+Test Case 20:
+
+Title: Upload Image Page
+
+Description: A logged in admin should be able to upload new slider images. 
+
+Precondition: The user must be logged in to the system and must have admin access.
+
+Assumption: User has specific priviliage.
+
+Test Steps:
+
+   1. Click on Upload Image button in the slider gallery page.
+   2. Then click on Browse button on next page and choose picture from the local disk.
+   3. Preview of image should be visible.
+   4. Click on Add button to save upload and save the image.
+   5. A message with successful upload should be visible.
+
+Expected Result: New image should be visible in the silder gallery.
+
+Debugging: Check if the images folder is writable.
+
+Test Case 21:
+
+Title: Showing Image In Slider
+
+Description: A logged in admin should be able to show slider images to public user. 
+
+Precondition: The user must be logged in to the system and must have admin access.
+
+Assumption: User has specific priviliage.
+
+Test Steps:
+
+   1. Click on the preview of the image in the slider gallery page.
+   2. Then click on the image on next page.
+   3. Select the region of the image that needs be visible in slider.
+   4. Click on Crop & Save button.
+   5. A success message should be visible.
+
+Expected Result: Cropped section of the image should be visible in the public silder and also in Active Slider section.
+
+Debugging: Check if the images folder is writable and GD library is enabled in the application server.
+
+Test Case 22:
+
+Title: Deleting Image From The Silder
+
+Description: A logged in admin should be able to remove slider images. 
+
+Precondition: The user must be logged in to the system and must have admin access.
+
+Assumption: User has specific priviliage.
+
+Test Steps:
+
+   1. Click on the preview of the image in the slider gallery page.
+   2. Then click on the image on next page.
+   3. Click on Delete Image button to delete the image.
+   5. A success message should be visible.
+
+Expected Result: Deleted image should not be visible in Silder Gallery or Active Slider section.
+
+Debugging: Check if the image folder is writable.
+
+Test Case 23:
+
+Title: Places Page
+
+Description: A logged in admin should be able to see the list of places. 
+
+Precondition: The user must be logged in to the system and must have admin access.
+
+Assumption: Places list has been placed earlier by same user.
+
+Test Steps:
+
+   1. Click on the Places icon in the dashboard or Places link in the navigation bar.
+
+Expected Result: A list of places should appear.
+
+Debugging: Add new record to the list. If issue persists, requires code level changes.
+
+Test Case 24:
+
+Title: Add Places Page
+
+Description: A logged in admin should be able to add new place to the list. 
+
+Precondition: The user must be logged in to the system and must have admin access.
+
+Assumption: User has specific priviliage.
+
+Test Steps:
+
+   1. Click on the 'Add New' button just above the list of buses.
+   2. Set total name of the place in the text boxes.
+   3. Click on "Add".
+   4. A message showing sucessful addition should appear on the screen.
+
+Expected Result: A new entry should be visible on the list of places.
+
+Debugging: Requires code level changes.
+
+Test Case 25:
+
+Title: Edit Places Page
+
+Description: A logged in admin should be able to edit a place from the list of places. 
+
+Precondition: The user must be logged in to the system and must have admin access.
+
+Assumption: User has specific priviliage.
+
+Test Steps:
+
+   1. Click on the 'Edit' link under 'Actions' column in the list of places.
+   2. Change the values of name in the text boxes.
+   3. Click on "Update".
+   4. A message showing sucessful update should appear on the screen.
+
+Expected Result: Updated values should be visible on the list of places.
+
+Debugging: Requires code level changes.
+
+Test Case 26:
+
+Title: Delete Places Page 
+
+Description: A logged in admin should be able to delete a place from the list of places. 
+
+Precondition: The user must be logged in to the system and must have admin access.
+
+Assumption: User has required priviliage.
+
+Test Steps:
+
+   1. Click on the 'Delete' link under 'Actions' column in the list of places.
+   2. A popup should appear showing the details of choice for delete.
+   3. Confirm to delete the record.
+   4. A message showing sucessful deletion should appear on the screen.
+   5. Selected entry from the list should disapper.
+
+Expected Result: Selected entry for deletion should disapper from the list of places.
+
+Debugging: Requires code level changes.
 
