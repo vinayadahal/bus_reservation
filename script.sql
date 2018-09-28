@@ -1,26 +1,28 @@
--- phpMyAdmin SQL Dump
--- version 4.1.14
--- http://www.phpmyadmin.net
+-- MySQL dump 10.13  Distrib 5.7.22, for Linux (x86_64)
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 21, 2018 at 06:25 PM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Host: localhost    Database: bus_reservation
+-- ------------------------------------------------------
+-- Server version	5.7.22-0ubuntu0.16.04.1
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
-
---
--- Database: `bus_reservation`
---
-
--- --------------------------------------------------------
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
 -- Table structure for table `bus`
 --
 
-CREATE TABLE IF NOT EXISTS `bus` (
+DROP TABLE IF EXISTS `bus`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bus` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `type` text NOT NULL,
   `total_seat` int(11) NOT NULL,
@@ -29,97 +31,106 @@ CREATE TABLE IF NOT EXISTS `bus` (
   `seat_layout` int(11) NOT NULL,
   `travel_agency_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `travel_agency_id` (`travel_agency_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+  KEY `travel_agency_id` (`travel_agency_id`),
+  CONSTRAINT `bus_ibfk_1` FOREIGN KEY (`travel_agency_id`) REFERENCES `travel_agency` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `bus`
 --
 
-INSERT INTO `bus` (`id`, `type`, `total_seat`, `bus_number`, `price`, `seat_layout`, `travel_agency_id`) VALUES
-(2, 'Micro', 15, 9808, 800, 1, 1),
-(3, 'Micro', 15, 4955, 750, 2, 1),
-(4, 'AC', 36, 987, 1200, 3, 2),
-(5, 'Micro', 15, 9078, 1200, 0, 1);
-
--- --------------------------------------------------------
+LOCK TABLES `bus` WRITE;
+/*!40000 ALTER TABLE `bus` DISABLE KEYS */;
+INSERT INTO `bus` VALUES (2,'Micro',15,9808,800,1,1),(3,'Micro',15,4955,750,2,1),(4,'AC',36,987,1200,3,2),(5,'Micro',15,9078,1200,0,1);
+/*!40000 ALTER TABLE `bus` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `destination`
 --
 
-CREATE TABLE IF NOT EXISTS `destination` (
+DROP TABLE IF EXISTS `destination`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `destination` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `destination` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `destination`
 --
 
-INSERT INTO `destination` (`id`, `destination`) VALUES
-(1, 'Kathmandu'),
-(2, 'Pokhara'),
-(3, 'Janakpur');
-
--- --------------------------------------------------------
+LOCK TABLES `destination` WRITE;
+/*!40000 ALTER TABLE `destination` DISABLE KEYS */;
+INSERT INTO `destination` VALUES (1,'Kathmandu'),(2,'Pokhara'),(3,'Janakpur');
+/*!40000 ALTER TABLE `destination` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `reservation`
 --
 
-CREATE TABLE IF NOT EXISTS `reservation` (
+DROP TABLE IF EXISTS `reservation`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `reservation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `departure_time` varchar(255) NOT NULL,
   `departure_date` date NOT NULL,
   `reserved_seat` text NOT NULL,
   `bus_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `bus_bus_id` (`bus_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+  KEY `bus_bus_id` (`bus_id`),
+  CONSTRAINT `bus_bus_id` FOREIGN KEY (`bus_id`) REFERENCES `bus` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `reservation`
 --
 
-INSERT INTO `reservation` (`id`, `departure_time`, `departure_date`, `reserved_seat`, `bus_id`) VALUES
-(1, '9', '2018-09-21', 'a1,a2,a3', 2),
-(2, '10', '2018-09-21', 'a2,a3,c2', 3),
-(3, '12 pm', '2018-09-21', 'a2,a3,a1', 4),
-(6, '10', '2018-09-21', '', 2),
-(8, '11', '2018-09-21', '', 5),
-(10, '8', '2018-09-21', 'b3,f2,f1,d3', 3),
-(11, '7', '2018-09-21', '', 2);
-
--- --------------------------------------------------------
+LOCK TABLES `reservation` WRITE;
+/*!40000 ALTER TABLE `reservation` DISABLE KEYS */;
+INSERT INTO `reservation` VALUES (1,'9','2018-09-21','a1,a2,a3',2),(2,'10','2018-09-21','a2,a3,c2',3),(3,'12 pm','2018-09-21','a2,a3,a1',4),(6,'10','2018-09-21','',2),(8,'11','2018-09-21','',5),(10,'8','2018-09-21','b3,f2,f1,d3',3),(11,'7','2018-09-21','',2);
+/*!40000 ALTER TABLE `reservation` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `role`
 --
 
-CREATE TABLE IF NOT EXISTS `role` (
+DROP TABLE IF EXISTS `role`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `role` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `role` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `role`
 --
 
-INSERT INTO `role` (`id`, `role`) VALUES
-(1, 'role_admin'),
-(2, 'role_user'),
-(3, 'role_agency_admin');
-
--- --------------------------------------------------------
+LOCK TABLES `role` WRITE;
+/*!40000 ALTER TABLE `role` DISABLE KEYS */;
+INSERT INTO `role` VALUES (1,'role_admin'),(2,'role_user'),(3,'role_agency_admin');
+/*!40000 ALTER TABLE `role` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `route`
 --
 
-CREATE TABLE IF NOT EXISTS `route` (
+DROP TABLE IF EXISTS `route`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `route` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `start_point` int(11) NOT NULL,
   `end_point` int(11) NOT NULL,
@@ -127,25 +138,31 @@ CREATE TABLE IF NOT EXISTS `route` (
   PRIMARY KEY (`id`),
   KEY `bus_id` (`bus_id`),
   KEY `end_point` (`end_point`),
-  KEY `start_point` (`start_point`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
+  KEY `start_point` (`start_point`),
+  CONSTRAINT `route_ibfk_1` FOREIGN KEY (`start_point`) REFERENCES `destination` (`id`),
+  CONSTRAINT `route_ibfk_2` FOREIGN KEY (`end_point`) REFERENCES `destination` (`id`),
+  CONSTRAINT `route_ibfk_3` FOREIGN KEY (`bus_id`) REFERENCES `bus` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `route`
 --
 
-INSERT INTO `route` (`id`, `start_point`, `end_point`, `bus_id`) VALUES
-(1, 1, 2, 2),
-(2, 1, 3, 3),
-(3, 2, 3, 5);
-
--- --------------------------------------------------------
+LOCK TABLES `route` WRITE;
+/*!40000 ALTER TABLE `route` DISABLE KEYS */;
+INSERT INTO `route` VALUES (1,1,2,2),(2,1,3,3),(3,2,3,5);
+/*!40000 ALTER TABLE `route` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `tickets`
 --
 
-CREATE TABLE IF NOT EXISTS `tickets` (
+DROP TABLE IF EXISTS `tickets`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tickets` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `first_name` varchar(255) NOT NULL,
   `last_name` varchar(255) NOT NULL,
@@ -160,50 +177,54 @@ CREATE TABLE IF NOT EXISTS `tickets` (
   `from` varchar(255) DEFAULT NULL,
   `to` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `tickets`
 --
 
-INSERT INTO `tickets` (`id`, `first_name`, `last_name`, `address`, `contact`, `email`, `seats`, `total_price`, `unique_id`, `reservation_id`, `bus_id`, `from`, `to`) VALUES
-(2, 'Vivek', 'Dahal', 'Jorpati', '9813456786', 'viv@qwe.com', 'a1', 800, 'OLvuMVTTHU', 3, 2, 'Pokhara', 'Janakpur'),
-(3, 'Aweqwe', 'Zxczxczfjghjghj', 'Yuoioupu', '1233556456', 'asd@qwer.ghfhjf', 'd4', 800, 'UBsAyRdZ1i', 3, 2, 'Kathmandu', 'Pokhara'),
-(7, 'Qwrr', 'Asdf', 'Zxcv', '12345', 'qwer', 'b3', 750, 'IRw22b9xEW', 10, 3, 'Kathmandu', 'Janakpur'),
-(8, 'Binaya ', 'Dahal', 'Kathmandu', '981234534', 'vinayadahal@gmail.com', 'f2,f1', 1500, 'T3nrDHbioG', 10, 3, 'Kathmandu', 'Janakpur'),
-(9, 'Binaya', 'Dahal', 'Jorpati', '981324567', 'vnaydahal@dmail.com', 'd3', 750, 'Lj0zyaMyCU', 10, 3, 'Kathmandu', 'Janakpur'),
-(10, 'Test', 'Test', 'Qwr', '1234', 'qasdf@mail.com', 'c2', 750, '5Th5JAX9Gq', 2, 3, 'Kathmandu', 'Janakpur');
-
--- --------------------------------------------------------
+LOCK TABLES `tickets` WRITE;
+/*!40000 ALTER TABLE `tickets` DISABLE KEYS */;
+INSERT INTO `tickets` VALUES (2,'Vivek','Dahal','Jorpati','9813456786','viv@qwe.com','a1',800,'OLvuMVTTHU',3,2,'Pokhara','Janakpur'),(3,'Aweqwe','Zxczxczfjghjghj','Yuoioupu','1233556456','asd@qwer.ghfhjf','d4',800,'UBsAyRdZ1i',3,2,'Kathmandu','Pokhara'),(7,'Qwrr','Asdf','Zxcv','12345','qwer','b3',750,'IRw22b9xEW',10,3,'Kathmandu','Janakpur'),(8,'Binaya ','Dahal','Kathmandu','981234534','vinayadahal@gmail.com','f2,f1',1500,'T3nrDHbioG',10,3,'Kathmandu','Janakpur'),(9,'Binaya','Dahal','Jorpati','981324567','vnaydahal@dmail.com','d3',750,'Lj0zyaMyCU',10,3,'Kathmandu','Janakpur'),(10,'Test','Test','Qwr','1234','qasdf@mail.com','c2',750,'5Th5JAX9Gq',2,3,'Kathmandu','Janakpur');
+/*!40000 ALTER TABLE `tickets` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `travel_agency`
 --
 
-CREATE TABLE IF NOT EXISTS `travel_agency` (
+DROP TABLE IF EXISTS `travel_agency`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `travel_agency` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` text NOT NULL,
   `address` text NOT NULL,
   `contact` int(11) NOT NULL,
   `email` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `travel_agency`
 --
 
-INSERT INTO `travel_agency` (`id`, `name`, `address`, `contact`, `email`) VALUES
-(1, 'ABC Yatayat', 'Kalanki', 12313323, 'info@abc.com'),
-(2, 'XYZ Bus', 'Koteshwor', 2323712, 'xyz@mail.com');
-
--- --------------------------------------------------------
+LOCK TABLES `travel_agency` WRITE;
+/*!40000 ALTER TABLE `travel_agency` DISABLE KEYS */;
+INSERT INTO `travel_agency` VALUES (1,'ABC Yatayat','Kalanki',12313323,'info@abc.com'),(2,'XYZ Bus','Koteshwor',2323712,'xyz@mail.com'),(3,'Self','Self',123,'self@self.com');
+/*!40000 ALTER TABLE `travel_agency` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
+DROP TABLE IF EXISTS `user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -215,39 +236,26 @@ CREATE TABLE IF NOT EXISTS `user` (
   `password` varchar(255) NOT NULL,
   `travel_agency_id` int(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `name`, `email`, `phone`, `address`, `created`, `role`, `username`, `password`, `travel_agency_id`) VALUES
-(1, 'vinaya dahal', 'myemail@mail.com', '12312434234', 'country of mountains', '2017-11-14 19:24:23', 2, 'user', '12dea96fec20593566ab75692c9949596833adc9', 1),
-(2, 'admin', 'admin@gmail.com', '12345', 'admin home', '2018-04-05 00:00:00', 1, 'admin', 'd033e22ae348aeb5660fc2140aec35850c4da997', 1),
-(3, 'Raj', 'raj@raj.com', '2334569', 'ram road', '2018-04-06 23:04:14', 2, 'raj', '3055effa054a24f84cf42cea946db4cdf445cb76', 1),
-(5, 'Binaya Dahal', 'qweq1', '1234', 'hghjgh', '2018-09-05 13:05:49', 0, 'bidahal', '', 2),
-(9, 'binaya dahal', 'vin@qwrs.com', '1234678', 'kathmandu', '2018-09-05 23:00:39', 3, 'bidahal', '0b9759db71ab50cd2c06cc1b37e7aa563d84cb07', 1);
+LOCK TABLES `user` WRITE;
+/*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES (1,'vinaya dahal','myemail@mail.com','12312434234','country of mountains','2017-11-14 19:24:23',2,'user','12dea96fec20593566ab75692c9949596833adc9',1),(2,'admin','admin@gmail.com','12345','admin home','2018-04-05 00:00:00',1,'admin','d033e22ae348aeb5660fc2140aec35850c4da997',3),(3,'Raj','raj@raj.com','2334569','ram road','2018-04-06 23:04:14',2,'raj','3055effa054a24f84cf42cea946db4cdf445cb76',1),(5,'Binaya Dahal','qweq1','1234','hghjgh','2018-09-05 13:05:49',1,'bidahal','',2),(9,'binaya dahal','vin@qwrs.com','1234678','kathmandu','2018-09-05 23:00:39',3,'bidahal','0b9759db71ab50cd2c06cc1b37e7aa563d84cb07',1),(10,'qwe','qwe','123','asd','2018-09-28 16:46:31',2,'zxc','f10e2821bbbea527ea02200352313bc059445190',1);
+/*!40000 ALTER TABLE `user` ENABLE KEYS */;
+UNLOCK TABLES;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
---
--- Constraints for dumped tables
---
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
---
--- Constraints for table `bus`
---
-ALTER TABLE `bus`
-  ADD CONSTRAINT `bus_ibfk_1` FOREIGN KEY (`travel_agency_id`) REFERENCES `travel_agency` (`id`);
-
---
--- Constraints for table `reservation`
---
-ALTER TABLE `reservation`
-  ADD CONSTRAINT `bus_bus_id` FOREIGN KEY (`bus_id`) REFERENCES `bus` (`id`);
-
---
--- Constraints for table `route`
---
-ALTER TABLE `route`
-  ADD CONSTRAINT `route_ibfk_1` FOREIGN KEY (`start_point`) REFERENCES `destination` (`id`),
-  ADD CONSTRAINT `route_ibfk_2` FOREIGN KEY (`end_point`) REFERENCES `destination` (`id`),
-  ADD CONSTRAINT `route_ibfk_3` FOREIGN KEY (`bus_id`) REFERENCES `bus` (`id`);
+-- Dump completed on 2018-09-28 17:18:05

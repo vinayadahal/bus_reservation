@@ -1,4 +1,9 @@
 <div class="list_details_wrap">
+    <div>
+        <a href="<?php echo base_url() ?>member/users/add">
+            <button type="button" class="btn btn-success" style="float: right;display: table-cell;">Add New</button>
+        </a>
+    </div>
     <h3>Agency Users</h3>
     <div class="list_details">
         <table class="table">
@@ -33,8 +38,8 @@
                         <td><?php echo $user->phone; ?></td>
                         <td><?php echo $user->email; ?></td>
                         <td><?php echo $user->username; ?></td>
-                        <td><a href="<?php echo base_url() ?>member/users/edit/<?php echo $user->id; ?>" target="_blank">Edit</a></td>
-                        <td><a href="<?php echo base_url() ?>member/users/delete/<?php echo $user->id; ?>" target="_blank">Delete</a></td>
+                        <td><a href="<?php echo base_url() ?>member/users/edit/<?php echo $user->id; ?>">Edit</a></td>
+                        <td><a onclick="return confirm('Are you sure to delete <?php echo $user->name; ?>?')" href="<?php echo base_url() ?>member/users/delete/<?php echo $user->id; ?>">Delete</a></td>
                     </tr>
                 <?php } ?>
             </tbody>

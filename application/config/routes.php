@@ -84,3 +84,8 @@ $route['member/settings/updateUser'] = 'Settings/updateUser';
 
 $route['member/users'] = 'Users/index';
 $route['member/users/(:num)'] = 'Users/index/$1';
+$route['member/users/add'] = 'Users/addAgencyMember';
+$route['member/users/create'] = 'Users/createAgencyMember';
+$route['member/users/edit/(:num)'] = 'Users/editAgencyMember/$1';
+$route['member/users/update'] = 'Users/updateAgencyMember';
+$route['member/users/delete/(:num)'] = 'Users/deleteAgencyMember/$1';
