@@ -14,6 +14,9 @@
         <?php
         $i = 1;
         foreach ($agencies as $agency) {
+            if ($agency->name == "Self") {
+                continue;
+            }
             ?>
             <tr>
                 <td><?php echo $i++; ?></td>
