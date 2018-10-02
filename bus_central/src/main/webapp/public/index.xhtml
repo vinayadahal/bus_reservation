@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+        <title>Home - Bus Reservation</title>
+        <h:outputStylesheet library="webjars" name="font-awesome/5.3.1/css/all.min.css" />
+        <h:outputStylesheet library="css" name="style.css"  />
+        
+    </h:head>
+    <h:body id="container">
+        <i class="fas fa-stroopwafel"></i>
+        <div class="menu_wrap">
+            <div class="menu">
+                <div class="logo">
+                    <a href="${pageContext.request.contextPath}/">
+                        <i class="fas fa-bus-alt"></i> <span class="logo_text">Bus Reservation</span>
+                    </a>
+                </div>
+                <ul>
+                    <li><a href="${pageContext.request.contextPath}/">Home</a></li>
+                    <li><a href="${pageContext.request.contextPath}/travel_agency">Travel Agencies</a></li>
+                    <li><a href="${pageContext.request.contextPath}/member">Login</a></li>
+                    <!--                    <li class="dropdown-menu-li" id="side_drp_wrap" style="float: right;">
+                                            <a href="javascript:void();" id="side_drp_down">
+                                                About <i class="fa fa-angle-down" style="font-weight: bold"></i>
+                                            </a>
+                                            <ul id="side_drp_list">
+                                                <li><a href="http://google.com">Objectives</a></li>
+                                                <li><a href="http://google.com">Chairmain's Message</a></li>
+                                                <li><a href="http://google.com">About Us</a></li>
+                                            </ul>
+                                        </li>-->
+                </ul>
+                <div class="search_area">
+                    <form method="get" action="${pageContext.request.contextPath}/show_ticket/">
+                        <input type="text" placeholder="Search Ticket" class="form-elements search_box" name="keyword"/><button class="btn_submit search_btn" type="submit"><i class="fa fa-search" ></i></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="content_wrap" id="content_wrap">
+            <div class="routes" style="width: 99%;padding: .5%;">
+                <h2>Pick A Route</h2>
+                <hr/>
+                <div class="route_form">
+                    <table class="tbl_form">
+                        <tr>
+                            <th>Start Point:</th>
+                            <th>Destination:</th>
+                            <th>Travel Date:</th>
+                        </tr>
+                        <tr>
+                            <td>
+                                <select name="start_point" class="form-elements" id="start_point" onchange="change_destination();">
+                                    <!--<?php foreach ($places as $start) { ?>-->
+                                    <!--<option value="<?php echo $start->id; ?>" ><?php echo $start->destination; ?></option>-->
+                                    <!--<?php } ?>-->
+                                </select>
+                            </td>
+                            <td>
+                                <select name="end_point" class="form-elements" id="end_point">
+                                    <!--<?php foreach (array_reverse($places) as $end) { ?>-->
+                                    <!--<option value="<?php echo $end->id; ?>"><?php echo $end->destination; ?></option>-->
+                                    <!--<?php } ?>-->
+                                </select>
+                            </td>
+                            <td><input type="date" name="date" id='date' class="form-elements" /></td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><button id="search_bus" url="${pageContext.request.contextPath}/search_bus" class="btn_submit">Submit</button></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="routes" style="width: 99%;padding: .5%;display: none; " id="bus_info"></div>
+
+
+
+        </div>
+        <script src="${pageContext.request.contextPath}/slider.js"></script>
+        <div class="footerWrap" id="footerWrap">
+            <div class="footerLinkWrap">
+                <div class="footerLink">
+                    <i class="fa fa-bus fa-5x"></i> <span style="font-size: 24px;">Bus Reservation</span>
+                    <br />
+                    <br />
+                    © Copyright 2018 Bus Reservation. All Rights Reserved. Privacy and Policy.
+                </div>
+                <div class="footerLink">
+                    <ul>
+                        <li><h4>This Site</h4></li>
+                        <li><a href="${pageContext.request.contextPath}">Home</a></li>
+                        <li><a href="${pageContext.request.contextPath}register">Travel Agencies</a></li>
+                        <li><a href="${pageContext.request.contextPath}request">Available Routes</a></li>
+                        <li><a href="${pageContext.request.contextPath}request">Popular Routes</a></li>
+                    </ul>
+                </div>
+                <div class="footerLink">
+                    <ul>
+                        <li><h4>Other</h4></li>
+                        <li><a href="javascript:void(0)" onclick="loadForm('Suggestion');">Gallery</a></li>
+                        <li><a href="javascript:void(0)" onclick="loadForm('Suggestion');">Suggestion</a></li>
+                        <li><a href="javascript:void(0)" onclick="loadForm('Feedback');">Feedback</a></li>
+                    </ul>
+                </div>
+                <div class="footerLink">
+                    <ul>
+                        <li><h4>Follow us</h4></li>
+                        <li><a href="https://www.facebook.com/"><span class="footerIcon fb">Facebook</span></a></li>
+                        <li><a href="https://twitter.com/"><span class="footerIcon tw">Twitter</span></a></li>
+                        <li><a href="https://plus.google.com/"><span class="footerIcon gp">Google +</span></a></li>
+                        <li><a href="https://www.linkedin.com/"><span class="footerIcon in">Linked In</span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </h:body>
+</html>
+

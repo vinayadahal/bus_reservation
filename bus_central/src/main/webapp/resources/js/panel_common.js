@@ -1,0 +1,133 @@
+var detached;
+
+$(document).ready(function () {
+    var container_height = $("#container").height();
+    setFooter(container_height);
+
+    $("#img").change(function () {
+        var filesize = this.files[0].size;
+        if (filesize >= 2097152) {
+            alert('File size should be less than 2 MB.');
+            this.value = '';
+        } else {
+            showImg(this);
+        }
+    });
+});
+
+function change_destination() {
+//    if (detached) {
+//        detached.appendTo("#destination");
+//    }
+//    var selection = $("#start_point").find(":selected").val();
+//    detached = $("#destination option[value='" + selection + "']").detach();
+
+    var selection = $("#route").find(":selected").val();
+    $("span").filter(function () {
+        if ($(this).html() === selection) {
+            var unique_id = $(this).html();
+            console.log("match found for selection " + selection);
+            $("#type").val($("#type" + unique_id).html());
+            $("#bus_number").val($("#bus_number" + unique_id).html());
+            $("#bus_id").val($("#id" + unique_id).html());
+        }
+    });
+}
+
+function showPopup() {
+    $("#popup").fadeIn('slow');
+    setInterval(function () {
+        $("#popup").fadeOut('slow');
+    }, 5000);
+}
+
+function setFooter(container_height) {
+//    console.log(container_height);
+    if (container_height < 500) {
+        $(".footerWrap").css({position: "fixed", bottom: "0"});
+    } else {
+        $(".footerWrap").css({position: "relative"});
+    }
+}
+
+function showImg(img) {
+    if (img.files && img.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#imgLocation').attr('src', e.target.result);
+        },
+                reader.readAsDataURL(img.files[0]);
+    }
+}
+
+function countChars() {
+    var val = $('#title').val().length;
+    if (val > 40) {
+        alert('Only 40 characters are allowed in title.');
+        $('#title').css({
+            'color': '#f00'
+        });
+        return false;
+    } else if ($('#title').val() === '') {
+        return false;
+    } else {
+        $('#title').css({
+            'color': '#555'
+        });
+        return true;
+    }
+
+}
+
+function validate(idArray) {
+    var count = idArray.length;
+    for (var i = 0; i <= count; i++) {
+        if (idArray[i] === 'title') {
+            countChars();
+        }
+        if (checkNull(idArray[i])) {
+            console.log("check negative");
+            if (checkNegative(idArray[i])) {
+                continue;
+            } else {
+                alert('Value is negative.');
+                return false;
+            }
+            continue;
+        } else {
+            alert('Please fill every fields.');
+            return false;
+        }
+//console.log("check negative");
+//        if (checkNegative(idArray[i])) {
+//            continue;
+//        } else {
+//            alert('Value is negative.');
+//            return false;
+//        }
+    }
+    return true;
+}
+
+function checkNull(idName) {
+    var id = $("#" + idName).val();
+    if (id === '') {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function checkNegative(idName) {
+    console.log(idName);
+    if (idName === "price") {
+        var id = $("#" + idName).val();
+        if (id < 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }else{
+        return true;
+    }
+}
