@@ -1,21 +1,21 @@
-<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
         <title>Home - Bus Reservation</title>
-        <h:outputStylesheet library="webjars" name="font-awesome/5.3.1/css/all.min.css" />
-        <h:outputStylesheet library="css" name="style.css"  />
-        
+        <h:outputStylesheet library="webjars" name="font-awesome/4.7.0/css/font-awesome.min-jsf.css" />
+        <h:outputStylesheet library="css" name="style.css" />
+        <h:outputStylesheet library="css" name="slider.css" />
+
     </h:head>
     <h:body id="container">
-        <i class="fas fa-stroopwafel"></i>
         <div class="menu_wrap">
             <div class="menu">
                 <div class="logo">
                     <a href="${pageContext.request.contextPath}/">
-                        <i class="fas fa-bus-alt"></i> <span class="logo_text">Bus Reservation</span>
+                        <i class="fa fa-bus"></i> <span class="logo_text">Bus Central</span>
                     </a>
                 </div>
                 <ul>
@@ -41,6 +41,38 @@
             </div>
         </div>
         <div class="content_wrap" id="content_wrap">
+
+
+            <div class="slider_wrap">
+                <!-- Slideshow container -->
+                <div class="slideshow-container">
+                    <!-- Full-width images with number and caption text -->
+
+
+                    <c:forEach var="res" items="#{mbImages.imageList}">
+                        <c:if test="#{not res.contains('svg')}">
+                            <div class="mySlides fade"><h:graphicImage library="images" name="/slider/#{res}" style="width:100%;" /></div>
+                        </c:if>
+                    </c:forEach>
+
+
+
+                    <!-- Next and previous buttons -->
+                    <a class="prev" onclick="lastSlide()">&#10094;</a>
+                    <a class="next" onclick="nextSlide()">&#10095;</a>
+
+                    <!-- The dots/circles -->
+                    <div class="dot_wrap" style="text-align:center">
+                        <c:set var="count" value="0"/>
+                        <c:forEach var="res" items="#{mbImages.imageList}">
+                            <c:if test="#{not res.contains('svg')}">
+                                <c:set var="count" value="#{count + 1}"/>
+                                <span class="dot" onclick='currentSlide(#{count})'></span>
+                            </c:if>
+                        </c:forEach>
+                    </div>
+                </div>
+            </div>
             <div class="routes" style="width: 99%;padding: .5%;">
                 <h2>Pick A Route</h2>
                 <hr/>
@@ -83,7 +115,7 @@
         <div class="footerWrap" id="footerWrap">
             <div class="footerLinkWrap">
                 <div class="footerLink">
-                    <i class="fa fa-bus fa-5x"></i> <span style="font-size: 24px;">Bus Reservation</span>
+                    <i class="fa fa-bus fa-5x"></i> <span style="font-size: 24px;">Bus Central</span>
                     <br />
                     <br />
                     © Copyright 2018 Bus Reservation. All Rights Reserved. Privacy and Policy.
@@ -116,7 +148,7 @@
                 </div>
             </div>
         </div>
-
+        <h:outputScript library="js" name="slider.js" />
     </h:body>
 </html>
 
