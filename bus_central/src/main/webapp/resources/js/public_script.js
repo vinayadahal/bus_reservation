@@ -10,6 +10,7 @@ $(document).ready(function () {
     set_reserved_seats();
     set_selected_seats();
     preserve_history();
+    change_destination(); // running this to maintain uniqueness in index page.
     $("#side_drp_down").click(function () {
         showDropDown("side_drp_list", "side_drp_wrap");
     });
@@ -36,6 +37,7 @@ $(document).ready(function () {
 });
 
 function showBuses(url) {
+    console.log(url);
     $.ajax({
         url: url,
         type: "get",
@@ -183,10 +185,10 @@ function hideDropDown(list_id, list_wrap) {
 
 function change_destination() {
     if (detached) {
-        detached.appendTo("#destination");
+        detached.appendTo("#end_point");
     }
     var selection = $("#start_point").find(":selected").val();
-    detached = $("#destination option[value='" + selection + "']").detach();
+    detached = $("#end_point option[value='" + selection + "']").detach();
 }
 
 function countChars() {

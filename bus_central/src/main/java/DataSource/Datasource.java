@@ -10,7 +10,7 @@ public class Datasource {
 
     public BasicDataSource createConnection() {
         System.out.println("<<<<<<<<<<<<<< Datasource called >>>>>>>>>>");
-        String connectionURL = "jdbc:mysql://localhost:3306/stockmgnt";
+        String connectionURL = "jdbc:mysql://localhost:3306/bus_central";
         ds = new BasicDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
         ds.setUsername("root");
