@@ -1,4 +1,4 @@
-package DataSource;
+package Application.DataSource;
 
 import java.sql.SQLException;
 import org.apache.commons.dbcp.BasicDataSource;

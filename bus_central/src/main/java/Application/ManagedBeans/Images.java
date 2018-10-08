@@ -1,6 +1,6 @@
-package ManagedBeans;
+package Application.ManagedBeans;
 
-import Services.Commons;
+import Application.Services.Commons;
 import java.net.URL;
 import java.util.List;
 import javax.faces.bean.ManagedBean;

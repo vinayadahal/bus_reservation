@@ -1,6 +1,6 @@
-package ManagedBeans;
+package Application.ManagedBeans;
 
-import ApplicationModels.PublicUserModel;
+import Application.Models.PublicUserModel;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
@@ -33,11 +33,11 @@ public class PublicUser {
     public void setStartPoint(String start_point) {
         this.start_point = start_point;
     }
-    
+
     public String getId() {
         return id;
     }
-    
+
     public String getName() {
         return name;
     }
@@ -61,9 +61,14 @@ public class PublicUser {
     public List<PublicUser> getAllDestination() {
         return objPublicUserModel.getAllDestinationBean("destination");
     }
+    
+    public void setSearch(){
+        
+    }
 
-    public void getSearch() {
+    public String getSearch() {
         System.out.println("Testing");
+        return "test";
 //        System.out.println("Testing::: " + this.start_point);
     }
 }

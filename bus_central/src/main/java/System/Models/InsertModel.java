@@ -1,7 +1,7 @@
-package SystemModels;
+package System.Models;
 
-import DataSource.Datasource;
-import SystemConfig.BootStrap;
+import Application.DataSource.Datasource;
+import System.Config.BootStrap;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

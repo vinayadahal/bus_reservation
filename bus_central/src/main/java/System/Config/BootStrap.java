@@ -1,6 +1,6 @@
-package SystemConfig;
+package System.Config;
 
-import DataSource.Datasource;
+import Application.DataSource.Datasource;
 import java.sql.SQLException;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

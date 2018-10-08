@@ -1,7 +1,7 @@
-package SystemModels;
+package System.Models;
 
-import Services.Helper;
-import SystemConfig.BootStrap;
+import Application.Services.Helper;
+import System.Config.BootStrap;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;

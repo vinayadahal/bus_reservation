@@ -1,11 +1,11 @@
-package ApplicationModels;
+package Application.Models;
 
-import DataSource.Datasource;
-import ManagedBeans.PublicUser;
-import SystemModels.DeleteModel;
-import SystemModels.InsertModel;
-import SystemModels.SelectModel;
-import SystemModels.UpdateModel;
+import Application.DataSource.Datasource;
+import Application.ManagedBeans.PublicUser;
+import System.Models.DeleteModel;
+import System.Models.InsertModel;
+import System.Models.SelectModel;
+import System.Models.UpdateModel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

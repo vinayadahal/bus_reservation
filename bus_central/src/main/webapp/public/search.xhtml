@@ -4,8 +4,10 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     <h:head></h:head>
     <h:body>
-        <ui:define name="content">
-            #{mbPublicUser.search}
-        </ui:define>
+        <ui:composition template="template/layout.xhtml">
+            <ui:define name="content">
+                #{mbPublicUser.search}
+            </ui:define>
+        </ui:composition>
     </h:body>
 </html>
