@@ -1,6 +1,6 @@
 package Application.Models;
 
-import Application.DataSource.Datasource;
+import Application.Config.Datasource;
 import Application.ManagedBeans.PublicUser;
 import System.Models.DeleteModel;
 import System.Models.InsertModel;

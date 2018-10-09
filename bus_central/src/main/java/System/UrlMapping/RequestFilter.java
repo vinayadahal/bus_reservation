@@ -1,6 +1,6 @@
 package System.UrlMapping;
 
-import Application.UrlMapping.UrlMappings;
+import Application.Config.UrlMappings;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -13,10 +13,10 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
 public class RequestFilter implements Filter {
-    
+
     private static final boolean debug = true;
     private FilterConfig filterConfig = null;
-    
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
@@ -24,25 +24,45 @@ public class RequestFilter implements Filter {
         String path = req.getRequestURI();//gets requested url.
         String rootDir = path.substring(1);//removes "/" from requested url.
         System.out.println(path);
-        System.out.println(rootDir);
-//        System.out.println("Bla");
-
+        String url = UrlFilter(rootDir);
+        String FilePath = UrlValidator(url);
+        request.getRequestDispatcher(FilePath).forward(request, response);  // forwards requested url without applying filter.
         if (path.contains("resource") || path.contains("images")) {
             System.out.println("Calling resources::::");
             chain.doFilter(request, response);
-            return;
         }
-        String FilePath = callFacesServlet("index");
-        if (!"error".equals(FilePath)) {
-            System.out.println("Calling Page:::" + FilePath);
-            request.getRequestDispatcher(FilePath).forward(request, response);  // forwards requested url without applying filter.
-        } else {
-            System.out.println("can't call file::::");
-        }
-        
+
     }
-    
-    public String callFacesServlet(String path) {
+
+    public String UrlFilter(String RootDir) {
+        String requested_url = RootDir.substring(RootDir.indexOf("/") + 1); // contains everything after context path
+        if (!requested_url.contains(".")) {
+            return requested_url;
+        } else {
+            return "other_resources";
+        }
+
+    }
+
+    public String UrlValidator(String url) {
+        if (!"other_resources".equals(url) || null != url) {
+            if (url.length() == 0) {
+                System.out.println("URL null::: Calling default page");
+                return UrlMapping("default");
+            }
+            String FilePath = UrlMapping(url);
+            if (!"error".equals(FilePath)) {
+                return FilePath;
+            } else {
+                System.out.println("can't call file::::");
+            }
+        } else {
+            System.out.println("Empty URL:::");
+        }
+        return "test";
+    }
+
+    public String UrlMapping(String path) {
         UrlMappings objUrlMapping = new UrlMappings();
         objUrlMapping.setRoutes(); // setting routes
         if (objUrlMapping.getRoutes(path) != null) { // checking if the url mapping exsits or not for given input in the browser
@@ -52,7 +72,7 @@ public class RequestFilter implements Filter {
             return "error";
         }
     }
-    
+
     @Override
     public String toString() {
         if (filterConfig == null) {
@@ -63,7 +83,7 @@ public class RequestFilter implements Filter {
         sb.append(")");
         return (sb.toString());
     }
-    
+
     public static String getStackTrace(Throwable t) {
         String stackTrace = null;
         try {
@@ -78,11 +98,11 @@ public class RequestFilter implements Filter {
         }
         return stackTrace;
     }
-    
+
     public void log(String msg) {
         filterConfig.getServletContext().log(msg);
     }
-    
+
     @Override
     public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
@@ -92,9 +112,9 @@ public class RequestFilter implements Filter {
             }
         }
     }
-    
+
     @Override
     public void destroy() {
     }
-    
+
 }

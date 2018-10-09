@@ -1,6 +1,6 @@
 package System.Models;
 
-import Application.DataSource.Datasource;
+import Application.Config.Datasource;
 import System.Config.BootStrap;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
