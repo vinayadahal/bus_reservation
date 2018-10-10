@@ -23,15 +23,15 @@ public class RequestFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         String path = req.getRequestURI();//gets requested url.
         String rootDir = path.substring(1);//removes "/" from requested url.
+        if (path.contains("resource") || path.contains("images")) {
+            System.out.println("Calling resources::::");
+            chain.doFilter(request, response);
+            return;
+        }
         System.out.println(path);
         String url = UrlFilter(rootDir);
         String FilePath = UrlValidator(url);
         request.getRequestDispatcher(FilePath).forward(request, response);  // forwards requested url without applying filter.
-        if (path.contains("resource") || path.contains("images")) {
-            System.out.println("Calling resources::::");
-            chain.doFilter(request, response);
-        }
-
     }
 
     public String UrlFilter(String RootDir) {
