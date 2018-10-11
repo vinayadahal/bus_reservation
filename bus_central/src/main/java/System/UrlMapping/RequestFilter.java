@@ -24,11 +24,11 @@ public class RequestFilter implements Filter {
         String path = req.getRequestURI();//gets requested url.
         String rootDir = path.substring(1);//removes "/" from requested url.
         if (path.contains("resource") || path.contains("images")) {
-            System.out.println("Calling resources::::");
+//            System.out.println("Calling resources::::");
             chain.doFilter(request, response);
             return;
         }
-        System.out.println(path);
+//        System.out.println(path);
         String url = UrlFilter(rootDir);
         String FilePath = UrlValidator(url);
         request.getRequestDispatcher(FilePath).forward(request, response);  // forwards requested url without applying filter.
@@ -47,14 +47,14 @@ public class RequestFilter implements Filter {
     public String UrlValidator(String url) {
         if (!"other_resources".equals(url) || null != url) {
             if (url.length() == 0) {
-                System.out.println("URL null::: Calling default page");
+//                System.out.println("URL null::: Calling default page");
                 return UrlMapping("default");
             }
             String FilePath = UrlMapping(url);
             if (!"error".equals(FilePath)) {
                 return FilePath;
             } else {
-                System.out.println("can't call file::::");
+//                System.out.println("can't call file::::");
             }
         } else {
             System.out.println("Empty URL:::");

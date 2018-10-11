@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head></h:head>
     <h:body>
         <ui:composition template="template/layout.xhtml">
@@ -44,13 +45,22 @@
                                     <td><input type="date" name="date" id='date' class="form-elements" /></td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3"><button id="search_bus" url="#{request.contextPath}/public/search.xhtml" class="btn_submit">Submit</button></td>
+                                    <td colspan="3"><button id="search_bus" url="#{request.contextPath}/bus_result" class="btn_submit">Submit</button></td>
                                 </tr>
                             </table>
                         </div>
                     </div>
                     <div class="routes" style="width: 99%;padding: .5%;display: none; " id="bus_info"></div>
                 </div>
+<!--                <h:form>
+                    <h:inputHidden id="url_bus_result" value="#{request.contextPath}/bus_result" />
+                    <h:commandButton value = "Show Message">
+                        <f:ajax execute="url_bus_result" render="outputMessage" />
+                    </h:commandButton>
+                    <h2>
+                        <h:outputText id="outputMessage" value="#{mbPublicUser.busResult != null ? mbPublicUser.busResult : ''}"/>
+                    </h2>
+                </h:form>-->
             </ui:define>
         </ui:composition>
     </h:body>

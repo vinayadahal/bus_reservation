@@ -62,11 +62,11 @@ public class PublicUser {
         return objPublicUserModel.getAllDestinationBean("destination");
     }
     
-    public void setSearch(){
+    public void setBusResult(){
         
     }
 
-    public String getSearch() {
+    public String getBusResult() {
         System.out.println("Testing");
         return "test";
 //        System.out.println("Testing::: " + this.start_point);
