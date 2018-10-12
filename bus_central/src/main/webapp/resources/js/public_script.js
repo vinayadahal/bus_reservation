@@ -78,7 +78,7 @@ function set_reserved_seats() {
 function set_selected_seats() {
     if ($("#selected_seat").length !== 0) {
         var seats = $("#selected_seat").html().split(',');
-        $.each(seats, function (index, value) {
+        $.each(seats, function (value) {
             $('.click_seat').each(function () { // all element with class click_seat within DOM
                 if ($(this).html() === value) {
                     $(this).css({"background-color": "#93a85c", "color": "#fff"});

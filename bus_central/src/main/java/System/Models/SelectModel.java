@@ -23,6 +23,10 @@ public class SelectModel {
         query += " FROM " + table;
     }
 
+    public void join(String main_table, String main_table_id, String second_table, String second_table_id) {
+        query += " JOIN " + main_table + " ON " + main_table + "." + main_table_id + "=" + second_table + "." + second_table_id;
+    }
+
     public void where(String[] id, String[] val) {
         query += " WHERE ";
         if (id.length == val.length) {
@@ -55,6 +59,7 @@ public class SelectModel {
     }
 
     public List<Map> runQuery() {
+        System.out.println("Query::: " + query);
         Helper objHelper = new Helper();
         try {
             if (!BootStrap.dbConnection.toString().contains("UserName")) {

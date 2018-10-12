@@ -3,8 +3,10 @@ package Application.ManagedBeans;
 import Application.Models.PublicUserModel;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.faces.context.FacesContext;
 
 @ManagedBean(name = "mbPublicUser")
 @RequestScoped
@@ -17,6 +19,7 @@ public class PublicUser {
     private String end_point;
 
     PublicUserModel objPublicUserModel = new PublicUserModel();
+    Map<String, String> params;
 
     public void setId(String id) {
         this.id = id;
@@ -59,15 +62,26 @@ public class PublicUser {
     }
 
     public List<PublicUser> getAllDestination() {
-        return objPublicUserModel.getAllDestinationBean("destination");
+        return objPublicUserModel.getAll("destination");
     }
-    
-    public void setBusResult(){
-        
+
+    public void setBusResult() {
+
+    }
+
+    public void initParams() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        params = fc.getExternalContext().getRequestParameterMap();
     }
 
     public String getBusResult() {
         System.out.println("Testing");
+        this.initParams();
+        String start_point = params.get("start_point");
+        String end_point = params.get("end_point");
+        System.out.println("querying::::");
+        objPublicUserModel.InnerJoinTableWhere("route");
+        
         return "test";
 //        System.out.println("Testing::: " + this.start_point);
     }
