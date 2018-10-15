@@ -68,7 +68,7 @@ public class RequestFilter implements Filter {
         if (objUrlMapping.getRoutes(path) != null) { // checking if the url mapping exsits or not for given input in the browser
             return objUrlMapping.getRoutes(path).toString();
         } else {
-            System.out.println("Invalid URL showing error page"); // requires error handling
+            System.out.println("Invalid URL showing error page::: " + path); // requires error handling
             return "error";
         }
     }

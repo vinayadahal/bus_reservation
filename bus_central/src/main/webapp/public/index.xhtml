@@ -17,37 +17,44 @@
                         <h2>Pick A Route</h2>
                         <hr/>
                         <div class="route_form">
-                            <table class="tbl_form">
-                                <tr>
-                                    <th>Start Point:</th>
-                                    <th>Destination:</th>
-                                    <th>Travel Date:</th>
-                                </tr>
-                                <tr>
-                                    <td>
 
-                                        <select name="start_point" class="form-elements" id="start_point" onchange="change_destination();">
-                                            <c:forEach var="start" items="#{mbPublicUser.allDestination}">
-                                                <option value="#{start.id}">#{start.name}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select name="end_point" class="form-elements" id="end_point">
-                                            <!--<?php foreach (array_reverse($places) as $end) { ?>-->
-                                            <!--<option value="<?php echo $end->id; ?>"><?php echo $end->destination; ?></option>-->
-                                            <!--<?php } ?>-->
-                                            <c:forEach var="end" items="#{mbPublicUser.allDestination}">
-                                                <option value="#{end.id}">#{end.name}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </td>
-                                    <td><input type="date" name="date" id='date' class="form-elements" /></td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3"><button id="search_bus" url="#{request.contextPath}/bus_result" class="btn_submit">Submit</button></td>
-                                </tr>
-                            </table>
+                            <h:form onsubmit="alert('stop submit'); return false;">
+                                <table class="tbl_form">
+                                    <tr>
+                                        <th>Start Point:</th>
+                                        <th>Destination:</th>
+                                        <th>Travel Date:</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+
+                                            <select name="start_point" class="form-elements" id="start_point" onchange="change_destination();">
+                                                <c:forEach var="start" items="#{mbPublicUser.allDestination}">
+                                                    <option value="#{start.id}">#{start.name}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select name="end_point" class="form-elements" id="end_point">
+                                                <c:forEach var="end" items="#{mbPublicUser.allDestination}">
+                                                    <option value="#{end.id}">#{end.name}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </td>
+                                        <td><input type="date" name="date" id='date' class="form-elements" /></td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3"><button id="search_bus" url="#{request.contextPath}/bus_result" class="btn_submit">Submit</button></td>
+                                    </tr>
+                                </table>
+                                <!--                                <h:commandButton value="Submit" action="bus_result">
+                                                                    <f:ajax execute="@form" render="comments" />
+                                                                </h:commandButton>-->
+                                <h:commandLink action="#{mbBusBooking.busResult}">
+                                    <f:ajax execute="@form" render="bus_info" />
+                                    Do Stuff
+                                </h:commandLink>
+                            </h:form>
                         </div>
                     </div>
                     <div class="routes" style="width: 99%;padding: .5%;display: none; " id="bus_info"></div>

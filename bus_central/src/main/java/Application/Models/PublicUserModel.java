@@ -32,17 +32,6 @@ public class PublicUserModel {
         return list;
     }
 
-    public List<PublicUser> InnerJoinTableWhere(String tableName) {
-        objSelect.select("*");
-        objSelect.from(tableName);
-        objSelect.join("reservation", "bus_id", "route", "bus_id");
-        objSelect.join("bus", "id", "route", "bus_id");
-        objSelect.join("travel_agency", "id", "bus", "travel_agency_id");
-//        objSelect.where("travel_agency", "id", "bus", "travel_agency_id");
-        System.out.println("Query:::::::::::::::::::");
-        List<Map> result = objSelect.runQuery();
-        List<PublicUser> list = new ArrayList();
-        return list;
-    }
+    
 
 }

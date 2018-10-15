@@ -32,10 +32,10 @@ public class SelectModel {
         if (id.length == val.length) {
             for (int i = 0; i < val.length; i++) {
                 if (val.length > i + 1) {
-                    query += "`" + id[i] + "`" + " = ? AND ";
+                    query += "" + id[i] + "" + " = ? AND ";
                     value.add(val[i]);
                 } else {
-                    query += "`" + id[i] + "`" + " = ?";
+                    query += "" + id[i] + "" + " = ?";
                     value.add(val[i]);
                     break;
                 }

@@ -1,6 +1,62 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head></h:head>
-    <h:body>#{mbPublicUser.busResult}</h:body>
+    <h:body>
+
+        <div class="bus_search_wrap">
+            <h1>Available Buses For: <?php echo $from->destination; ?> To <?php echo $to->destination; ?></h1>
+            <hr/>
+            <br/>
+            <table class="bus_search_table">
+                <tr>
+                    <th>S.No.</th>
+                    <th>Agency</th>
+                    <th>Bus Type</th>
+                    <th>Bus Number</th>
+                    <th>Total Capacity</th>
+                    <th>Available Capacity</th>
+                    <th>Departure Time</th>
+                    <th>Departure Date</th>
+                    <th>Ticket Price</th>
+                </tr>
+
+
+                <c:set var="i" value="0"/>
+                <c:set var="j" value="0" />
+                <!--<c:set var="count" value="0" scope="page" />-->
+                <c:choose>
+                    <c:when test="#{(mbBusBooking.busResult.size()) eq 0}">
+                        <tr><td colspan="9">No records to display. Please choose another destination or date.</td></tr>
+                    </c:when>
+                    <c:otherwise>
+                        <c:forEach var="bus" items="#{mbBusBooking.busResult}">
+                            <tr class="clickable-row" url="seats/#{j}">
+                                <td>#{i}</td>
+                                <td>#{bus.name}</td>
+                                <td>#{bus.type}</td>
+                                <td>#{bus.busNumber}</td>
+                                <td>#{bus.totalSeat}</td>
+                                <td>13</td>
+                                <td>#{bus.departureTime}:00:00</td>
+                                <td>#{bus.departureDate}</td>
+                                <td>Rs. #{bus.price} /-</td>
+                            </tr>
+                            <c:set var="i" value="#{i + 1}"/>
+                            <c:set var="j" value="#{j + 1}"/>
+                        </c:forEach>
+                    </c:otherwise>
+                </c:choose>
+            </table>
+        </div>
+        <script type="text/javascript">
+            $(".clickable-row").click(function () {
+                console.log("checking");
+                var redirect_url = $(this).attr("url");
+                window.location = redirect_url;
+            });
+        </script>
+
+    </h:body>
 </html>
