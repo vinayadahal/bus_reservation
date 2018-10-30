@@ -8,5 +8,8 @@
 * compiled file, but it's generally better to create a new file per style scope.
 *
 *= require bootstrap.min
-*= require all.min
 *= require style
+*= require slider
+*= require mobile
+*= require all.min
+*/

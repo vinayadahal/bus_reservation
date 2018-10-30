@@ -1,82 +1,53 @@
-/* Styles for mobile devices */
-
-@media screen and (max-width: 480px) {
-    .nav {
-        padding: 0.5em;
+@media screen and (max-width: 980px) {
+    * {
+        font-size: 8px;
     }
 
-    .nav li {
-        margin: 0 0.5em 0 0;
-        padding: 0.25em;
+    /*slider*/
+    .slider_wrap {
+        width: 99.4%;
     }
 
-    /* Hide individual steps in pagination, just have next & previous */
-    .pagination .step, .pagination .currentStep {
-        display: none;
+    .dot {
+        height: 8px;
+        width: 8px;
     }
 
-    .pagination .prevLink {
-        float: left;
-    }
+    /*slider*/
 
-    .pagination .nextLink {
-        float: right;
-    }
 
-    /* pagination needs to wrap around floated buttons */
-    .pagination {
-        overflow: hidden;
-    }
 
-    /* slightly smaller margin around content body */
-    fieldset,
-    .property-list {
-        padding: 0.3em 1em 1em;
-    }
-
-    input, textarea {
+    /*footer*/
+    .footerLink:first-child {
+        border: none;
         width: 100%;
-           -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-            -ms-box-sizing: border-box;
-                box-sizing: border-box;
-    }
-
-    select, input[type=checkbox], input[type=radio], input[type=submit], input[type=button], input[type=reset] {
-        width: auto;
-    }
-
-    /* hide all but the first column of list tables */
-    .scaffold-list td:not(:first-child),
-    .scaffold-list th:not(:first-child) {
-        display: none;
-    }
-
-    .scaffold-list thead th {
         text-align: center;
     }
 
-    /* stack form elements */
-    .fieldcontain {
-        margin-top: 0.6em;
+    .footerLink {
+        display: table-cell;
+        padding: 20px 20px;
+        height: auto;
+        width: 100%;
+        box-sizing: border-box;
+        color: #fff;
+        border: none;
+        border-top: 1px solid #ccc;
     }
 
-    .fieldcontain label,
-    .fieldcontain .property-label,
-    .fieldcontain .property-value {
-        display: block;
-        float: none;
-        margin: 0 0 0.25em 0;
-        text-align: left;
-        width: auto;
+    .footerLink li {
+        height: 15px;
+        margin-bottom: 10px;
     }
 
-    .errors ul,
-    .message p {
-        margin: 0.5em;
+    .footerLink:last-child li {
+        height: 25px;
+        margin-bottom: 10px;
     }
 
-    .error ul {
-        margin-left: 0;
+    .footerIcon {
+        padding: 15px 35px;
     }
+
+    /*footer*/
 }

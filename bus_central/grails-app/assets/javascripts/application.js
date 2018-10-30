@@ -8,6 +8,7 @@
 //= require jquery-2.2.0.min
 //= require bootstrap.min
 //= require all.min
+//= require slider
 //= require_tree .
 //= require_self
 

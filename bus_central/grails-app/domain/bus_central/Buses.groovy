@@ -9,7 +9,7 @@ class Buses {
     String seat_layout
 //    String travel_agency_id
 
-    static belongsTo = [agency: Agency]
+    static belongsTo = [operator: Operators]
     static constraints = {
     }
 

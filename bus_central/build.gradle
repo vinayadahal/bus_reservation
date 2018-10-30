@@ -50,7 +50,8 @@ dependencies {
     profile "org.grails.profiles:web"
     runtime "org.glassfish.web:el-impl:2.1.2-b03"
     runtime "com.h2database:h2"
-    runtime "org.apache.tomcat:tomcat-jdbc"
+//    runtime "org.apache.tomcat:tomcat-jdbc"
+    runtime "org.springframework.boot:spring-boot-starter-jetty"
     runtime "com.bertramlabs.plugins:asset-pipeline-grails:2.14.8"
     testCompile "org.grails:grails-gorm-testing-support"
     testCompile "org.grails:grails-web-testing-support"
@@ -60,7 +61,7 @@ dependencies {
     testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
 
     compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.13'
-    compile group: 'org.webjars', name: 'angularjs', version: '1.7.5'
+//    compile group: 'org.webjars', name: 'angularjs', version: '1.7.5'
 }
 
 bootRun {
