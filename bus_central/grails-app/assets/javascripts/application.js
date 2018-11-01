@@ -9,6 +9,7 @@
 //= require bootstrap.min
 //= require all.min
 //= require slider
+//= require script
 //= require_tree .
 //= require_self
 

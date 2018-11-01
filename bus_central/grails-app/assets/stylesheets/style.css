@@ -91,6 +91,10 @@ hr{
     color: #333;
     outline: none;
 }
+
+.shrinked_menu{
+    display: none;
+}
 /* Nav bar End */
 
 .content_wrap{

@@ -16,7 +16,7 @@
 <div class="menu_wrap">
     <div class="menu">
         <div class="logo">
-            <a href="<?php echo base_url(); ?>">
+            <a href="#">
                 <i class="fa fa-bus"></i> <span class="logo_text">Bus Reservation</span>
             </a>
         </div>
@@ -42,8 +42,17 @@
                     class="btn_submit search_btn" type="submit"><i class="fa fa-search"></i></button>
             </form>
         </div>
+
+        <div class="shrinked_menu">
+            <button onclick="alert('testing');"><i class="fas fa-bars fa-3x"></i></button>
+        </div>
+
+        <div class="mobile_menu">
+testing
+        </div>
     </div>
 </div>
+
 
 <div class="content_wrap" id="content_wrap">
 
