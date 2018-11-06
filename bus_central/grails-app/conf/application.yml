@@ -92,6 +92,7 @@ dataSource:
     pooled: true
     jmxExport: true
     driverClassName: com.mysql.cj.jdbc.Driver
+    dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     username: root
     password: ''
 
@@ -99,7 +100,7 @@ environments:
     development:
         dataSource:
             dbCreate: create-drop
-            url: jdbc:mysql://localhost:3306/ticket
+            url: jdbc:mysql://localhost:3306/ticket?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
     test:
         dataSource:
             dbCreate: update

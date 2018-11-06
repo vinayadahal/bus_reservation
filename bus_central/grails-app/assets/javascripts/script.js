@@ -2,6 +2,7 @@ $(document).ready(function () {
 
 });
 
-function show_mobile_menu() {
 
+function mobile_menu() {
+    $("#mobile_menu").slideToggle('slow');
 }

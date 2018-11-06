@@ -95,6 +95,10 @@ hr{
 .shrinked_menu{
     display: none;
 }
+
+.mobile_menu{
+    display: none;
+}
 /* Nav bar End */
 
 .content_wrap{
